@@ -3,228 +3,290 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>BSENFLOW</title>
+<title>BSENFLOW — Social Beyond Limits</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,sans-serif;
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f6f7fb;
+  --card:#fff;
+  --text:#111318;
+  --muted:#737782;
+  --line:#e8e9ee;
+  --accent:#635bff;
+  --accent2:#8b5cf6;
 }
-
 body{
-    background:#f5f5f5;
-    color:#111;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
+button,input{font:inherit}
+button{cursor:pointer;border:0}
 
 .app{
-    max-width:430px;
-    min-height:100vh;
-    margin:auto;
-    background:white;
+  min-height:100vh;
+  max-width:1400px;
+  margin:auto;
 }
 
-/* HEADER */
-.header{
-    height:60px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 18px;
-    border-bottom:1px solid #ddd;
-    position:sticky;
-    top:0;
-    background:white;
-    z-index:10;
+/* TOP BAR */
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  height:70px;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 28px;
 }
-
 .logo{
-    font-size:25px;
-    font-weight:bold;
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:-1px;
+}
+.logo span{color:var(--accent)}
+.top-actions{display:flex;gap:10px}
+.icon-btn{
+  width:42px;height:42px;border-radius:14px;
+  background:#f2f3f7;
+  display:grid;place-items:center;
+  font-size:19px;
+}
+.avatar{
+  width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,#111,#777);
+  color:white;
+  display:grid;place-items:center;
+  font-weight:800;
+  position:relative;
+}
+.online{
+  position:absolute;
+  right:-1px;bottom:1px;
+  width:11px;height:11px;
+  background:#22c55e;
+  border:2px solid white;
+  border-radius:50%;
 }
 
-.header-icons{
-    display:flex;
-    gap:18px;
-    font-size:23px;
+/* LAYOUT */
+.layout{
+  display:grid;
+  grid-template-columns:230px minmax(0,680px) 280px;
+  gap:24px;
+  justify-content:center;
+  padding:24px;
 }
-
-/* LOGIN */
-.login-page{
-    padding:50px 25px;
-    text-align:center;
+.sidebar,.rightbar{
+  position:sticky;
+  top:94px;
+  height:max-content;
 }
-
-.login-page h1{
-    font-size:32px;
-    margin-bottom:10px;
+.nav{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:12px;
 }
-
-.login-page p{
-    color:#777;
-    margin-bottom:30px;
+.nav-item{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:13px 15px;
+  border-radius:15px;
+  margin-bottom:4px;
+  color:#50535d;
+  font-weight:650;
+  cursor:pointer;
 }
-
-.input{
-    width:100%;
-    padding:15px;
-    margin:8px 0;
-    border:1px solid #ccc;
-    border-radius:10px;
-    font-size:16px;
+.nav-item:hover,.nav-item.active{
+  background:#f0efff;
+  color:var(--accent);
 }
-
-.btn{
-    width:100%;
-    padding:15px;
-    margin-top:12px;
-    border:0;
-    border-radius:10px;
-    background:#111;
-    color:white;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.link{
-    margin-top:18px;
-    color:#555;
-    cursor:pointer;
-}
+.nav-icon{font-size:20px;width:25px;text-align:center}
 
 /* STORIES */
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:24px;
+}
 .stories{
-    display:flex;
-    gap:15px;
-    padding:15px;
-    overflow-x:auto;
-    border-bottom:1px solid #eee;
+  display:flex;
+  gap:16px;
+  overflow:auto;
+  padding:17px;
 }
-
 .story{
-    min-width:60px;
-    text-align:center;
-    font-size:12px;
+  min-width:68px;
+  text-align:center;
+  font-size:12px;
+  font-weight:650;
+}
+.story-avatar{
+  width:60px;height:60px;
+  margin:auto auto 7px;
+  border-radius:50%;
+  padding:3px;
+  background:linear-gradient(135deg,#635bff,#ec4899,#f59e0b);
+}
+.story-inner{
+  width:100%;height:100%;
+  border-radius:50%;
+  background:#e8e9ef;
+  border:3px solid white;
+  display:grid;place-items:center;
+  font-size:22px;
 }
 
-.story-circle{
-    width:55px;
-    height:55px;
-    border-radius:50%;
-    background:#ddd;
-    margin:auto auto 5px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-}
-
-/* CREATE POST */
+/* CREATE */
 .create{
-    padding:15px;
-    border-bottom:8px solid #f5f5f5;
+  margin-top:18px;
+  padding:16px;
 }
-
+.create-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
 .create input{
-    width:100%;
-    padding:14px;
-    border:1px solid #ddd;
-    border-radius:25px;
+  flex:1;
+  border:0;
+  outline:0;
+  background:#f5f6f9;
+  padding:13px 18px;
+  border-radius:18px;
 }
 
 /* POST */
 .post{
-    border-bottom:8px solid #f5f5f5;
-    padding-bottom:15px;
+  margin-top:18px;
+  overflow:hidden;
 }
-
 .post-head{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:15px;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:17px;
 }
-
-.avatar{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    background:#ddd;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.username{
-    font-weight:bold;
-}
-
-.premium{
-    color:#b8860b;
-}
-
+.user-info strong{font-size:14px}
+.user-info small{display:block;color:var(--muted);margin-top:2px}
+.premium{color:#a06b00}
 .post-text{
-    padding:0 15px 12px;
+  padding:0 17px 15px;
+  line-height:1.5;
 }
-
 .post-image{
-    width:100%;
-    height:260px;
-    background:#ddd;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:50px;
+  height:390px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#17171b,#555);
+  color:white;
+  font-size:65px;
+}
+.post-actions{
+  display:flex;
+  gap:8px;
+  padding:13px 17px 5px;
+}
+.action{
+  background:transparent;
+  font-size:22px;
+  padding:7px;
+}
+.likes{
+  padding:0 17px 14px;
+  font-size:13px;
+  font-weight:700;
 }
 
-.actions{
-    display:flex;
-    gap:25px;
-    padding:12px 15px;
-    font-size:22px;
+/* RIGHT */
+.profile-card{
+  padding:20px;
+  text-align:center;
+}
+.profile-card .avatar{
+  width:72px;height:72px;
+  margin:auto auto 12px;
+  font-size:22px;
+}
+.founder{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+.premium-btn{
+  margin-top:15px;
+  width:100%;
+  padding:12px;
+  border-radius:14px;
+  color:white;
+  font-weight:800;
+  background:linear-gradient(135deg,#111,#4b4b55);
 }
 
-.actions span{
-    cursor:pointer;
+/* MOBILE NAV */
+.mobile-nav{
+  display:none;
 }
 
-/* NAVIGATION */
-.bottom{
+/* VIEWS */
+.view{display:none}
+.view.active{display:block}
+
+.hero{
+  padding:30px;
+  text-align:center;
+}
+.hero h1{
+  font-size:34px;
+  letter-spacing:-1px;
+}
+.hero p{
+  color:var(--muted);
+  margin-top:8px;
+}
+
+/* RESPONSIVE */
+@media(max-width:1050px){
+  .layout{
+    grid-template-columns:80px minmax(0,680px);
+  }
+  .rightbar{display:none}
+  .nav-item span:not(.nav-icon){display:none}
+  .nav-item{justify-content:center}
+}
+@media(max-width:700px){
+  .topbar{padding:0 15px;height:62px}
+  .layout{
+    display:block;
+    padding:12px 10px 85px;
+  }
+  .sidebar{display:none}
+  .mobile-nav{
     position:fixed;
-    bottom:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:100%;
-    max-width:430px;
-    height:65px;
-    background:white;
-    border-top:1px solid #ddd;
+    bottom:0;left:0;right:0;
+    height:68px;
+    z-index:30;
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(18px);
+    border-top:1px solid var(--line);
     display:flex;
     justify-content:space-around;
     align-items:center;
-    font-size:22px;
-}
-
-.bottom span{
-    cursor:pointer;
-}
-
-/* HIDE */
-.hidden{
-    display:none;
-}
-
-@media(min-width:600px){
-    body{
-        padding:20px;
-    }
-
-    .app{
-        box-shadow:0 0 20px #ddd;
-    }
+  }
+  .mobile-nav button{
+    background:transparent;
+    font-size:21px;
+    padding:10px;
+  }
+  .post-image{height:300px}
+  .stories{border-radius:20px}
 }
 </style>
 </head>
@@ -233,362 +295,276 @@ body{
 
 <div class="app">
 
-<!-- LOGIN -->
-<section id="loginPage" class="login-page">
+<header class="topbar">
+  <div class="logo">BSEN<span>FLOW</span></div>
 
-<h1>BSENFLOW</h1>
-
-<p>Welcome to BSENFLOW</p>
-
-<input
-class="input"
-id="loginUser"
-placeholder="Email or Phone Number"
->
-
-<input
-class="input"
-id="loginPassword"
-type="password"
-placeholder="Enter your password"
->
-
-<button class="btn" onclick="login()">
-LOGIN
-</button>
-
-<div class="link">
-Forgot Password?
-</div>
-
-<div class="link" onclick="showSignup()">
-Don't have an account? Create Account
-</div>
-
-</section>
-
-
-<!-- SIGNUP -->
-<section id="signupPage" class="login-page hidden">
-
-<h1>Create Account</h1>
-
-<p>Join BSENFLOW</p>
-
-<input
-class="input"
-id="signupName"
-placeholder="Enter your full name"
->
-
-<input
-class="input"
-id="signupUser"
-placeholder="Email or Phone Number"
->
-
-<input
-class="input"
-id="signupPassword"
-type="password"
-placeholder="Create password"
->
-
-<input
-class="input"
-id="signupConfirm"
-type="password"
-placeholder="Confirm password"
->
-
-<button class="btn" onclick="createAccount()">
-CREATE ACCOUNT
-</button>
-
-<div class="link" onclick="showLogin()">
-Already have an account? Login
-</div>
-
-</section>
-
-
-<!-- HOME -->
-<section id="homePage" class="hidden">
-
-<header class="header">
-
-<div class="logo">
-BSENFLOW
-</div>
-
-<div class="header-icons">
-<span>🔔</span>
-<span>💬</span>
-</div>
-
+  <div class="top-actions">
+    <button class="icon-btn">⌕</button>
+    <button class="icon-btn">♡</button>
+    <button class="icon-btn">✉</button>
+    <div class="avatar">BS<div class="online"></div></div>
+  </div>
 </header>
 
+<div class="layout">
 
-<!-- STORIES -->
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <nav class="nav">
 
-<div class="stories">
+    <div class="nav-item active" onclick="showView('home')">
+      <span class="nav-icon">⌂</span><span>Home</span>
+    </div>
 
-<div class="story">
-<div class="story-circle">+</div>
-Your Story
-</div>
+    <div class="nav-item" onclick="showView('discover')">
+      <span class="nav-icon">⌕</span><span>Discover</span>
+    </div>
 
-<div class="story">
-<div class="story-circle">👤</div>
-Bharat
-</div>
+    <div class="nav-item" onclick="showView('reels')">
+      <span class="nav-icon">▶</span><span>Reels</span>
+    </div>
 
-<div class="story">
-<div class="story-circle">👤</div>
-Rahul
-</div>
+    <div class="nav-item" onclick="showView('messages')">
+      <span class="nav-icon">✉</span><span>Messages</span>
+    </div>
 
-<div class="story">
-<div class="story-circle">👤</div>
-Aman
-</div>
+    <div class="nav-item" onclick="showView('profile')">
+      <span class="nav-icon">◎</span><span>Profile</span>
+    </div>
 
-<div class="story">
-<div class="story-circle">👤</div>
-Priya
-</div>
+    <div class="nav-item" onclick="showView('premium')">
+      <span class="nav-icon">❖</span><span>Premium</span>
+    </div>
 
-</div>
+  </nav>
+</aside>
 
+<!-- MAIN -->
+<main>
 
-<!-- CREATE POST -->
+<!-- HOME -->
+<section id="home" class="view active">
 
-<div class="create">
+  <div class="card stories">
 
-<input
-id="postInput"
-placeholder="What's on your mind?"
-onkeydown="createPost(event)"
->
+    <div class="story">
+      <div class="story-avatar">
+        <div class="story-inner">＋</div>
+      </div>
+      Your Story
+    </div>
 
-</div>
+    <div class="story">
+      <div class="story-avatar">
+        <div class="story-inner">BS</div>
+      </div>
+      Bharat
+    </div>
 
+    <div class="story">
+      <div class="story-avatar">
+        <div class="story-inner">A</div>
+      </div>
+      Aman
+    </div>
 
-<!-- POST -->
+    <div class="story">
+      <div class="story-avatar">
+        <div class="story-inner">R</div>
+      </div>
+      Rahul
+    </div>
 
-<div class="post">
+    <div class="story">
+      <div class="story-avatar">
+        <div class="story-inner">P</div>
+      </div>
+      Priya
+    </div>
 
-<div class="post-head">
+  </div>
 
-<div class="avatar">
-👤
-</div>
+  <div class="card create">
+    <div class="create-row">
+      <div class="avatar">BS</div>
+      <input placeholder="What's on your mind?">
+      <button class="icon-btn">＋</button>
+    </div>
+  </div>
 
-<div>
-<div class="username">
-BharatSain <span class="premium">❖</span>
-</div>
+  <article class="card post">
 
-<small>Just now</small>
-</div>
+    <div class="post-head">
+      <div class="avatar">
+        BS
+        <div class="online"></div>
+      </div>
 
-</div>
+      <div class="user-info">
+        <strong>Bharat Sain <span class="premium">❖</span></strong>
+        <small>Founder of BSENFLOW · Just now</small>
+      </div>
+    </div>
 
-<div class="post-text">
-Welcome to BSENFLOW 🚀
-</div>
+    <div class="post-text">
+      Building something different. 🚀
+      Welcome to the new generation of social networking.
+    </div>
 
-<div class="post-image">
-📸
-</div>
+    <div class="post-image">✦</div>
 
-<div class="actions">
+    <div class="post-actions">
+      <button class="action" onclick="like(this)">♡</button>
+      <button class="action">♡</button>
+      <button class="action">↗</button>
+      <button class="action">⌑</button>
+    </div>
 
-<span onclick="likePost(this)">
-♡
-</span>
+    <div class="likes">
+      1,248 people like this
+    </div>
 
-<span>
-💬
-</span>
-
-<span>
-↗️
-</span>
-
-</div>
-
-</div>
+  </article>
 
 </section>
 
 
-<!-- BOTTOM NAV -->
+<!-- DISCOVER -->
+<section id="discover" class="view">
+  <div class="card hero">
+    <h1>Discover</h1>
+    <p>Find creators, people, topics and trends.</p>
+  </div>
+</section>
 
-<div id="bottomNav" class="bottom hidden">
 
-<span onclick="home()">🏠</span>
+<!-- REELS -->
+<section id="reels" class="view">
+  <div class="card hero">
+    <h1>Reels ▶</h1>
+    <p>Your next-generation short video experience.</p>
+  </div>
+</section>
 
-<span>🔍</span>
 
-<span>➕</span>
+<!-- MESSAGES -->
+<section id="messages" class="view">
+  <div class="card hero">
+    <h1>Messages ✉</h1>
+    <p>Your conversations will appear here.</p>
+  </div>
+</section>
 
-<span>🎬</span>
 
-<span>👤</span>
+<!-- PROFILE -->
+<section id="profile" class="view">
+  <div class="card hero">
+
+    <div class="avatar" style="width:100px;height:100px;margin:auto;font-size:28px">
+      BS
+    </div>
+
+    <h1 style="margin-top:15px">Bharat Sain ❖</h1>
+
+    <p>Founder of BSENFLOW</p>
+
+    <p style="margin-top:15px">
+      Building the future of social networking.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- PREMIUM -->
+<section id="premium" class="view">
+  <div class="card hero">
+
+    <div style="font-size:50px">❖</div>
+
+    <h1>BSENFLOW Premium</h1>
+
+    <p>Unlock the premium experience.</p>
+
+    <button class="premium-btn">
+      ₹249 / Month
+    </button>
+
+    <p style="margin-top:15px;font-size:13px">
+      Special introductory offer can be added later.
+    </p>
+
+  </div>
+</section>
+
+</main>
+
+
+<!-- RIGHT BAR -->
+<aside class="rightbar">
+
+  <div class="card profile-card">
+
+    <div class="avatar">BS</div>
+
+    <strong>Bharat Sain ❖</strong>
+
+    <div class="founder">
+      Founder · BSENFLOW
+    </div>
+
+    <button class="premium-btn"
+      onclick="showView('premium')">
+      Explore Premium
+    </button>
+
+  </div>
+
+</aside>
 
 </div>
+
+
+<!-- MOBILE NAV -->
+<nav class="mobile-nav">
+
+  <button onclick="showView('home')">⌂</button>
+
+  <button onclick="showView('discover')">⌕</button>
+
+  <button onclick="showView('home')">＋</button>
+
+  <button onclick="showView('reels')">▶</button>
+
+  <button onclick="showView('profile')">◎</button>
+
+</nav>
 
 </div>
 
 
 <script>
 
-function showSignup(){
+function showView(id){
 
-document.getElementById("loginPage")
-.classList.add("hidden");
+  document.querySelectorAll('.view')
+    .forEach(v => v.classList.remove('active'));
 
-document.getElementById("signupPage")
-.classList.remove("hidden");
+  const target=document.getElementById(id);
 
+  if(target){
+    target.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
 }
 
+function like(button){
 
-function showLogin(){
-
-document.getElementById("signupPage")
-.classList.add("hidden");
-
-document.getElementById("loginPage")
-.classList.remove("hidden");
-
-}
-
-
-function createAccount(){
-
-let name =
-document.getElementById("signupName").value;
-
-let user =
-document.getElementById("signupUser").value;
-
-let password =
-document.getElementById("signupPassword").value;
-
-let confirm =
-document.getElementById("signupConfirm").value;
-
-if(!name || !user || !password){
-
-alert("Please fill all fields.");
-
-return;
-
-}
-
-if(password !== confirm){
-
-alert("Passwords do not match.");
-
-return;
-
-}
-
-localStorage.setItem(
-"bsenflowUser",
-user
-);
-
-localStorage.setItem(
-"bsenflowName",
-name
-);
-
-alert("Account created successfully!");
-
-showHome();
-
-}
-
-
-function login(){
-
-let user =
-document.getElementById("loginUser").value;
-
-let password =
-document.getElementById("loginPassword").value;
-
-if(!user || !password){
-
-alert("Please enter your login details.");
-
-return;
-
-}
-
-showHome();
-
-}
-
-
-function showHome(){
-
-document.getElementById("loginPage")
-.classList.add("hidden");
-
-document.getElementById("signupPage")
-.classList.add("hidden");
-
-document.getElementById("homePage")
-.classList.remove("hidden");
-
-document.getElementById("bottomNav")
-.classList.remove("hidden");
-
-}
-
-
-function home(){
-
-showHome();
-
-}
-
-
-function likePost(element){
-
-if(element.innerHTML === "♡"){
-
-element.innerHTML = "❤️";
-
-}else{
-
-element.innerHTML = "♡";
-
-}
-
-}
-
-
-function createPost(event){
-
-if(event.key === "Enter"){
-
-let text =
-document.getElementById("postInput").value;
-
-if(text){
-
-alert("Post created: " + text);
-
-document.getElementById("postInput").value = "";
-
-}
-
-}
+  if(button.innerHTML.trim()==='♡'){
+    button.innerHTML='♥';
+  }else{
+    button.innerHTML='♡';
+  }
 
 }
 
