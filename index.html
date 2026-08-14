@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BSENFLOW</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+    color:#111;
+}
+
+.app{
+    max-width:430px;
+    min-height:100vh;
+    margin:auto;
+    background:white;
+}
+
+/* HEADER */
+.header{
+    height:60px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 18px;
+    border-bottom:1px solid #ddd;
+    position:sticky;
+    top:0;
+    background:white;
+    z-index:10;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.header-icons{
+    display:flex;
+    gap:18px;
+    font-size:23px;
+}
+
+/* LOGIN */
+.login-page{
+    padding:50px 25px;
+    text-align:center;
+}
+
+.login-page h1{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.login-page p{
+    color:#777;
+    margin-bottom:30px;
+}
+
+.input{
+    width:100%;
+    padding:15px;
+    margin:8px 0;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:16px;
+}
+
+.btn{
+    width:100%;
+    padding:15px;
+    margin-top:12px;
+    border:0;
+    border-radius:10px;
+    background:#111;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.link{
+    margin-top:18px;
+    color:#555;
+    cursor:pointer;
+}
+
+/* STORIES */
+.stories{
+    display:flex;
+    gap:15px;
+    padding:15px;
+    overflow-x:auto;
+    border-bottom:1px solid #eee;
+}
+
+.story{
+    min-width:60px;
+    text-align:center;
+    font-size:12px;
+}
+
+.story-circle{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#ddd;
+    margin:auto auto 5px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+}
+
+/* CREATE POST */
+.create{
+    padding:15px;
+    border-bottom:8px solid #f5f5f5;
+}
+
+.create input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:25px;
+}
+
+/* POST */
+.post{
+    border-bottom:8px solid #f5f5f5;
+    padding-bottom:15px;
+}
+
+.post-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:15px;
+}
+
+.avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#ddd;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.username{
+    font-weight:bold;
+}
+
+.premium{
+    color:#b8860b;
+}
+
+.post-text{
+    padding:0 15px 12px;
+}
+
+.post-image{
+    width:100%;
+    height:260px;
+    background:#ddd;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:50px;
+}
+
+.actions{
+    display:flex;
+    gap:25px;
+    padding:12px 15px;
+    font-size:22px;
+}
+
+.actions span{
+    cursor:pointer;
+}
+
+/* NAVIGATION */
+.bottom{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:430px;
+    height:65px;
+    background:white;
+    border-top:1px solid #ddd;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    font-size:22px;
+}
+
+.bottom span{
+    cursor:pointer;
+}
+
+/* HIDE */
+.hidden{
+    display:none;
+}
+
+@media(min-width:600px){
+    body{
+        padding:20px;
+    }
+
+    .app{
+        box-shadow:0 0 20px #ddd;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- LOGIN -->
+<section id="loginPage" class="login-page">
+
+<h1>BSENFLOW</h1>
+
+<p>Welcome to BSENFLOW</p>
+
+<input
+class="input"
+id="loginUser"
+placeholder="Email or Phone Number"
+>
+
+<input
+class="input"
+id="loginPassword"
+type="password"
+placeholder="Enter your password"
+>
+
+<button class="btn" onclick="login()">
+LOGIN
+</button>
+
+<div class="link">
+Forgot Password?
+</div>
+
+<div class="link" onclick="showSignup()">
+Don't have an account? Create Account
+</div>
+
+</section>
+
+
+<!-- SIGNUP -->
+<section id="signupPage" class="login-page hidden">
+
+<h1>Create Account</h1>
+
+<p>Join BSENFLOW</p>
+
+<input
+class="input"
+id="signupName"
+placeholder="Enter your full name"
+>
+
+<input
+class="input"
+id="signupUser"
+placeholder="Email or Phone Number"
+>
+
+<input
+class="input"
+id="signupPassword"
+type="password"
+placeholder="Create password"
+>
+
+<input
+class="input"
+id="signupConfirm"
+type="password"
+placeholder="Confirm password"
+>
+
+<button class="btn" onclick="createAccount()">
+CREATE ACCOUNT
+</button>
+
+<div class="link" onclick="showLogin()">
+Already have an account? Login
+</div>
+
+</section>
+
+
+<!-- HOME -->
+<section id="homePage" class="hidden">
+
+<header class="header">
+
+<div class="logo">
+BSENFLOW
+</div>
+
+<div class="header-icons">
+<span>🔔</span>
+<span>💬</span>
+</div>
+
+</header>
+
+
+<!-- STORIES -->
+
+<div class="stories">
+
+<div class="story">
+<div class="story-circle">+</div>
+Your Story
+</div>
+
+<div class="story">
+<div class="story-circle">👤</div>
+Bharat
+</div>
+
+<div class="story">
+<div class="story-circle">👤</div>
+Rahul
+</div>
+
+<div class="story">
+<div class="story-circle">👤</div>
+Aman
+</div>
+
+<div class="story">
+<div class="story-circle">👤</div>
+Priya
+</div>
+
+</div>
+
+
+<!-- CREATE POST -->
+
+<div class="create">
+
+<input
+id="postInput"
+placeholder="What's on your mind?"
+onkeydown="createPost(event)"
+>
+
+</div>
+
+
+<!-- POST -->
+
+<div class="post">
+
+<div class="post-head">
+
+<div class="avatar">
+👤
+</div>
+
+<div>
+<div class="username">
+BharatSain <span class="premium">❖</span>
+</div>
+
+<small>Just now</small>
+</div>
+
+</div>
+
+<div class="post-text">
+Welcome to BSENFLOW 🚀
+</div>
+
+<div class="post-image">
+📸
+</div>
+
+<div class="actions">
+
+<span onclick="likePost(this)">
+♡
+</span>
+
+<span>
+💬
+</span>
+
+<span>
+↗️
+</span>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- BOTTOM NAV -->
+
+<div id="bottomNav" class="bottom hidden">
+
+<span onclick="home()">🏠</span>
+
+<span>🔍</span>
+
+<span>➕</span>
+
+<span>🎬</span>
+
+<span>👤</span>
+
+</div>
+
+</div>
+
+
+<script>
+
+function showSignup(){
+
+document.getElementById("loginPage")
+.classList.add("hidden");
+
+document.getElementById("signupPage")
+.classList.remove("hidden");
+
+}
+
+
+function showLogin(){
+
+document.getElementById("signupPage")
+.classList.add("hidden");
+
+document.getElementById("loginPage")
+.classList.remove("hidden");
+
+}
+
+
+function createAccount(){
+
+let name =
+document.getElementById("signupName").value;
+
+let user =
+document.getElementById("signupUser").value;
+
+let password =
+document.getElementById("signupPassword").value;
+
+let confirm =
+document.getElementById("signupConfirm").value;
+
+if(!name || !user || !password){
+
+alert("Please fill all fields.");
+
+return;
+
+}
+
+if(password !== confirm){
+
+alert("Passwords do not match.");
+
+return;
+
+}
+
+localStorage.setItem(
+"bsenflowUser",
+user
+);
+
+localStorage.setItem(
+"bsenflowName",
+name
+);
+
+alert("Account created successfully!");
+
+showHome();
+
+}
+
+
+function login(){
+
+let user =
+document.getElementById("loginUser").value;
+
+let password =
+document.getElementById("loginPassword").value;
+
+if(!user || !password){
+
+alert("Please enter your login details.");
+
+return;
+
+}
+
+showHome();
+
+}
+
+
+function showHome(){
+
+document.getElementById("loginPage")
+.classList.add("hidden");
+
+document.getElementById("signupPage")
+.classList.add("hidden");
+
+document.getElementById("homePage")
+.classList.remove("hidden");
+
+document.getElementById("bottomNav")
+.classList.remove("hidden");
+
+}
+
+
+function home(){
+
+showHome();
+
+}
+
+
+function likePost(element){
+
+if(element.innerHTML === "♡"){
+
+element.innerHTML = "❤️";
+
+}else{
+
+element.innerHTML = "♡";
+
+}
+
+}
+
+
+function createPost(event){
+
+if(event.key === "Enter"){
+
+let text =
+document.getElementById("postInput").value;
+
+if(text){
+
+alert("Post created: " + text);
+
+document.getElementById("postInput").value = "";
+
+}
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
