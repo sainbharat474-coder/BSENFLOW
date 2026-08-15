@@ -2,568 +2,569 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BSENFLOW — Social Beyond Limits</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BSENFLOW</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#f6f7fb;
-  --card:#fff;
-  --text:#111318;
-  --muted:#737782;
-  --line:#e8e9ee;
-  --accent:#635bff;
-  --accent2:#8b5cf6;
-}
 body{
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:var(--bg);
-  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f6fa;
+  color:#111;
 }
 button,input{font:inherit}
-button{cursor:pointer;border:0}
+button{cursor:pointer}
 
-.app{
+.auth-page{
   min-height:100vh;
-  max-width:1400px;
-  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:linear-gradient(135deg,#111,#3b315f,#635bff);
 }
 
-/* TOP BAR */
+.auth-box{
+  width:100%;
+  max-width:430px;
+  background:white;
+  border-radius:28px;
+  padding:32px;
+  box-shadow:0 25px 70px rgba(0,0,0,.3);
+}
+
+.logo{
+  text-align:center;
+  font-size:34px;
+  font-weight:900;
+  margin-bottom:8px;
+}
+
+.logo span{color:#635bff}
+
+.subtitle{
+  text-align:center;
+  color:#777;
+  margin-bottom:28px;
+}
+
+.auth-box input{
+  width:100%;
+  padding:15px 17px;
+  margin-bottom:13px;
+  border:1px solid #ddd;
+  border-radius:15px;
+  outline:none;
+}
+
+.auth-box input:focus{
+  border-color:#635bff;
+}
+
+.main-btn{
+  width:100%;
+  padding:15px;
+  border:0;
+  border-radius:15px;
+  color:white;
+  font-weight:800;
+  background:linear-gradient(135deg,#635bff,#8b5cf6);
+  margin-top:5px;
+}
+
+.google-btn{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border:1px solid #ddd;
+  border-radius:15px;
+  background:white;
+  font-weight:700;
+}
+
+.switch{
+  text-align:center;
+  margin-top:20px;
+  color:#777;
+  font-size:14px;
+}
+
+.switch span{
+  color:#635bff;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.message{
+  text-align:center;
+  margin-top:14px;
+  font-size:14px;
+  min-height:20px;
+}
+
+.app{
+  display:none;
+  min-height:100vh;
+}
+
 .topbar{
-  position:sticky;
-  top:0;
-  z-index:20;
   height:70px;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--line);
+  background:white;
+  border-bottom:1px solid #eee;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 28px;
+  padding:0 25px;
+  position:sticky;
+  top:0;
+  z-index:10;
 }
-.logo{
+
+.brand{
   font-size:25px;
   font-weight:900;
-  letter-spacing:-1px;
-}
-.logo span{color:var(--accent)}
-.top-actions{display:flex;gap:10px}
-.icon-btn{
-  width:42px;height:42px;border-radius:14px;
-  background:#f2f3f7;
-  display:grid;place-items:center;
-  font-size:19px;
-}
-.avatar{
-  width:42px;height:42px;border-radius:50%;
-  background:linear-gradient(135deg,#111,#777);
-  color:white;
-  display:grid;place-items:center;
-  font-weight:800;
-  position:relative;
-}
-.online{
-  position:absolute;
-  right:-1px;bottom:1px;
-  width:11px;height:11px;
-  background:#22c55e;
-  border:2px solid white;
-  border-radius:50%;
 }
 
-/* LAYOUT */
-.layout{
-  display:grid;
-  grid-template-columns:230px minmax(0,680px) 280px;
-  gap:24px;
-  justify-content:center;
-  padding:24px;
-}
-.sidebar,.rightbar{
-  position:sticky;
-  top:94px;
-  height:max-content;
-}
-.nav{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:22px;
-  padding:12px;
-}
-.nav-item{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  padding:13px 15px;
-  border-radius:15px;
-  margin-bottom:4px;
-  color:#50535d;
-  font-weight:650;
-  cursor:pointer;
-}
-.nav-item:hover,.nav-item.active{
-  background:#f0efff;
-  color:var(--accent);
-}
-.nav-icon{font-size:20px;width:25px;text-align:center}
+.brand span{color:#635bff}
 
-/* STORIES */
-.card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:24px;
-}
-.stories{
-  display:flex;
-  gap:16px;
-  overflow:auto;
-  padding:17px;
-}
-.story{
-  min-width:68px;
-  text-align:center;
-  font-size:12px;
-  font-weight:650;
-}
-.story-avatar{
-  width:60px;height:60px;
-  margin:auto auto 7px;
-  border-radius:50%;
-  padding:3px;
-  background:linear-gradient(135deg,#635bff,#ec4899,#f59e0b);
-}
-.story-inner{
-  width:100%;height:100%;
-  border-radius:50%;
-  background:#e8e9ef;
-  border:3px solid white;
-  display:grid;place-items:center;
-  font-size:22px;
-}
-
-/* CREATE */
-.create{
-  margin-top:18px;
-  padding:16px;
-}
-.create-row{
+.user-area{
   display:flex;
   align-items:center;
   gap:12px;
 }
-.create input{
-  flex:1;
-  border:0;
-  outline:0;
-  background:#f5f6f9;
-  padding:13px 18px;
-  border-radius:18px;
-}
 
-/* POST */
-.post{
-  margin-top:18px;
-  overflow:hidden;
-}
-.post-head{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  padding:17px;
-}
-.user-info strong{font-size:14px}
-.user-info small{display:block;color:var(--muted);margin-top:2px}
-.premium{color:#a06b00}
-.post-text{
-  padding:0 17px 15px;
-  line-height:1.5;
-}
-.post-image{
-  height:390px;
+.avatar{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#635bff,#111);
+  color:white;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,#17171b,#555);
-  color:white;
-  font-size:65px;
+  font-weight:900;
 }
-.post-actions{
-  display:flex;
-  gap:8px;
-  padding:13px 17px 5px;
-}
-.action{
-  background:transparent;
-  font-size:22px;
-  padding:7px;
-}
-.likes{
-  padding:0 17px 14px;
-  font-size:13px;
+
+.logout{
+  border:0;
+  background:#f0f0f4;
+  padding:10px 15px;
+  border-radius:12px;
   font-weight:700;
 }
 
-/* RIGHT */
-.profile-card{
+.content{
+  max-width:900px;
+  margin:30px auto;
   padding:20px;
-  text-align:center;
 }
-.profile-card .avatar{
-  width:72px;height:72px;
-  margin:auto auto 12px;
-  font-size:22px;
-}
-.founder{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:4px;
-}
-.premium-btn{
-  margin-top:15px;
-  width:100%;
-  padding:12px;
-  border-radius:14px;
-  color:white;
-  font-weight:800;
-  background:linear-gradient(135deg,#111,#4b4b55);
-}
-
-/* MOBILE NAV */
-.mobile-nav{
-  display:none;
-}
-
-/* VIEWS */
-.view{display:none}
-.view.active{display:block}
 
 .hero{
-  padding:30px;
+  background:white;
+  border-radius:28px;
+  padding:50px 25px;
   text-align:center;
-}
-.hero h1{
-  font-size:34px;
-  letter-spacing:-1px;
-}
-.hero p{
-  color:var(--muted);
-  margin-top:8px;
+  box-shadow:0 10px 35px rgba(0,0,0,.06);
 }
 
-/* RESPONSIVE */
-@media(max-width:1050px){
-  .layout{
-    grid-template-columns:80px minmax(0,680px);
-  }
-  .rightbar{display:none}
-  .nav-item span:not(.nav-icon){display:none}
-  .nav-item{justify-content:center}
+.hero h1{
+  font-size:42px;
+  margin-bottom:10px;
 }
-@media(max-width:700px){
-  .topbar{padding:0 15px;height:62px}
-  .layout{
-    display:block;
-    padding:12px 10px 85px;
-  }
-  .sidebar{display:none}
-  .mobile-nav{
-    position:fixed;
-    bottom:0;left:0;right:0;
-    height:68px;
-    z-index:30;
-    background:rgba(255,255,255,.95);
-    backdrop-filter:blur(18px);
-    border-top:1px solid var(--line);
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-  }
-  .mobile-nav button{
-    background:transparent;
-    font-size:21px;
-    padding:10px;
-  }
-  .post-image{height:300px}
-  .stories{border-radius:20px}
+
+.hero p{
+  color:#777;
+  font-size:17px;
+}
+
+.premium{
+  margin-top:25px;
+  display:inline-block;
+  padding:14px 24px;
+  border-radius:15px;
+  color:white;
+  background:#111;
+  font-weight:800;
+}
+
+@media(max-width:600px){
+  .auth-box{padding:25px}
+  .hero h1{font-size:32px}
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<!-- LOGIN / SIGNUP -->
+<div class="auth-page" id="authPage">
 
-<header class="topbar">
-  <div class="logo">BSEN<span>FLOW</span></div>
+  <div class="auth-box">
 
-  <div class="top-actions">
-    <button class="icon-btn">⌕</button>
-    <button class="icon-btn">♡</button>
-    <button class="icon-btn">✉</button>
-    <div class="avatar">BS<div class="online"></div></div>
-  </div>
-</header>
+    <div class="logo">BSEN<span>FLOW</span></div>
 
-<div class="layout">
-
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <nav class="nav">
-
-    <div class="nav-item active" onclick="showView('home')">
-      <span class="nav-icon">⌂</span><span>Home</span>
+    <div class="subtitle" id="authSubtitle">
+      Welcome back
     </div>
 
-    <div class="nav-item" onclick="showView('discover')">
-      <span class="nav-icon">⌕</span><span>Discover</span>
-    </div>
+    <input
+      id="name"
+      type="text"
+      placeholder="Your name"
+      style="display:none"
+    >
 
-    <div class="nav-item" onclick="showView('reels')">
-      <span class="nav-icon">▶</span><span>Reels</span>
-    </div>
+    <input
+      id="email"
+      type="email"
+      placeholder="Email"
+      autocomplete="email"
+    >
 
-    <div class="nav-item" onclick="showView('messages')">
-      <span class="nav-icon">✉</span><span>Messages</span>
-    </div>
+    <input
+      id="password"
+      type="password"
+      placeholder="Password"
+      autocomplete="current-password"
+    >
 
-    <div class="nav-item" onclick="showView('profile')">
-      <span class="nav-icon">◎</span><span>Profile</span>
-    </div>
+    <button class="main-btn" id="mainBtn">
+      Login
+    </button>
 
-    <div class="nav-item" onclick="showView('premium')">
-      <span class="nav-icon">❖</span><span>Premium</span>
-    </div>
+    <button class="google-btn" id="googleBtn">
+      🔵 Continue with Google
+    </button>
 
-  </nav>
-</aside>
+    <div class="message" id="message"></div>
 
-<!-- MAIN -->
-<main>
-
-<!-- HOME -->
-<section id="home" class="view active">
-
-  <div class="card stories">
-
-    <div class="story">
-      <div class="story-avatar">
-        <div class="story-inner">＋</div>
-      </div>
-      Your Story
-    </div>
-
-    <div class="story">
-      <div class="story-avatar">
-        <div class="story-inner">BS</div>
-      </div>
-      Bharat
-    </div>
-
-    <div class="story">
-      <div class="story-avatar">
-        <div class="story-inner">A</div>
-      </div>
-      Aman
-    </div>
-
-    <div class="story">
-      <div class="story-avatar">
-        <div class="story-inner">R</div>
-      </div>
-      Rahul
-    </div>
-
-    <div class="story">
-      <div class="story-avatar">
-        <div class="story-inner">P</div>
-      </div>
-      Priya
+    <div class="switch">
+      <span id="switchText">Create new account</span>
     </div>
 
   </div>
 
-  <div class="card create">
-    <div class="create-row">
-      <div class="avatar">BS</div>
-      <input placeholder="What's on your mind?">
-      <button class="icon-btn">＋</button>
+</div>
+
+
+<!-- APP -->
+<div class="app" id="app">
+
+  <header class="topbar">
+
+    <div class="brand">
+      BSEN<span>FLOW</span>
     </div>
-  </div>
 
-  <article class="card post">
+    <div class="user-area">
 
-    <div class="post-head">
-      <div class="avatar">
+      <div class="avatar" id="avatar">
         BS
-        <div class="online"></div>
       </div>
 
-      <div class="user-info">
-        <strong>Bharat Sain <span class="premium">❖</span></strong>
-        <small>Founder of BSENFLOW · Just now</small>
+      <button class="logout" id="logoutBtn">
+        Logout
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <main class="content">
+
+    <section class="hero">
+
+      <h1>Welcome to BSENFLOW 🚀</h1>
+
+      <p id="welcomeText">
+        The next generation of social networking.
+      </p>
+
+      <div class="premium">
+        ❖ BSENFLOW Premium
       </div>
-    </div>
 
-    <div class="post-text">
-      Building something different. 🚀
-      Welcome to the new generation of social networking.
-    </div>
+      <p style="margin-top:25px;font-size:14px">
+        Founded by Bharat Sain
+      </p>
 
-    <div class="post-image">✦</div>
+    </section>
 
-    <div class="post-actions">
-      <button class="action" onclick="like(this)">♡</button>
-      <button class="action">♡</button>
-      <button class="action">↗</button>
-      <button class="action">⌑</button>
-    </div>
-
-    <div class="likes">
-      1,248 people like this
-    </div>
-
-  </article>
-
-</section>
-
-
-<!-- DISCOVER -->
-<section id="discover" class="view">
-  <div class="card hero">
-    <h1>Discover</h1>
-    <p>Find creators, people, topics and trends.</p>
-  </div>
-</section>
-
-
-<!-- REELS -->
-<section id="reels" class="view">
-  <div class="card hero">
-    <h1>Reels ▶</h1>
-    <p>Your next-generation short video experience.</p>
-  </div>
-</section>
-
-
-<!-- MESSAGES -->
-<section id="messages" class="view">
-  <div class="card hero">
-    <h1>Messages ✉</h1>
-    <p>Your conversations will appear here.</p>
-  </div>
-</section>
-
-
-<!-- PROFILE -->
-<section id="profile" class="view">
-  <div class="card hero">
-
-    <div class="avatar" style="width:100px;height:100px;margin:auto;font-size:28px">
-      BS
-    </div>
-
-    <h1 style="margin-top:15px">Bharat Sain ❖</h1>
-
-    <p>Founder of BSENFLOW</p>
-
-    <p style="margin-top:15px">
-      Building the future of social networking.
-    </p>
-
-  </div>
-</section>
-
-
-<!-- PREMIUM -->
-<section id="premium" class="view">
-  <div class="card hero">
-
-    <div style="font-size:50px">❖</div>
-
-    <h1>BSENFLOW Premium</h1>
-
-    <p>Unlock the premium experience.</p>
-
-    <button class="premium-btn">
-      ₹249 / Month
-    </button>
-
-    <p style="margin-top:15px;font-size:13px">
-      Special introductory offer can be added later.
-    </p>
-
-  </div>
-</section>
-
-</main>
-
-
-<!-- RIGHT BAR -->
-<aside class="rightbar">
-
-  <div class="card profile-card">
-
-    <div class="avatar">BS</div>
-
-    <strong>Bharat Sain ❖</strong>
-
-    <div class="founder">
-      Founder · BSENFLOW
-    </div>
-
-    <button class="premium-btn"
-      onclick="showView('premium')">
-      Explore Premium
-    </button>
-
-  </div>
-
-</aside>
+  </main>
 
 </div>
 
 
-<!-- MOBILE NAV -->
-<nav class="mobile-nav">
+<script type="module">
 
-  <button onclick="showView('home')">⌂</button>
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-  <button onclick="showView('discover')">⌕</button>
-
-  <button onclick="showView('home')">＋</button>
-
-  <button onclick="showView('reels')">▶</button>
-
-  <button onclick="showView('profile')">◎</button>
-
-</nav>
-
-</div>
-
-
-<script>
-
-function showView(id){
-
-  document.querySelectorAll('.view')
-    .forEach(v => v.classList.remove('active'));
-
-  const target=document.getElementById(id);
-
-  if(target){
-    target.classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+  signOut,
+  updateProfile
 }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-function like(button){
 
-  if(button.innerHTML.trim()==='♡'){
-    button.innerHTML='♥';
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCfBlYDE7hz8yUXTxtUpATBmCqR4qZ1fsI",
+  authDomain: "bsenflow.firebaseapp.com",
+  projectId: "bsenflow",
+  storageBucket: "bsenflow.firebasestorage.app",
+  messagingSenderId: "757334229298",
+  appId: "1:757334229298:web:8d1d9ba615c09d1edad72b",
+  measurementId: "G-4KYD657J4K"
+};
+
+
+/* START FIREBASE */
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const googleProvider = new GoogleAuthProvider();
+
+
+/* ELEMENTS */
+
+const authPage = document.getElementById("authPage");
+const appPage = document.getElementById("app");
+
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+
+const mainBtn = document.getElementById("mainBtn");
+const googleBtn = document.getElementById("googleBtn");
+
+const switchText = document.getElementById("switchText");
+const authSubtitle = document.getElementById("authSubtitle");
+
+const message = document.getElementById("message");
+
+const logoutBtn = document.getElementById("logoutBtn");
+
+const welcomeText = document.getElementById("welcomeText");
+const avatar = document.getElementById("avatar");
+
+
+let signupMode = false;
+
+
+/* LOGIN / SIGNUP SWITCH */
+
+switchText.addEventListener("click", () => {
+
+  signupMode = !signupMode;
+
+  nameInput.style.display =
+    signupMode ? "block" : "none";
+
+  mainBtn.textContent =
+    signupMode ? "Create Account" : "Login";
+
+  switchText.textContent =
+    signupMode
+      ? "Already have an account? Login"
+      : "Create new account";
+
+  authSubtitle.textContent =
+    signupMode
+      ? "Create your BSENFLOW account"
+      : "Welcome back";
+
+  message.textContent = "";
+
+});
+
+
+/* EMAIL AUTH */
+
+mainBtn.addEventListener("click", async () => {
+
+  const email = emailInput.value.trim();
+
+  const password = passwordInput.value;
+
+  const name = nameInput.value.trim();
+
+
+  if(!email || !password){
+
+    message.textContent =
+      "Please enter email and password.";
+
+    return;
+  }
+
+
+  try{
+
+    if(signupMode){
+
+      if(!name){
+
+        message.textContent =
+          "Please enter your name.";
+
+        return;
+      }
+
+
+      const result =
+        await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+
+      await updateProfile(
+        result.user,
+        {
+          displayName:name
+        }
+      );
+
+
+      message.textContent =
+        "Account created successfully!";
+
+
+    }else{
+
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+    message.textContent =
+      getFriendlyError(error.code);
+
+  }
+
+});
+
+
+/* GOOGLE LOGIN */
+
+googleBtn.addEventListener("click", async () => {
+
+  try{
+
+    await signInWithPopup(
+      auth,
+      googleProvider
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    message.textContent =
+      getFriendlyError(error.code);
+
+  }
+
+});
+
+
+/* LOGOUT */
+
+logoutBtn.addEventListener("click", async () => {
+
+  await signOut(auth);
+
+});
+
+
+/* AUTH STATE */
+
+onAuthStateChanged(auth, user => {
+
+  if(user){
+
+    authPage.style.display = "none";
+
+    appPage.style.display = "block";
+
+
+    const displayName =
+      user.displayName ||
+      user.email?.split("@")[0] ||
+      "User";
+
+
+    welcomeText.textContent =
+      "Welcome, " + displayName +
+      " 👋";
+
+
+    avatar.textContent =
+      displayName
+        .substring(0,2)
+        .toUpperCase();
+
+
   }else{
-    button.innerHTML='♡';
+
+    authPage.style.display = "flex";
+
+    appPage.style.display = "none";
+
+  }
+
+});
+
+
+/* FRIENDLY ERRORS */
+
+function getFriendlyError(code){
+
+  switch(code){
+
+    case "auth/invalid-email":
+      return "Invalid email address.";
+
+    case "auth/user-not-found":
+      return "No account found with this email.";
+
+    case "auth/wrong-password":
+    case "auth/invalid-credential":
+      return "Email or password is incorrect.";
+
+    case "auth/email-already-in-use":
+      return "This email is already registered.";
+
+    case "auth/weak-password":
+      return "Password should be at least 6 characters.";
+
+    case "auth/popup-closed-by-user":
+      return "Google login was cancelled.";
+
+    case "auth/unauthorized-domain":
+      return "This website domain is not authorized in Firebase.";
+
+    default:
+      return "Something went wrong. Please try again.";
+
   }
 
 }
