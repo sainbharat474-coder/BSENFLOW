@@ -762,3 +762,131 @@ function getFriendlyError(code){
 
 })();
 </script>
+<script>
+/* BSENFLOW EDIT PROFILE - ADD ON */
+
+(function () {
+
+  const profileCard = document.querySelector(".profile-card");
+
+  if (!profileCard) return;
+
+  const editBtn = document.createElement("button");
+
+  editBtn.innerHTML = "✏️ Edit Profile";
+
+  editBtn.style.cssText = `
+    margin-top:20px;
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:14px;
+    background:#111;
+    color:#fff;
+    font-weight:800;
+    cursor:pointer;
+  `;
+
+  profileCard.appendChild(editBtn);
+
+  editBtn.onclick = function () {
+
+    if (document.getElementById("bflowEditBox")) return;
+
+    const editBox = document.createElement("div");
+
+    editBox.id = "bflowEditBox";
+
+    editBox.style.cssText = `
+      margin-top:20px;
+      padding:20px;
+      background:#f7f7fa;
+      border-radius:18px;
+    `;
+
+    editBox.innerHTML = `
+      <input
+        id="bflowNewName"
+        type="text"
+        placeholder="Enter your name"
+        style="
+          width:100%;
+          padding:14px;
+          border:1px solid #ddd;
+          border-radius:12px;
+          margin-bottom:12px;
+        "
+      >
+
+      <textarea
+        id="bflowNewBio"
+        placeholder="Write something about yourself..."
+        style="
+          width:100%;
+          min-height:90px;
+          padding:14px;
+          border:1px solid #ddd;
+          border-radius:12px;
+          resize:vertical;
+        "
+      ></textarea>
+
+      <button
+        id="bflowSaveProfile"
+        style="
+          width:100%;
+          margin-top:12px;
+          padding:14px;
+          border:0;
+          border-radius:12px;
+          background:#635bff;
+          color:#fff;
+          font-weight:800;
+          cursor:pointer;
+        "
+      >
+        💾 Save Profile
+      </button>
+    `;
+
+    profileCard.appendChild(editBox);
+
+    document.getElementById("bflowNewName").value =
+      document.getElementById("profileName").textContent;
+
+    document.getElementById("bflowSaveProfile").onclick =
+      function () {
+
+        const newName =
+          document.getElementById("bflowNewName").value.trim();
+
+        const newBio =
+          document.getElementById("bflowNewBio").value.trim();
+
+        if (!newName) {
+          alert("Please enter your name.");
+          return;
+        }
+
+        document.getElementById("profileName").textContent =
+          newName;
+
+        document.getElementById("welcomeText").textContent =
+          "Welcome, " + newName + " 👋";
+
+        document.getElementById("avatar").textContent =
+          newName.substring(0,2).toUpperCase();
+
+        document.getElementById("profileAvatar").textContent =
+          newName.substring(0,2).toUpperCase();
+
+        alert("Profile updated successfully! ✅");
+
+        editBox.remove();
+
+      };
+
+  };
+
+})();
+</script>
