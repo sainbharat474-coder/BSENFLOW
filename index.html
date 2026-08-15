@@ -714,4 +714,51 @@ function getFriendlyError(code){
 </script>
 
 </body>
-</html>
+<script>
+/* BSENFLOW PROFILE BUTTON - ADD ON */
+
+(function () {
+
+  const userArea = document.querySelector(".user-area");
+
+  if (!userArea) return;
+
+  const profileBtn = document.createElement("button");
+
+  profileBtn.id = "bflowProfileBtn";
+
+  profileBtn.innerHTML = "👤 Profile";
+
+  profileBtn.style.cssText = `
+    border:0;
+    background:#635bff;
+    color:#fff;
+    padding:10px 15px;
+    border-radius:12px;
+    font-weight:800;
+    cursor:pointer;
+  `;
+
+  profileBtn.onclick = function () {
+
+    const profileCard =
+      document.querySelector(".profile-card");
+
+    if (profileCard) {
+
+      profileCard.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+      });
+
+    }
+
+  };
+
+  userArea.insertBefore(
+    profileBtn,
+    userArea.querySelector(".logout")
+  );
+
+})();
+</script>
