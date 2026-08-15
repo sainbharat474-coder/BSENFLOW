@@ -890,3 +890,84 @@ function getFriendlyError(code){
 
 })();
 </script>
+<script>
+/* BSENFLOW PROFILE FIRESTORE SAVE - ADD ON */
+
+(function () {
+
+  const saveProfile = document.getElementById("bflowSaveProfile");
+
+  if (!saveProfile) return;
+
+  saveProfile.addEventListener("click", async function () {
+
+    try {
+
+      const user = auth.currentUser;
+
+      if (!user) {
+        alert("Please login first.");
+        return;
+      }
+
+      const newName =
+        document.getElementById("bflowNewName")?.value.trim() || "";
+
+      const newBio =
+        document.getElementById("bflowNewBio")?.value.trim() || "";
+
+      if (!newName) {
+        alert("Please enter your name.");
+        return;
+      }
+
+      await updateProfile(user, {
+        displayName: newName
+      });
+
+      await setDoc(
+        doc(db, "users", user.uid),
+        {
+          name: newName,
+          bio: newBio,
+          updatedAt: serverTimestamp()
+        },
+        {
+          merge: true
+        }
+      );
+
+      document.getElementById("profileName").textContent =
+        newName;
+
+      document.getElementById("welcomeText").textContent =
+        "Welcome, " + newName + " 👋";
+
+      const initials =
+        newName.substring(0, 2).toUpperCase();
+
+      document.getElementById("avatar").textContent =
+        initials;
+
+      document.getElementById("profileAvatar").textContent =
+        initials;
+
+      alert("Profile saved to Firebase! ✅");
+
+      document.getElementById("bflowEditBox")?.remove();
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "Profile save failed: " +
+        error.message
+      );
+
+    }
+
+  });
+
+})();
+</script>
