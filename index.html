@@ -27,7 +27,7 @@ button{cursor:pointer}
 .auth-box{
   width:100%;
   max-width:430px;
-  background:white;
+  background:#fff;
   border-radius:28px;
   padding:32px;
   box-shadow:0 25px 70px rgba(0,0,0,.3);
@@ -40,7 +40,7 @@ button{cursor:pointer}
   margin-bottom:8px;
 }
 
-.logo span{color:#635bff}
+.logo span,.brand span{color:#635bff}
 
 .subtitle{
   text-align:center;
@@ -57,19 +57,16 @@ button{cursor:pointer}
   outline:none;
 }
 
-.auth-box input:focus{
-  border-color:#635bff;
-}
+.auth-box input:focus{border-color:#635bff}
 
 .main-btn{
   width:100%;
   padding:15px;
   border:0;
   border-radius:15px;
-  color:white;
+  color:#fff;
   font-weight:800;
   background:linear-gradient(135deg,#635bff,#8b5cf6);
-  margin-top:5px;
 }
 
 .google-btn{
@@ -78,7 +75,7 @@ button{cursor:pointer}
   margin-top:12px;
   border:1px solid #ddd;
   border-radius:15px;
-  background:white;
+  background:#fff;
   font-weight:700;
 }
 
@@ -102,14 +99,11 @@ button{cursor:pointer}
   min-height:20px;
 }
 
-.app{
-  display:none;
-  min-height:100vh;
-}
+.app{display:none;min-height:100vh}
 
 .topbar{
   height:70px;
-  background:white;
+  background:#fff;
   border-bottom:1px solid #eee;
   display:flex;
   align-items:center;
@@ -125,8 +119,6 @@ button{cursor:pointer}
   font-weight:900;
 }
 
-.brand span{color:#635bff}
-
 .user-area{
   display:flex;
   align-items:center;
@@ -134,11 +126,11 @@ button{cursor:pointer}
 }
 
 .avatar{
-  width:42px;
-  height:42px;
+  width:44px;
+  height:44px;
   border-radius:50%;
   background:linear-gradient(135deg,#635bff,#111);
-  color:white;
+  color:#fff;
   display:grid;
   place-items:center;
   font-weight:900;
@@ -159,7 +151,7 @@ button{cursor:pointer}
 }
 
 .hero{
-  background:white;
+  background:#fff;
   border-radius:28px;
   padding:50px 25px;
   text-align:center;
@@ -174,6 +166,7 @@ button{cursor:pointer}
 .hero p{
   color:#777;
   font-size:17px;
+  margin-top:8px;
 }
 
 .premium{
@@ -181,21 +174,45 @@ button{cursor:pointer}
   display:inline-block;
   padding:14px 24px;
   border-radius:15px;
-  color:white;
+  color:#fff;
   background:#111;
   font-weight:800;
+}
+
+.profile-card{
+  margin-top:25px;
+  padding:25px;
+  background:#fff;
+  border-radius:22px;
+  text-align:left;
+}
+
+.profile-row{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.profile-info strong{font-size:18px}
+
+.profile-info small{
+  display:block;
+  color:#777;
+  margin-top:5px;
 }
 
 @media(max-width:600px){
   .auth-box{padding:25px}
   .hero h1{font-size:32px}
+  .topbar{padding:0 15px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN / SIGNUP -->
+<!-- AUTHENTICATION -->
+
 <div class="auth-page" id="authPage">
 
   <div class="auth-box">
@@ -217,14 +234,12 @@ button{cursor:pointer}
       id="email"
       type="email"
       placeholder="Email"
-      autocomplete="email"
     >
 
     <input
       id="password"
       type="password"
       placeholder="Password"
-      autocomplete="current-password"
     >
 
     <button class="main-btn" id="mainBtn">
@@ -246,7 +261,8 @@ button{cursor:pointer}
 </div>
 
 
-<!-- APP -->
+<!-- MAIN APP -->
+
 <div class="app" id="app">
 
   <header class="topbar">
@@ -284,9 +300,33 @@ button{cursor:pointer}
         ❖ BSENFLOW Premium
       </div>
 
-      <p style="margin-top:25px;font-size:14px">
-        Founded by Bharat Sain
-      </p>
+      <div class="profile-card">
+
+        <div class="profile-row">
+
+          <div class="avatar" id="profileAvatar">
+            BS
+          </div>
+
+          <div class="profile-info">
+
+            <strong id="profileName">
+              BSENFLOW User
+            </strong>
+
+            <small id="profileEmail">
+              Loading...
+            </small>
+
+            <small>
+              Founder: Bharat Sain
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
 
     </section>
 
@@ -297,8 +337,14 @@ button{cursor:pointer}
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+/* FIREBASE APP */
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+/* FIREBASE AUTH */
 
 import {
   getAuth,
@@ -309,15 +355,18 @@ import {
   onAuthStateChanged,
   signOut,
   updateProfile
-}
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+/* FIRESTORE */
+
 import {
   getFirestore,
   doc,
   setDoc,
   serverTimestamp
-}
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
 
 /* FIREBASE CONFIG */
 
@@ -332,12 +381,14 @@ const firebaseConfig = {
 };
 
 
-/* START FIREBASE */
+/* INITIALIZE */
 
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
+
 const db = getFirestore(app);
+
 const googleProvider = new GoogleAuthProvider();
 
 
@@ -361,7 +412,12 @@ const message = document.getElementById("message");
 const logoutBtn = document.getElementById("logoutBtn");
 
 const welcomeText = document.getElementById("welcomeText");
+
 const avatar = document.getElementById("avatar");
+const profileAvatar = document.getElementById("profileAvatar");
+
+const profileName = document.getElementById("profileName");
+const profileEmail = document.getElementById("profileEmail");
 
 
 let signupMode = false;
@@ -394,7 +450,7 @@ switchText.addEventListener("click", () => {
 });
 
 
-/* EMAIL AUTH */
+/* EMAIL LOGIN / SIGNUP */
 
 mainBtn.addEventListener("click", async () => {
 
@@ -411,6 +467,7 @@ mainBtn.addEventListener("click", async () => {
       "Please enter email and password.";
 
     return;
+
   }
 
 
@@ -424,8 +481,11 @@ mainBtn.addEventListener("click", async () => {
           "Please enter your name.";
 
         return;
+
       }
 
+
+      /* CREATE AUTH ACCOUNT */
 
       const result =
         await createUserWithEmailAndPassword(
@@ -435,10 +495,29 @@ mainBtn.addEventListener("click", async () => {
         );
 
 
+      /* SAVE DISPLAY NAME */
+
       await updateProfile(
         result.user,
         {
           displayName:name
+        }
+      );
+
+
+      /* SAVE USER TO FIRESTORE */
+
+      await setDoc(
+        doc(db, "users", result.user.uid),
+        {
+          uid: result.user.uid,
+          name: name,
+          email: email,
+          bio: "",
+          profilePhoto: "",
+          followers: 0,
+          following: 0,
+          createdAt: serverTimestamp()
         }
       );
 
@@ -448,6 +527,8 @@ mainBtn.addEventListener("click", async () => {
 
 
     }else{
+
+      /* LOGIN */
 
       await signInWithEmailAndPassword(
         auth,
@@ -475,10 +556,40 @@ googleBtn.addEventListener("click", async () => {
 
   try{
 
-    await signInWithPopup(
-      auth,
-      googleProvider
+    const result =
+      await signInWithPopup(
+        auth,
+        googleProvider
+      );
+
+
+    const user = result.user;
+
+
+    /* SAVE / UPDATE GOOGLE USER */
+
+    await setDoc(
+      doc(db, "users", user.uid),
+      {
+        uid: user.uid,
+        name:
+          user.displayName ||
+          "BSENFLOW User",
+        email:
+          user.email || "",
+        bio: "",
+        profilePhoto:
+          user.photoURL || "",
+        followers: 0,
+        following: 0,
+        createdAt:
+          serverTimestamp()
+      },
+      {
+        merge:true
+      }
     );
+
 
   }catch(error){
 
@@ -494,53 +605,75 @@ googleBtn.addEventListener("click", async () => {
 
 /* LOGOUT */
 
-logoutBtn.addEventListener("click", async () => {
+logoutBtn.addEventListener(
+  "click",
+  async () => {
 
-  await signOut(auth);
+    await signOut(auth);
 
-});
+  }
+);
 
 
 /* AUTH STATE */
 
-onAuthStateChanged(auth, user => {
+onAuthStateChanged(
+  auth,
+  user => {
 
-  if(user){
+    if(user){
 
-    authPage.style.display = "none";
+      authPage.style.display = "none";
 
-    appPage.style.display = "block";
-
-
-    const displayName =
-      user.displayName ||
-      user.email?.split("@")[0] ||
-      "User";
+      appPage.style.display = "block";
 
 
-    welcomeText.textContent =
-      "Welcome, " + displayName +
-      " 👋";
+      const displayName =
+        user.displayName ||
+        user.email?.split("@")[0] ||
+        "User";
 
 
-    avatar.textContent =
-      displayName
-        .substring(0,2)
-        .toUpperCase();
+      welcomeText.textContent =
+        "Welcome, " +
+        displayName +
+        " 👋";
 
 
-  }else{
+      profileName.textContent =
+        displayName;
 
-    authPage.style.display = "flex";
 
-    appPage.style.display = "none";
+      profileEmail.textContent =
+        user.email || "";
+
+
+      const initials =
+        displayName
+          .substring(0,2)
+          .toUpperCase();
+
+
+      avatar.textContent =
+        initials;
+
+      profileAvatar.textContent =
+        initials;
+
+
+    }else{
+
+      authPage.style.display = "flex";
+
+      appPage.style.display = "none";
+
+    }
 
   }
+);
 
-});
 
-
-/* FRIENDLY ERRORS */
+/* ERROR MESSAGES */
 
 function getFriendlyError(code){
 
@@ -567,6 +700,9 @@ function getFriendlyError(code){
 
     case "auth/unauthorized-domain":
       return "This website domain is not authorized in Firebase.";
+
+    case "permission-denied":
+      return "Firestore permission denied. Check Firestore Rules.";
 
     default:
       return "Something went wrong. Please try again.";
