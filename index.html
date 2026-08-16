@@ -3,36 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>BSENFLOW — Social. Connect. Create.</title>
+<title>BSENFLOW — Connect. Create. Belong.</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#635bff;
+  --primary2:#8b5cf6;
+  --dark:#111;
+  --muted:#737373;
+  --bg:#f5f6fa;
+  --card:#fff;
+  --border:#e9e9ef;
+  --success:#188038;
+  --danger:#d93025;
 }
-
+html{scroll-behavior:smooth}
 body{
   font-family:Inter,Arial,Helvetica,sans-serif;
-  background:#f5f6fa;
+  background:var(--bg);
   color:#111;
 }
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.6;cursor:not-allowed}
 
-button,
-input,
-textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-/* =========================
-   AUTH
-========================= */
+/* ================= AUTH ================= */
 
 .auth-page{
   min-height:100vh;
@@ -41,87 +37,85 @@ button{
   justify-content:center;
   padding:20px;
   background:
-    radial-gradient(circle at top left,#8b5cf6 0%,transparent 35%),
-    radial-gradient(circle at bottom right,#635bff 0%,transparent 35%),
-    #111;
+    radial-gradient(circle at 10% 10%,#8b5cf6 0,transparent 30%),
+    radial-gradient(circle at 90% 90%,#635bff 0,transparent 30%),
+    linear-gradient(135deg,#080808,#211b3d);
 }
 
 .auth-box{
   width:100%;
-  max-width:440px;
+  max-width:450px;
   background:rgba(255,255,255,.98);
-  padding:34px;
   border-radius:30px;
-  box-shadow:0 30px 90px rgba(0,0,0,.35);
+  padding:34px;
+  box-shadow:0 30px 100px rgba(0,0,0,.4);
 }
 
 .logo{
   text-align:center;
-  font-size:36px;
+  font-size:38px;
   font-weight:950;
-  letter-spacing:-1.5px;
+  letter-spacing:-2px;
 }
+.logo span,.brand span{color:var(--primary)}
 
-.logo span,
-.brand span{
-  color:#635bff;
+.auth-tag{
+  text-align:center;
+  margin:8px 0 6px;
+  color:#888;
+  font-size:13px;
+  font-weight:700;
 }
 
 .subtitle{
   text-align:center;
-  color:#777;
-  margin:8px 0 28px;
+  color:#666;
+  margin:0 0 27px;
 }
 
-.input-group{
-  margin-bottom:14px;
-}
-
-.input-label{
-  display:block;
-  font-size:13px;
-  font-weight:800;
-  margin-bottom:7px;
-}
-
-.auth-input{
+.auth-input,.field input,.field textarea,.search-input{
   width:100%;
-  padding:15px 16px;
   border:1px solid #ddd;
-  border-radius:15px;
+  border-radius:14px;
+  padding:14px 15px;
   outline:none;
   background:#fff;
   transition:.2s;
 }
 
-.auth-input:focus{
-  border-color:#635bff;
+.auth-input:focus,
+.field input:focus,
+.field textarea:focus,
+.search-input:focus{
+  border-color:var(--primary);
   box-shadow:0 0 0 4px rgba(99,91,255,.08);
+}
+
+.input-group{margin-bottom:14px}
+.input-label,.field label{
+  display:block;
+  font-size:12px;
+  font-weight:900;
+  margin-bottom:7px;
 }
 
 .primary-btn{
   width:100%;
   border:0;
-  border-radius:15px;
+  border-radius:14px;
   padding:15px;
-  background:linear-gradient(135deg,#635bff,#8b5cf6);
   color:#fff;
   font-weight:900;
-  margin-top:5px;
-}
-
-.primary-btn:disabled{
-  opacity:.6;
-  cursor:not-allowed;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
 }
 
 .google-btn{
   width:100%;
   border:1px solid #ddd;
-  border-radius:15px;
+  border-radius:14px;
   padding:14px;
   background:#fff;
-  font-weight:800;
+  font-weight:900;
   margin-top:12px;
 }
 
@@ -130,60 +124,51 @@ button{
   align-items:center;
   gap:10px;
   color:#aaa;
-  font-size:12px;
-  margin:20px 0;
+  font-size:11px;
+  margin:19px 0;
 }
-
-.divider::before,
-.divider::after{
+.divider:before,.divider:after{
   content:"";
-  flex:1;
   height:1px;
   background:#eee;
+  flex:1;
 }
 
 .switch{
   text-align:center;
-  margin-top:20px;
+  margin-top:19px;
   color:#777;
   font-size:14px;
 }
-
 .switch span{
-  color:#635bff;
+  color:var(--primary);
   font-weight:900;
   cursor:pointer;
 }
-
-.message{
+.auth-message{
   min-height:22px;
   text-align:center;
-  margin-top:14px;
+  margin-top:13px;
   font-size:13px;
-  font-weight:700;
+  font-weight:800;
 }
 
-/* =========================
-   APP
-========================= */
+/* ================= APP ================= */
 
-.app{
-  display:none;
-  min-height:100vh;
-}
+.app{display:none;min-height:100vh}
 
 .topbar{
   height:70px;
   background:rgba(255,255,255,.96);
-  border-bottom:1px solid #eee;
+  border-bottom:1px solid var(--border);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:0 28px;
+  padding:0 25px;
   position:sticky;
   top:0;
   z-index:100;
-  backdrop-filter:blur(15px);
+  backdrop-filter:blur(18px);
 }
 
 .brand{
@@ -192,10 +177,21 @@ button{
   letter-spacing:-1px;
 }
 
-.user-area{
+.top-actions{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:10px;
+}
+
+.icon-btn{
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:13px;
+  background:#f2f2f7;
+  display:grid;
+  place-items:center;
+  font-size:19px;
 }
 
 .avatar{
@@ -204,403 +200,507 @@ button{
   border-radius:50%;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,#635bff,#111);
+  background:linear-gradient(135deg,var(--primary),#111);
   color:#fff;
   font-weight:900;
   border:2px solid #fff;
-  box-shadow:0 4px 15px rgba(0,0,0,.15);
+  box-shadow:0 4px 16px rgba(0,0,0,.15);
+  overflow:hidden;
+}
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
 .logout-btn{
   border:0;
-  background:#f0f0f5;
-  padding:10px 15px;
+  background:#f1f1f5;
+  padding:10px 14px;
   border-radius:12px;
   font-weight:800;
 }
 
-/* =========================
-   CONTENT
-========================= */
-
-.content{
-  width:100%;
-  max-width:900px;
-  margin:0 auto;
-  padding:30px 20px 80px;
+.layout{
+  max-width:1200px;
+  margin:auto;
+  padding:24px 18px 80px;
+  display:grid;
+  grid-template-columns:230px minmax(0,620px) 260px;
+  gap:20px;
 }
 
-.hero{
+.sidebar,.rightbar{
+  position:sticky;
+  top:92px;
+  height:max-content;
+}
+
+.nav-card,.side-card,.card{
   background:#fff;
-  border-radius:30px;
-  padding:45px 25px;
-  text-align:center;
-  box-shadow:0 12px 40px rgba(0,0,0,.06);
+  border:1px solid var(--border);
+  border-radius:22px;
+  box-shadow:0 8px 30px rgba(0,0,0,.04);
+}
+
+.nav-card{padding:12px}
+
+.nav-btn{
+  width:100%;
+  border:0;
+  background:transparent;
+  padding:13px 14px;
+  border-radius:13px;
+  text-align:left;
+  font-weight:800;
+  margin-bottom:3px;
+}
+.nav-btn:hover,.nav-btn.active{background:#f0efff;color:var(--primary)}
+
+.side-card{
+  padding:18px;
+  margin-bottom:15px;
+}
+
+.side-title{
+  font-weight:950;
+  margin-bottom:13px;
+}
+
+.small-text{
+  color:#888;
+  font-size:12px;
+  line-height:1.5;
+}
+
+/* ================= FEED ================= */
+
+.hero{
+  background:linear-gradient(135deg,#111,#30275a,#635bff);
+  color:#fff;
+  border-radius:25px;
+  padding:30px;
+  margin-bottom:18px;
+  box-shadow:0 15px 40px rgba(70,60,180,.2);
 }
 
 .hero h1{
-  font-size:40px;
+  font-size:31px;
   letter-spacing:-1px;
 }
-
-.hero-subtitle{
-  color:#777;
-  margin-top:10px;
+.hero p{
+  margin-top:8px;
+  color:#ddd;
 }
-
 .premium{
   display:inline-block;
-  margin-top:24px;
-  padding:12px 20px;
-  border-radius:14px;
-  background:#111;
+  margin-top:18px;
+  background:#fff;
+  color:#111;
+  padding:10px 15px;
+  border-radius:12px;
+  font-size:13px;
+  font-weight:950;
+}
+
+.card{padding:20px;margin-bottom:17px}
+
+.section-title{
+  font-size:19px;
+  font-weight:950;
+  margin-bottom:14px;
+}
+
+.post-composer textarea{
+  width:100%;
+  min-height:100px;
+  border:1px solid #ddd;
+  border-radius:15px;
+  padding:14px;
+  resize:vertical;
+  outline:none;
+}
+.post-composer textarea:focus{border-color:var(--primary)}
+
+.composer-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:10px;
+  gap:10px;
+}
+.char-count{color:#888;font-size:12px}
+
+.post-btn{
+  border:0;
+  background:var(--dark);
   color:#fff;
+  padding:11px 18px;
+  border-radius:12px;
   font-weight:900;
 }
 
-/* =========================
-   PROFILE
-========================= */
-
-.profile-card{
-  margin-top:25px;
+.post{
+  padding:20px;
+  border:1px solid var(--border);
+  border-radius:20px;
   background:#fff;
-  border-radius:24px;
-  padding:25px;
-  text-align:left;
-  border:1px solid #eee;
+  margin-bottom:15px;
 }
 
-.profile-header{
+.post-head{
   display:flex;
   align-items:center;
-  gap:16px;
+  justify-content:space-between;
+  gap:10px;
 }
 
-.profile-main-avatar{
-  width:70px;
-  height:70px;
+.post-user{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.mini-avatar{
+  width:42px;
+  height:42px;
   border-radius:50%;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,#635bff,#111);
+  background:linear-gradient(135deg,var(--primary),#111);
   color:#fff;
-  font-size:24px;
-  font-weight:900;
-  flex-shrink:0;
-}
-
-.profile-info{
-  min-width:0;
-}
-
-.profile-name{
-  font-size:20px;
-  font-weight:900;
-}
-
-.profile-username{
-  color:#635bff;
-  font-weight:800;
-  margin-top:3px;
-}
-
-.profile-email{
-  color:#888;
   font-size:13px;
-  margin-top:5px;
+  font-weight:900;
+  overflow:hidden;
+}
+.mini-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
-.profile-bio{
-  margin-top:18px;
-  line-height:1.5;
+.post-name{font-weight:900}
+.post-username{font-size:12px;color:var(--primary);margin-top:2px}
+.post-time{font-size:11px;color:#aaa;margin-top:3px}
+
+.post-menu{
+  border:0;
+  background:#f3f3f6;
+  width:35px;
+  height:35px;
+  border-radius:10px;
+}
+
+.post-content{
+  margin-top:15px;
+  line-height:1.6;
+  white-space:pre-wrap;
+  word-break:break-word;
+}
+
+.post-actions{
+  display:flex;
+  gap:8px;
+  border-top:1px solid #eee;
+  margin-top:16px;
+  padding-top:12px;
+}
+
+.action-btn{
+  border:0;
+  background:#f6f6f8;
+  border-radius:11px;
+  padding:9px 13px;
+  font-weight:800;
+}
+.action-btn.liked{color:#e11d48;background:#fff0f3}
+
+.comment-box{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+}
+.comment-box input{
+  flex:1;
+  border:1px solid #ddd;
+  border-radius:11px;
+  padding:10px 12px;
+  outline:none;
+}
+.comment-box button{
+  border:0;
+  background:var(--primary);
+  color:#fff;
+  border-radius:11px;
+  padding:0 14px;
+  font-weight:800;
+}
+
+.comments{
+  margin-top:10px;
+}
+.comment{
+  background:#f7f7fa;
+  border-radius:11px;
+  padding:9px 11px;
+  margin-top:7px;
+  font-size:13px;
+}
+.comment strong{font-weight:900}
+
+/* ================= PROFILE ================= */
+
+.profile-cover{
+  height:150px;
+  border-radius:22px 22px 0 0;
+  background:linear-gradient(135deg,#111,#635bff,#8b5cf6);
+}
+
+.profile-section{
+  padding:0 22px 22px;
+}
+
+.profile-main{
+  display:flex;
+  align-items:flex-end;
+  gap:15px;
+  margin-top:-40px;
+}
+
+.profile-large-avatar{
+  width:88px;
+  height:88px;
+  border-radius:50%;
+  border:4px solid #fff;
+  background:linear-gradient(135deg,var(--primary),#111);
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:27px;
+  font-weight:950;
+  overflow:hidden;
+}
+.profile-large-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.profile-display-name{
+  font-size:23px;
+  font-weight:950;
+}
+.profile-user{
+  color:var(--primary);
+  font-weight:900;
+  margin-top:2px;
+}
+
+.bio{
+  margin-top:16px;
   color:#444;
   white-space:pre-wrap;
+  line-height:1.55;
 }
 
 .stats{
   display:flex;
   gap:30px;
-  margin-top:20px;
-  padding-top:18px;
-  border-top:1px solid #eee;
+  margin-top:18px;
 }
+.stat strong{display:block;font-size:19px}
+.stat span{font-size:12px;color:#888}
 
-.stat{
-  text-align:center;
-}
-
-.stat strong{
-  display:block;
-  font-size:19px;
-}
-
-.stat span{
-  color:#888;
-  font-size:12px;
-}
-
-.edit-btn{
+.edit-profile-btn{
   width:100%;
   margin-top:20px;
-  padding:14px;
-  border:1px solid #635bff;
+  padding:13px;
+  border:1px solid var(--primary);
   background:#fff;
-  color:#635bff;
-  border-radius:14px;
-  font-weight:900;
-}
-
-/* =========================
-   PROFILE EDITOR
-========================= */
-
-.profile-editor{
-  display:none;
-  margin-top:20px;
-  padding:22px;
-  border-radius:20px;
-  background:#f7f7fb;
-  border:1px solid #e6e6ee;
-}
-
-.editor-title{
-  font-size:21px;
-  font-weight:950;
-}
-
-.editor-subtitle{
-  color:#777;
-  font-size:13px;
-  margin:5px 0 20px;
-}
-
-.field{
-  margin-bottom:16px;
-}
-
-.field label{
-  display:block;
-  font-size:13px;
-  font-weight:900;
-  margin-bottom:7px;
-}
-
-.field input,
-.field textarea{
-  width:100%;
-  border:1px solid #ddd;
+  color:var(--primary);
   border-radius:13px;
-  padding:14px;
-  outline:none;
-  background:#fff;
+  font-weight:900;
 }
 
-.field input:focus,
-.field textarea:focus{
-  border-color:#635bff;
+.editor{
+  display:none;
+  margin-top:18px;
+  padding:18px;
+  background:#f7f7fb;
+  border-radius:17px;
 }
 
-.field textarea{
-  min-height:120px;
-  resize:vertical;
-}
+.field{margin-bottom:15px}
+.field textarea{min-height:120px;resize:vertical}
+.help{font-size:11px;color:#888;margin-top:5px}
 
-.username-help{
-  color:#888;
-  font-size:12px;
-  margin-top:5px;
-}
-
-.save-profile{
+.save-btn{
   width:100%;
-  padding:15px;
   border:0;
-  border-radius:14px;
+  padding:14px;
+  border-radius:13px;
   background:#111;
   color:#fff;
   font-weight:900;
 }
 
-.save-profile:disabled{
-  opacity:.6;
-}
-
 .profile-message{
+  min-height:20px;
   text-align:center;
-  min-height:22px;
-  margin-top:12px;
+  margin-top:10px;
   font-size:13px;
   font-weight:800;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* ================= SEARCH ================= */
 
-@media(max-width:600px){
+.search-results{
+  margin-top:12px;
+}
+.user-result{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:11px;
+  border-radius:12px;
+  cursor:pointer;
+}
+.user-result:hover{background:#f4f3ff}
+.user-result-name{font-weight:900;font-size:13px}
+.user-result-username{font-size:11px;color:var(--primary)}
 
-  .auth-box{
-    padding:25px;
-  }
+/* ================= NOTIFICATIONS ================= */
 
-  .topbar{
-    padding:0 15px;
-  }
+.notification{
+  padding:12px;
+  border-radius:13px;
+  background:#f7f7fa;
+  margin-bottom:8px;
+  font-size:13px;
+}
+.notification strong{font-weight:900}
 
-  .brand{
-    font-size:22px;
-  }
+/* ================= TOAST ================= */
 
-  .logout-btn{
-    padding:9px 11px;
-  }
-
-  .hero{
-    padding:35px 18px;
-  }
-
-  .hero h1{
-    font-size:30px;
-  }
-
-  .profile-header{
-    align-items:flex-start;
-  }
-
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translateX(-50%) translateY(100px);
+  background:#111;
+  color:#fff;
+  padding:13px 18px;
+  border-radius:13px;
+  font-size:13px;
+  font-weight:800;
+  z-index:1000;
+  transition:.3s;
+  opacity:0;
+}
+.toast.show{
+  transform:translateX(-50%) translateY(0);
+  opacity:1;
 }
 
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1050px){
+  .layout{
+    grid-template-columns:190px minmax(0,1fr);
+  }
+  .rightbar{display:none}
+}
+
+@media(max-width:700px){
+  .layout{
+    display:block;
+    padding:14px 12px 90px;
+  }
+  .sidebar{
+    position:static;
+    margin-bottom:15px;
+  }
+  .nav-card{
+    display:flex;
+    overflow:auto;
+    gap:5px;
+  }
+  .nav-btn{
+    min-width:max-content;
+    margin:0;
+  }
+  .topbar{padding:0 13px}
+  .brand{font-size:22px}
+  .logout-btn{display:none}
+  .hero{padding:24px}
+  .hero h1{font-size:27px}
+}
 </style>
 </head>
 
 <body>
 
-
-<!-- =====================================================
-     AUTH PAGE
-===================================================== -->
+<!-- =========================================================
+     AUTH
+========================================================= -->
 
 <div class="auth-page" id="authPage">
 
   <div class="auth-box">
 
-    <div class="logo">
-      BSEN<span>FLOW</span>
+    <div class="logo">BSEN<span>FLOW</span></div>
+
+    <div class="auth-tag">
+      INDIA → WORLD 🌎
     </div>
 
     <div class="subtitle" id="authSubtitle">
       Welcome back
     </div>
 
-
-    <!-- NAME -->
-
-    <div
-      class="input-group"
-      id="nameGroup"
-      style="display:none"
-    >
-
-      <label class="input-label">
-        Display Name
-      </label>
-
-      <input
-        class="auth-input"
-        id="nameInput"
-        type="text"
-        placeholder="Your name"
-      >
-
+    <div class="input-group" id="nameGroup" style="display:none">
+      <label class="input-label">Display Name</label>
+      <input class="auth-input" id="nameInput" type="text"
+             placeholder="Your name">
     </div>
-
-
-    <!-- EMAIL -->
 
     <div class="input-group">
-
-      <label class="input-label">
-        Email
-      </label>
-
-      <input
-        class="auth-input"
-        id="emailInput"
-        type="email"
-        placeholder="Enter your email"
-        autocomplete="email"
-      >
-
+      <label class="input-label">Email</label>
+      <input class="auth-input" id="emailInput" type="email"
+             placeholder="Enter your email">
     </div>
-
-
-    <!-- PASSWORD -->
 
     <div class="input-group">
-
-      <label class="input-label">
-        Password
-      </label>
-
-      <input
-        class="auth-input"
-        id="passwordInput"
-        type="password"
-        placeholder="Enter your password"
-        autocomplete="current-password"
-      >
-
+      <label class="input-label">Password</label>
+      <input class="auth-input" id="passwordInput" type="password"
+             placeholder="Enter your password">
     </div>
 
-
-    <button
-      class="primary-btn"
-      id="mainAuthButton"
-    >
+    <button class="primary-btn" id="authButton">
       Login
     </button>
 
+    <div class="divider">OR</div>
 
-    <div class="divider">
-      OR
-    </div>
-
-
-    <button
-      class="google-btn"
-      id="googleButton"
-    >
+    <button class="google-btn" id="googleButton">
       🔵 Continue with Google
     </button>
 
-
-    <div
-      class="message"
-      id="authMessage"
-    ></div>
-
+    <div class="auth-message" id="authMessage"></div>
 
     <div class="switch">
-
-      <span id="switchMode">
-        Create new account
-      </span>
-
+      <span id="switchMode">Create new account</span>
     </div>
 
   </div>
-
 </div>
 
 
-<!-- =====================================================
-     MAIN APPLICATION
-===================================================== -->
+<!-- =========================================================
+     APP
+========================================================= -->
 
-<div
-  class="app"
-  id="app"
->
+<div class="app" id="app">
 
   <header class="topbar">
 
@@ -608,20 +708,17 @@ button{
       BSEN<span>FLOW</span>
     </div>
 
-    <div class="user-area">
+    <div class="top-actions">
 
-      <div
-        class="avatar"
-        id="topAvatar"
-        title="Profile"
-      >
-        BS
-      </div>
+      <button class="icon-btn" id="notificationButton" title="Notifications">
+        🔔
+      </button>
 
-      <button
-        class="logout-btn"
-        id="logoutButton"
-      >
+      <button class="icon-btn" id="topProfileButton" title="Profile">
+        <span class="avatar" id="topAvatar">BS</span>
+      </button>
+
+      <button class="logout-btn" id="logoutButton">
         Logout
       </button>
 
@@ -630,208 +727,396 @@ button{
   </header>
 
 
-  <main class="content">
+  <div class="layout">
 
-    <section class="hero">
+    <!-- SIDEBAR -->
 
-      <h1>
-        Welcome to BSENFLOW 🚀
-      </h1>
+    <aside class="sidebar">
 
-      <p
-        class="hero-subtitle"
-        id="welcomeText"
-      >
-        The next generation of social networking.
-      </p>
+      <div class="nav-card">
 
+        <button class="nav-btn active" id="homeNav">
+          🏠 Home
+        </button>
 
-      <div class="premium">
-        ❖ BSENFLOW Premium
+        <button class="nav-btn" id="profileNav">
+          👤 Profile
+        </button>
+
+        <button class="nav-btn" id="searchNav">
+          🔎 Search
+        </button>
+
+        <button class="nav-btn" id="notificationsNav">
+          🔔 Notifications
+        </button>
+
+        <button class="nav-btn" id="premiumNav">
+          💎 Premium
+        </button>
+
       </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main>
+
+      <section class="hero">
+
+        <h1>
+          Welcome to BSENFLOW 🚀
+        </h1>
+
+        <p id="welcomeText">
+          Connect. Create. Belong.
+        </p>
+
+        <div class="premium">
+          ❖ BSENFLOW Premium
+        </div>
+
+      </section>
+
+
+      <!-- SEARCH -->
+
+      <section class="card" id="searchSection" style="display:none">
+
+        <div class="section-title">
+          🔎 Find people
+        </div>
+
+        <input
+          class="search-input"
+          id="searchInput"
+          placeholder="Search @username"
+        >
+
+        <div class="search-results" id="searchResults"></div>
+
+      </section>
+
+
+      <!-- COMPOSER -->
+
+      <section class="card post-composer">
+
+        <div class="section-title">
+          ✨ Create a Post
+        </div>
+
+        <textarea
+          id="postInput"
+          maxlength="1000"
+          placeholder="What's happening on BSENFLOW?"
+        ></textarea>
+
+        <div class="composer-bottom">
+
+          <span class="char-count" id="charCount">
+            0 / 1000
+          </span>
+
+          <button class="post-btn" id="createPostButton">
+            Publish 🚀
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- FEED -->
+
+      <section id="feedSection">
+
+        <div class="section-title">
+          🌎 Your Feed
+        </div>
+
+        <div id="feed">
+          <div class="card">
+            Loading your BSENFLOW feed...
+          </div>
+        </div>
+
+      </section>
 
 
       <!-- PROFILE -->
 
-      <div class="profile-card">
+      <section
+        class="card"
+        id="profileSection"
+        style="display:none;padding:0;overflow:hidden"
+      >
 
-        <div class="profile-header">
+        <div class="profile-cover"></div>
 
-          <div
-            class="profile-main-avatar"
-            id="profileAvatar"
-          >
-            BS
-          </div>
+        <div class="profile-section">
 
-          <div class="profile-info">
+          <div class="profile-main">
 
-            <div
-              class="profile-name"
-              id="profileName"
-            >
-              BSENFLOW User
+            <div class="profile-large-avatar" id="profileAvatar">
+              BS
             </div>
 
-            <div
-              class="profile-username"
-              id="profileUsername"
-            >
-              @username
-            </div>
+            <div>
+              <div class="profile-display-name" id="profileName">
+                BSENFLOW User
+              </div>
 
-            <div
-              class="profile-email"
-              id="profileEmail"
-            >
-              Loading...
+              <div class="profile-user" id="profileUsername">
+                @username
+              </div>
             </div>
 
           </div>
 
-        </div>
-
-
-        <div
-          class="profile-bio"
-          id="profileBio"
-        >
-          Add your bio from Edit Profile.
-        </div>
-
-
-        <div class="stats">
-
-          <div class="stat">
-            <strong id="followersCount">
-              0
-            </strong>
-            <span>
-              Followers
-            </span>
+          <div class="bio" id="profileBio">
+            Build your identity on BSENFLOW.
           </div>
 
-          <div class="stat">
-            <strong id="followingCount">
-              0
-            </strong>
-            <span>
-              Following
-            </span>
+          <div class="small-text" id="profileEmail">
+            email
           </div>
 
-        </div>
+          <div class="stats">
 
+            <div class="stat">
+              <strong id="followersCount">0</strong>
+              <span>Followers</span>
+            </div>
 
-        <button
-          class="edit-btn"
-          id="editProfileButton"
-        >
-          ✏️ Edit Profile
-        </button>
+            <div class="stat">
+              <strong id="followingCount">0</strong>
+              <span>Following</span>
+            </div>
 
-
-        <!-- EDITOR -->
-
-        <div
-          class="profile-editor"
-          id="profileEditor"
-        >
-
-          <div class="editor-title">
-            Edit Your Profile
-          </div>
-
-          <div class="editor-subtitle">
-            Your @username is your main BSENFLOW identity.
-          </div>
-
-
-          <!-- USERNAME -->
-
-          <div class="field">
-
-            <label>
-              Username
-            </label>
-
-            <input
-              id="usernameInput"
-              type="text"
-              maxlength="30"
-              placeholder="bharatsain"
-              autocomplete="off"
-            >
-
-            <div class="username-help">
-              3–30 characters · letters, numbers, . and _
+            <div class="stat">
+              <strong id="postCount">0</strong>
+              <span>Posts</span>
             </div>
 
           </div>
 
-
-          <!-- DISPLAY NAME -->
-
-          <div class="field">
-
-            <label>
-              Display Name
-            </label>
-
-            <input
-              id="displayNameInput"
-              type="text"
-              maxlength="60"
-              placeholder="Your name"
-            >
-
-          </div>
-
-
-          <!-- BIO -->
-
-          <div class="field">
-
-            <label>
-              Bio
-            </label>
-
-            <textarea
-              id="bioInput"
-              maxlength="160"
-              placeholder="Tell people about yourself..."
-            ></textarea>
-
-          </div>
-
-
-          <button
-            class="save-profile"
-            id="saveProfileButton"
-          >
-            Save Profile
+          <button class="edit-profile-btn" id="editProfileButton">
+            ✏️ Edit Profile
           </button>
 
 
-          <div
-            class="profile-message"
-            id="profileMessage"
-          ></div>
+          <!-- PROFILE EDITOR -->
 
+          <div class="editor" id="profileEditor">
+
+            <div class="section-title">
+              Build Your Identity
+            </div>
+
+            <div class="field">
+
+              <label>Username</label>
+
+              <input
+                id="usernameInput"
+                maxlength="30"
+                placeholder="bharatsain"
+              >
+
+              <div class="help">
+                Your @username is your main identity and search name.
+                3–30 characters: letters, numbers, . and _
+              </div>
+
+            </div>
+
+
+            <div class="field">
+
+              <label>Display Name</label>
+
+              <input
+                id="displayNameInput"
+                maxlength="60"
+                placeholder="Your real/display name"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label>Profile Photo URL</label>
+
+              <input
+                id="photoInput"
+                type="url"
+                placeholder="https://..."
+              >
+
+              <div class="help">
+                Add an image URL for your profile picture.
+              </div>
+
+            </div>
+
+
+            <div class="field">
+
+              <label>Bio</label>
+
+              <textarea
+                id="bioInput"
+                maxlength="160"
+                placeholder="Tell the world about yourself..."
+              ></textarea>
+
+              <div class="help">
+                Maximum 160 characters.
+              </div>
+
+            </div>
+
+
+            <button class="save-btn" id="saveProfileButton">
+              Save Profile ✓
+            </button>
+
+            <div class="profile-message" id="profileMessage"></div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- NOTIFICATIONS -->
+
+      <section
+        class="card"
+        id="notificationSection"
+        style="display:none"
+      >
+
+        <div class="section-title">
+          🔔 Notifications
+        </div>
+
+        <div class="notification">
+          🎉 <strong>Welcome to BSENFLOW!</strong>
+          Your social identity is ready.
+        </div>
+
+        <div class="notification">
+          🚀 Complete your profile to start building your network.
+        </div>
+
+        <div class="notification">
+          💎 BSENFLOW Premium features are coming soon.
+        </div>
+
+      </section>
+
+
+      <!-- PREMIUM -->
+
+      <section
+        class="card"
+        id="premiumSection"
+        style="display:none"
+      >
+
+        <div class="section-title">
+          💎 BSENFLOW Premium
+        </div>
+
+        <p class="small-text">
+          Unlock the next level of your BSENFLOW experience.
+        </p>
+
+        <div style="margin-top:18px;line-height:2;font-size:14px">
+          ✅ Premium profile badge<br>
+          ✅ Advanced profile customization<br>
+          ✅ Priority discovery<br>
+          ✅ Exclusive features<br>
+          ✅ More creator tools
+        </div>
+
+        <button
+          class="post-btn"
+          style="margin-top:18px"
+          onclick="showToast('Premium system is coming soon 💎')"
+        >
+          Explore Premium
+        </button>
+
+      </section>
+
+    </main>
+
+
+    <!-- RIGHT SIDEBAR -->
+
+    <aside class="rightbar">
+
+      <div class="side-card">
+
+        <div class="side-title">
+          👤 Your Identity
+        </div>
+
+        <div class="small-text">
+          Username is your main BSENFLOW identity.
+          People will discover you through your @username.
         </div>
 
       </div>
 
-    </section>
 
-  </main>
+      <div class="side-card">
+
+        <div class="side-title">
+          🇮🇳 BSENFLOW
+        </div>
+
+        <div class="small-text">
+          Built from India for the world.
+          <br><br>
+          Founder: <strong>Bharat Sain</strong>
+        </div>
+
+      </div>
+
+
+      <div class="side-card">
+
+        <div class="side-title">
+          💎 Premium
+        </div>
+
+        <div class="small-text">
+          More creator and social features are being prepared.
+        </div>
+
+      </div>
+
+    </aside>
+
+  </div>
 
 </div>
 
 
-<!-- =====================================================
+<div class="toast" id="toast"></div>
+
+
+<!-- =========================================================
      FIREBASE
-===================================================== -->
+========================================================= -->
 
 <script type="module">
 
@@ -857,48 +1142,32 @@ import {
   doc,
   getDoc,
   setDoc,
+  addDoc,
   collection,
   query,
   where,
-  getDocs,
+  orderBy,
   limit,
+  getDocs,
+  deleteDoc,
+  updateDoc,
+  increment,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-/* =====================================================
-   FIREBASE CONFIG
-===================================================== */
+/* ================= FIREBASE CONFIG ================= */
 
 const firebaseConfig = {
-
-  apiKey:
-    "AIzaSyCfBlYDE7hz8yUXTxtUpATBmCqR4qZ1fsI",
-
-  authDomain:
-    "bsenflow.firebaseapp.com",
-
-  projectId:
-    "bsenflow",
-
-  storageBucket:
-    "bsenflow.firebasestorage.app",
-
-  messagingSenderId:
-    "757334229298",
-
-  appId:
-    "1:757334229298:web:8d1d9ba615c09d1edad72b",
-
-  measurementId:
-    "G-4KYD657J4K"
-
+  apiKey:"AIzaSyCfBlYDE7hz8yUXTxtUpATBmCqR4qZ1fsI",
+  authDomain:"bsenflow.firebaseapp.com",
+  projectId:"bsenflow",
+  storageBucket:"bsenflow.firebasestorage.app",
+  messagingSenderId:"757334229298",
+  appId:"1:757334229298:web:8d1d9ba615c09d1edad72b",
+  measurementId:"G-4KYD657J4K"
 };
 
-
-/* =====================================================
-   INITIALIZE FIREBASE
-===================================================== */
 
 const firebaseApp =
   initializeApp(firebaseConfig);
@@ -913,460 +1182,276 @@ const googleProvider =
   new GoogleAuthProvider();
 
 
-/* =====================================================
-   KEEP LOGIN AFTER REFRESH
-===================================================== */
-
 await setPersistence(
   auth,
   browserLocalPersistence
 );
 
 
-/* =====================================================
-   ELEMENTS
-===================================================== */
+/* ================= ELEMENTS ================= */
 
-const authPage =
-  document.getElementById("authPage");
+const authPage=document.getElementById("authPage");
+const appPage=document.getElementById("app");
 
-const appPage =
-  document.getElementById("app");
+const nameGroup=document.getElementById("nameGroup");
+const nameInput=document.getElementById("nameInput");
+const emailInput=document.getElementById("emailInput");
+const passwordInput=document.getElementById("passwordInput");
 
-const nameGroup =
-  document.getElementById("nameGroup");
+const authButton=document.getElementById("authButton");
+const googleButton=document.getElementById("googleButton");
+const switchMode=document.getElementById("switchMode");
+const authSubtitle=document.getElementById("authSubtitle");
+const authMessage=document.getElementById("authMessage");
 
-const nameInput =
-  document.getElementById("nameInput");
+const logoutButton=document.getElementById("logoutButton");
+const topAvatar=document.getElementById("topAvatar");
+const topProfileButton=document.getElementById("topProfileButton");
 
-const emailInput =
-  document.getElementById("emailInput");
+const profileAvatar=document.getElementById("profileAvatar");
+const profileName=document.getElementById("profileName");
+const profileUsername=document.getElementById("profileUsername");
+const profileEmail=document.getElementById("profileEmail");
+const profileBio=document.getElementById("profileBio");
 
-const passwordInput =
-  document.getElementById("passwordInput");
+const followersCount=document.getElementById("followersCount");
+const followingCount=document.getElementById("followingCount");
+const postCount=document.getElementById("postCount");
 
-const mainAuthButton =
-  document.getElementById("mainAuthButton");
+const editProfileButton=document.getElementById("editProfileButton");
+const profileEditor=document.getElementById("profileEditor");
 
-const googleButton =
-  document.getElementById("googleButton");
+const usernameInput=document.getElementById("usernameInput");
+const displayNameInput=document.getElementById("displayNameInput");
+const photoInput=document.getElementById("photoInput");
+const bioInput=document.getElementById("bioInput");
 
-const switchMode =
-  document.getElementById("switchMode");
+const saveProfileButton=document.getElementById("saveProfileButton");
+const profileMessage=document.getElementById("profileMessage");
 
-const authSubtitle =
-  document.getElementById("authSubtitle");
+const postInput=document.getElementById("postInput");
+const charCount=document.getElementById("charCount");
+const createPostButton=document.getElementById("createPostButton");
+const feed=document.getElementById("feed");
 
-const authMessage =
-  document.getElementById("authMessage");
+const searchSection=document.getElementById("searchSection");
+const searchInput=document.getElementById("searchInput");
+const searchResults=document.getElementById("searchResults");
 
-const logoutButton =
-  document.getElementById("logoutButton");
+const notificationSection=document.getElementById("notificationSection");
+const premiumSection=document.getElementById("premiumSection");
+const profileSection=document.getElementById("profileSection");
+const feedSection=document.getElementById("feedSection");
 
-const welcomeText =
-  document.getElementById("welcomeText");
+const welcomeText=document.getElementById("welcomeText");
 
-const topAvatar =
-  document.getElementById("topAvatar");
-
-const profileAvatar =
-  document.getElementById("profileAvatar");
-
-const profileName =
-  document.getElementById("profileName");
-
-const profileUsername =
-  document.getElementById("profileUsername");
-
-const profileEmail =
-  document.getElementById("profileEmail");
-
-const profileBio =
-  document.getElementById("profileBio");
-
-const followersCount =
-  document.getElementById("followersCount");
-
-const followingCount =
-  document.getElementById("followingCount");
-
-const editProfileButton =
-  document.getElementById("editProfileButton");
-
-const profileEditor =
-  document.getElementById("profileEditor");
-
-const usernameInput =
-  document.getElementById("usernameInput");
-
-const displayNameInput =
-  document.getElementById("displayNameInput");
-
-const bioInput =
-  document.getElementById("bioInput");
-
-const saveProfileButton =
-  document.getElementById("saveProfileButton");
-
-const profileMessage =
-  document.getElementById("profileMessage");
+let signupMode=false;
+let currentUser=null;
+let currentProfile=null;
 
 
-let signupMode = false;
+/* ================= AUTH MODE ================= */
+
+switchMode.addEventListener("click",()=>{
+
+  signupMode=!signupMode;
+
+  nameGroup.style.display=
+    signupMode ? "block" : "none";
+
+  authButton.textContent=
+    signupMode ? "Create Account" : "Login";
+
+  authSubtitle.textContent=
+    signupMode
+      ? "Create your BSENFLOW identity"
+      : "Welcome back";
+
+  switchMode.textContent=
+    signupMode
+      ? "Already have an account? Login"
+      : "Create new account";
+
+  authMessage.textContent="";
+
+});
 
 
-/* =====================================================
-   LOGIN / SIGNUP SWITCH
-===================================================== */
+/* ================= EMAIL AUTH ================= */
 
-switchMode.addEventListener(
-  "click",
-  function(){
+authButton.addEventListener("click",async()=>{
 
-    signupMode =
-      !signupMode;
+  const email=emailInput.value.trim();
+  const password=passwordInput.value;
+  const name=nameInput.value.trim();
 
-
-    nameGroup.style.display =
-      signupMode
-        ? "block"
-        : "none";
-
-
-    mainAuthButton.textContent =
-      signupMode
-        ? "Create Account"
-        : "Login";
-
-
-    authSubtitle.textContent =
-      signupMode
-        ? "Create your BSENFLOW account"
-        : "Welcome back";
-
-
-    switchMode.textContent =
-      signupMode
-        ? "Already have an account? Login"
-        : "Create new account";
-
-
-    authMessage.textContent =
-      "";
-
+  if(!email){
+    showAuthMessage("Enter your email.","error");
+    return;
   }
-);
 
+  if(!password){
+    showAuthMessage("Enter your password.","error");
+    return;
+  }
 
-/* =====================================================
-   EMAIL LOGIN / SIGNUP
-===================================================== */
+  if(password.length<6){
+    showAuthMessage("Password must be at least 6 characters.","error");
+    return;
+  }
 
-mainAuthButton.addEventListener(
-  "click",
-  async function(){
+  authButton.disabled=true;
 
-    const email =
-      emailInput.value.trim();
+  try{
 
-    const password =
-      passwordInput.value;
+    if(signupMode){
 
-    const name =
-      nameInput.value.trim();
+      if(!name){
+        showAuthMessage("Enter your display name.","error");
+        authButton.disabled=false;
+        return;
+      }
 
-
-    if(!email){
-
-      showAuthMessage(
-        "Please enter your email.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    if(!password){
-
-      showAuthMessage(
-        "Please enter your password.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    mainAuthButton.disabled =
-      true;
-
-
-    try{
-
-      if(signupMode){
-
-        if(!name){
-
-          showAuthMessage(
-            "Please enter your display name.",
-            "error"
-          );
-
-          mainAuthButton.disabled =
-            false;
-
-          return;
-
-        }
-
-
-        /* CREATE ACCOUNT */
-
-        const result =
-          await createUserWithEmailAndPassword(
-            auth,
-            email,
-            password
-          );
-
-
-        /* UPDATE AUTH PROFILE */
-
-        await updateProfile(
-          result.user,
-          {
-            displayName:name
-          }
-        );
-
-
-        /* CREATE FIRESTORE PROFILE */
-
-        await setDoc(
-          doc(
-            db,
-            "users",
-            result.user.uid
-          ),
-          {
-
-            uid:
-              result.user.uid,
-
-            email:
-              email,
-
-            displayName:
-              name,
-
-            name:
-              name,
-
-            username:
-              "",
-
-            bio:
-              "",
-
-            profilePhoto:
-              "",
-
-            followers:
-              0,
-
-            following:
-              0,
-
-            createdAt:
-              serverTimestamp(),
-
-            updatedAt:
-              serverTimestamp()
-
-          }
-        );
-
-
-        showAuthMessage(
-          "Account created successfully! 🎉",
-          "success"
-        );
-
-
-      }else{
-
-        /* LOGIN */
-
-        await signInWithEmailAndPassword(
+      const result=
+        await createUserWithEmailAndPassword(
           auth,
           email,
           password
         );
 
-      }
-
-    }catch(error){
-
-      console.error(
-        "AUTH ERROR:",
-        error
+      await updateProfile(
+        result.user,
+        {displayName:name}
       );
 
+      await setDoc(
+        doc(db,"users",result.user.uid),
+        {
+          uid:result.user.uid,
+          email:email,
+          displayName:name,
+          username:"",
+          bio:"",
+          profilePhoto:"",
+          followers:0,
+          following:0,
+          createdAt:serverTimestamp(),
+          updatedAt:serverTimestamp()
+        }
+      );
 
       showAuthMessage(
-        friendlyError(error.code),
-        "error"
+        "Account created successfully 🎉",
+        "success"
       );
-
-    }
-
-
-    mainAuthButton.disabled =
-      false;
-
-  }
-);
-
-
-/* =====================================================
-   GOOGLE LOGIN
-===================================================== */
-
-googleButton.addEventListener(
-  "click",
-  async function(){
-
-    googleButton.disabled =
-      true;
-
-
-    try{
-
-      const result =
-        await signInWithPopup(
-          auth,
-          googleProvider
-        );
-
-
-      const user =
-        result.user;
-
-
-      const userRef =
-        doc(
-          db,
-          "users",
-          user.uid
-        );
-
-
-      const existing =
-        await getDoc(userRef);
-
-
-      if(!existing.exists()){
-
-        await setDoc(
-          userRef,
-          {
-
-            uid:
-              user.uid,
-
-            email:
-              user.email || "",
-
-            displayName:
-              user.displayName ||
-              "BSENFLOW User",
-
-            name:
-              user.displayName ||
-              "BSENFLOW User",
-
-            username:
-              "",
-
-            bio:
-              "",
-
-            profilePhoto:
-              user.photoURL || "",
-
-            followers:
-              0,
-
-            following:
-              0,
-
-            createdAt:
-              serverTimestamp(),
-
-            updatedAt:
-              serverTimestamp()
-
-          }
-        );
-
-      }
-
-
-    }catch(error){
-
-      console.error(
-        "GOOGLE LOGIN ERROR:",
-        error
-      );
-
-
-      showAuthMessage(
-        friendlyError(error.code),
-        "error"
-      );
-
-    }
-
-
-    googleButton.disabled =
-      false;
-
-  }
-);
-
-
-/* =====================================================
-   AUTH STATE
-===================================================== */
-
-onAuthStateChanged(
-  auth,
-  async function(user){
-
-    if(user){
-
-      authPage.style.display =
-        "none";
-
-      appPage.style.display =
-        "block";
-
-
-      await loadUserProfile(
-        user
-      );
-
 
     }else{
 
-      authPage.style.display =
-        "flex";
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-      appPage.style.display =
-        "none";
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+    showAuthMessage(
+      friendlyError(error.code),
+      "error"
+    );
+
+  }
+
+  authButton.disabled=false;
+
+});
+
+
+/* ================= GOOGLE ================= */
+
+googleButton.addEventListener("click",async()=>{
+
+  googleButton.disabled=true;
+
+  try{
+
+    const result=
+      await signInWithPopup(
+        auth,
+        googleProvider
+      );
+
+    const user=result.user;
+
+    const userRef=
+      doc(db,"users",user.uid);
+
+    const snapshot=
+      await getDoc(userRef);
+
+    if(!snapshot.exists()){
+
+      await setDoc(
+        userRef,
+        {
+          uid:user.uid,
+          email:user.email||"",
+          displayName:user.displayName||"BSENFLOW User",
+          username:"",
+          bio:"",
+          profilePhoto:user.photoURL||"",
+          followers:0,
+          following:0,
+          createdAt:serverTimestamp(),
+          updatedAt:serverTimestamp()
+        }
+      );
+
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+    showAuthMessage(
+      friendlyError(error.code),
+      "error"
+    );
+
+  }
+
+  googleButton.disabled=false;
+
+});
+
+
+/* ================= AUTH STATE ================= */
+
+onAuthStateChanged(
+  auth,
+  async(user)=>{
+
+    if(user){
+
+      currentUser=user;
+
+      authPage.style.display="none";
+      appPage.style.display="block";
+
+      await loadProfile(user);
+      await loadFeed();
+
+    }else{
+
+      currentUser=null;
+      currentProfile=null;
+
+      authPage.style.display="flex";
+      appPage.style.display="none";
 
     }
 
@@ -1374,137 +1459,82 @@ onAuthStateChanged(
 );
 
 
-/* =====================================================
-   LOAD USER PROFILE
-===================================================== */
+/* ================= PROFILE LOAD ================= */
 
-async function loadUserProfile(user){
+async function loadProfile(user){
 
   try{
 
-    const userRef =
-      doc(
-        db,
-        "users",
-        user.uid
-      );
+    const ref=doc(db,"users",user.uid);
+    const snap=await getDoc(ref);
 
+    let data={};
 
-    const snapshot =
-      await getDoc(userRef);
-
-
-    let data = {};
-
-
-    if(snapshot.exists()){
-
-      data =
-        snapshot.data();
-
+    if(snap.exists()){
+      data=snap.data();
     }
 
+    currentProfile=data;
 
-    const displayName =
+    const displayName=
       data.displayName ||
       user.displayName ||
       user.email?.split("@")[0] ||
       "BSENFLOW User";
 
+    const username=
+      data.username || "";
 
-    const username =
-      data.username ||
+    const bio=
+      data.bio || "";
+
+    const photo=
+      data.profilePhoto ||
+      user.photoURL ||
       "";
 
+    profileName.textContent=displayName;
 
-    const bio =
-      data.bio ||
-      "";
+    profileUsername.textContent=
+      username ? "@"+username : "@username";
 
-
-    const followers =
-      data.followers || 0;
-
-
-    const following =
-      data.following || 0;
-
-
-    /* NAME */
-
-    profileName.textContent =
-      displayName;
-
-
-    /* USERNAME */
-
-    profileUsername.textContent =
-      username
-        ? "@" + username
-        : "@username";
-
-
-    /* EMAIL */
-
-    profileEmail.textContent =
+    profileEmail.textContent=
       user.email || "";
 
-
-    /* BIO */
-
-    profileBio.textContent =
+    profileBio.textContent=
       bio ||
-      "Add your bio from Edit Profile.";
+      "Build your identity on BSENFLOW.";
 
+    followersCount.textContent=
+      data.followers || 0;
 
-    /* STATS */
+    followingCount.textContent=
+      data.following || 0;
 
-    followersCount.textContent =
-      followers;
+    usernameInput.value=username;
+    displayNameInput.value=displayName;
+    photoInput.value=photo;
+    bioInput.value=bio;
 
-    followingCount.textContent =
-      following;
+    welcomeText.textContent=
+      "Welcome, "+displayName+" 👋";
 
+    setAvatar(
+      topAvatar,
+      displayName,
+      photo
+    );
 
-    /* WELCOME */
-
-    welcomeText.textContent =
-      "Welcome, " +
-      displayName +
-      " 👋";
-
-
-    /* AVATAR */
-
-    const initials =
-      getInitials(
-        displayName
-      );
-
-
-    topAvatar.textContent =
-      initials;
-
-    profileAvatar.textContent =
-      initials;
-
-
-    /* EDITOR VALUES */
-
-    usernameInput.value =
-      username;
-
-    displayNameInput.value =
-      displayName;
-
-    bioInput.value =
-      bio;
-
+    setAvatar(
+      profileAvatar,
+      displayName,
+      photo
+    );
 
   }catch(error){
 
     console.error(
-      "PROFILE LOAD ERROR:",
+      "PROFILE LOAD:",
       error
     );
 
@@ -1513,26 +1543,141 @@ async function loadUserProfile(user){
 }
 
 
-/* =====================================================
-   EDIT PROFILE
-===================================================== */
+/* ================= AVATAR ================= */
+
+function setAvatar(element,name,photo){
+
+  if(photo){
+
+    element.innerHTML=
+      `<img src="${escapeAttribute(photo)}"
+            onerror="this.parentElement.textContent='${escapeHtml(getInitials(name))}'">`;
+
+  }else{
+
+    element.textContent=
+      getInitials(name);
+
+  }
+
+}
+
+
+/* ================= PROFILE BUTTONS ================= */
+
+function showOnly(section){
+
+  feedSection.style.display="none";
+  profileSection.style.display="none";
+  searchSection.style.display="none";
+  notificationSection.style.display="none";
+  premiumSection.style.display="none";
+
+  section.style.display="block";
+
+}
+
+
+function showHome(){
+
+  feedSection.style.display="block";
+  profileSection.style.display="none";
+  searchSection.style.display="none";
+  notificationSection.style.display="none";
+  premiumSection.style.display="none";
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+document.getElementById("homeNav")
+  .addEventListener("click",showHome);
+
+
+document.getElementById("profileNav")
+  .addEventListener("click",()=>{
+
+    showOnly(profileSection);
+
+  });
+
+
+profileSection.addEventListener(
+  "click",
+  ()=>{}
+);
+
+
+topProfileButton.addEventListener(
+  "click",
+  ()=>{
+
+    showOnly(profileSection);
+
+    profileSection.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+  }
+);
+
+
+document.getElementById("searchNav")
+  .addEventListener("click",()=>{
+
+    showOnly(searchSection);
+
+    searchInput.focus();
+
+  });
+
+
+document.getElementById("notificationsNav")
+  .addEventListener("click",()=>{
+
+    showOnly(notificationSection);
+
+  });
+
+
+document.getElementById("notificationButton")
+  .addEventListener("click",()=>{
+
+    showOnly(notificationSection);
+
+    notificationSection.scrollIntoView({
+      behavior:"smooth"
+    });
+
+  });
+
+
+document.getElementById("premiumNav")
+  .addEventListener("click",()=>{
+
+    showOnly(premiumSection);
+
+  });
+
+
+/* ================= EDIT PROFILE ================= */
 
 editProfileButton.addEventListener(
   "click",
-  function(){
+  ()=>{
 
-    const isOpen =
-      profileEditor.style.display ===
-      "block";
+    const open=
+      profileEditor.style.display==="block";
 
+    profileEditor.style.display=
+      open ? "none" : "block";
 
-    profileEditor.style.display =
-      isOpen
-        ? "none"
-        : "block";
-
-
-    if(!isOpen){
+    if(!open){
 
       profileEditor.scrollIntoView({
         behavior:"smooth",
@@ -1545,327 +1690,895 @@ editProfileButton.addEventListener(
 );
 
 
-/* =====================================================
-   TOP AVATAR OPENS PROFILE EDITOR
-===================================================== */
-
-topAvatar.addEventListener(
-  "click",
-  function(){
-
-    profileEditor.style.display =
-      "block";
-
-
-    profileEditor.scrollIntoView({
-      behavior:"smooth",
-      block:"center"
-    });
-
-  }
-);
-
-
-/* =====================================================
-   SAVE PROFILE
-===================================================== */
+/* ================= SAVE PROFILE ================= */
 
 saveProfileButton.addEventListener(
   "click",
-  async function(){
+  async()=>{
 
-    const user =
-      auth.currentUser;
-
-
-    if(!user){
-
-      profileMessage.textContent =
-        "Please login first.";
-
+    if(!currentUser){
+      showProfileMessage(
+        "Please login first.",
+        false
+      );
       return;
-
     }
 
-
-    let username =
+    let username=
       usernameInput.value
         .trim()
         .toLowerCase()
         .replace(/^@+/,"");
 
-
-    const displayName =
+    const displayName=
       displayNameInput.value.trim();
 
+    const photo=
+      photoInput.value.trim();
 
-    const bio =
+    const bio=
       bioInput.value.trim();
 
+    if(!/^[a-z0-9._]{3,30}$/.test(username)){
 
-    /* USERNAME */
-
-    if(
-      !/^[a-z0-9._]{3,30}$/.test(
-        username
-      )
-    ){
-
-      profileMessage.textContent =
-        "Username must be 3–30 characters. Use letters, numbers, . or _.";
-
-      profileMessage.style.color =
-        "#d93025";
+      showProfileMessage(
+        "Username: 3–30 characters, letters/numbers/. /_ only.",
+        false
+      );
 
       return;
-
     }
-
-
-    /* DISPLAY NAME */
 
     if(!displayName){
 
-      profileMessage.textContent =
-        "Please enter your display name.";
+      showProfileMessage(
+        "Display Name cannot be empty.",
+        false
+      );
 
-      profileMessage.style.color =
-        "#d93025";
+      return;
+    }
+
+    saveProfileButton.disabled=true;
+    saveProfileButton.textContent=
+      "Checking username...";
+
+    try{
+
+      const usernameQuery=
+        query(
+          collection(db,"users"),
+          where("username","==",username),
+          limit(1)
+        );
+
+      const results=
+        await getDocs(usernameQuery);
+
+      if(
+        !results.empty &&
+        results.docs[0].id!==currentUser.uid
+      ){
+
+        showProfileMessage(
+          "This @username is already taken.",
+          false
+        );
+
+        saveProfileButton.disabled=false;
+        saveProfileButton.textContent=
+          "Save Profile ✓";
+
+        return;
+      }
+
+      saveProfileButton.textContent="Saving...";
+
+      await setDoc(
+        doc(db,"users",currentUser.uid),
+        {
+          uid:currentUser.uid,
+          email:currentUser.email||"",
+          username:username,
+          displayName:displayName,
+          bio:bio,
+          profilePhoto:photo,
+          updatedAt:serverTimestamp()
+        },
+        {merge:true}
+      );
+
+      await updateProfile(
+        currentUser,
+        {
+          displayName:displayName,
+          photoURL:photo || null
+        }
+      );
+
+      await loadProfile(currentUser);
+
+      showProfileMessage(
+        "Profile saved successfully ✓",
+        true
+      );
+
+      saveProfileButton.textContent="Saved ✓";
+
+      setTimeout(()=>{
+        saveProfileButton.disabled=false;
+        saveProfileButton.textContent="Save Profile ✓";
+      },1000);
+
+    }catch(error){
+
+      console.error(
+        "SAVE PROFILE:",
+        error
+      );
+
+      showProfileMessage(
+        "Profile save failed: "+friendlyError(error.code),
+        false
+      );
+
+      saveProfileButton.disabled=false;
+      saveProfileButton.textContent=
+        "Save Profile ✓";
+
+    }
+
+  }
+);
+
+
+/* ================= POST CHARACTER COUNT ================= */
+
+postInput.addEventListener(
+  "input",
+  ()=>{
+    charCount.textContent=
+      postInput.value.length+" / 1000";
+  }
+);
+
+
+/* ================= CREATE POST ================= */
+
+createPostButton.addEventListener(
+  "click",
+  async()=>{
+
+    if(!currentUser){
+      showToast("Please login first.");
+      return;
+    }
+
+    const text=
+      postInput.value.trim();
+
+    if(!text){
+      showToast("Write something before publishing.");
+      return;
+    }
+
+    createPostButton.disabled=true;
+    createPostButton.textContent="Publishing...";
+
+    try{
+
+      const profileSnap=
+        await getDoc(
+          doc(db,"users",currentUser.uid)
+        );
+
+      const data=
+        profileSnap.exists()
+          ? profileSnap.data()
+          : {};
+
+      await addDoc(
+        collection(db,"posts"),
+        {
+          uid:currentUser.uid,
+          displayName:
+            data.displayName ||
+            currentUser.displayName ||
+            "BSENFLOW User",
+          username:
+            data.username || "",
+          profilePhoto:
+            data.profilePhoto ||
+            currentUser.photoURL ||
+            "",
+          text:text,
+          likes:[],
+          likeCount:0,
+          commentCount:0,
+          createdAt:serverTimestamp()
+        }
+      );
+
+      postInput.value="";
+      charCount.textContent="0 / 1000";
+
+      showToast("Post published 🚀");
+
+      await loadFeed();
+
+    }catch(error){
+
+      console.error(
+        "POST ERROR:",
+        error
+      );
+
+      showToast(
+        "Post failed: "+friendlyError(error.code)
+      );
+
+    }
+
+    createPostButton.disabled=false;
+    createPostButton.textContent="Publish 🚀";
+
+  }
+);
+
+
+/* ================= LOAD FEED ================= */
+
+async function loadFeed(){
+
+  if(!currentUser)return;
+
+  try{
+
+    const postsQuery=
+      query(
+        collection(db,"posts"),
+        orderBy("createdAt","desc"),
+        limit(30)
+      );
+
+    const snapshot=
+      await getDocs(postsQuery);
+
+    feed.innerHTML="";
+
+    if(snapshot.empty){
+
+      feed.innerHTML=`
+        <div class="card">
+          <div class="section-title">
+            🌱 Your feed is ready
+          </div>
+          <div class="small-text">
+            Be the first person to publish something on BSENFLOW.
+          </div>
+        </div>
+      `;
+
+      postCount.textContent="0";
+      return;
+    }
+
+    let mine=0;
+
+    snapshot.forEach(
+      postDoc=>{
+
+        const data=postDoc.data();
+
+        if(data.uid===currentUser.uid){
+          mine++;
+        }
+
+        renderPost(
+          postDoc.id,
+          data
+        );
+
+      }
+    );
+
+    postCount.textContent=mine;
+
+  }catch(error){
+
+    console.error(
+      "FEED ERROR:",
+      error
+    );
+
+    feed.innerHTML=`
+      <div class="card">
+        <strong>Feed could not load.</strong>
+        <div class="small-text" style="margin-top:7px">
+          ${escapeHtml(friendlyError(error.code))}
+        </div>
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* ================= RENDER POST ================= */
+
+function renderPost(id,data){
+
+  const article=
+    document.createElement("article");
+
+  article.className="post";
+
+  const liked=
+    Array.isArray(data.likes) &&
+    data.likes.includes(currentUser.uid);
+
+  const date=
+    formatDate(data.createdAt);
+
+  const isOwner=
+    data.uid===currentUser.uid;
+
+  const initials=
+    getInitials(
+      data.displayName || "User"
+    );
+
+  const photo=
+    data.profilePhoto || "";
+
+  article.innerHTML=`
+
+    <div class="post-head">
+
+      <div class="post-user">
+
+        <div class="mini-avatar">
+
+          ${
+            photo
+            ? `<img src="${escapeAttribute(photo)}"
+                    onerror="this.style.display='none'">`
+            : initials
+          }
+
+        </div>
+
+        <div>
+
+          <div class="post-name">
+            ${escapeHtml(data.displayName || "BSENFLOW User")}
+          </div>
+
+          <div class="post-username">
+            ${data.username ? "@"+escapeHtml(data.username) : "@user"}
+          </div>
+
+          <div class="post-time">
+            ${date}
+          </div>
+
+        </div>
+
+      </div>
+
+      ${
+        isOwner
+        ? `<button class="post-menu delete-post"
+                   data-id="${id}"
+                   title="Delete">
+             🗑️
+           </button>`
+        : ""
+      }
+
+    </div>
+
+    <div class="post-content">
+      ${escapeHtml(data.text || "")}
+    </div>
+
+    <div class="post-actions">
+
+      <button
+        class="action-btn like-post ${liked ? "liked":""}"
+        data-id="${id}"
+      >
+        ${liked ? "❤️" : "🤍"}
+        ${data.likeCount || 0}
+      </button>
+
+      <button
+        class="action-btn focus-comments"
+      >
+        💬 ${data.commentCount || 0}
+      </button>
+
+      <button
+        class="action-btn share-post"
+        data-text="${escapeAttribute(data.text || "")}"
+      >
+        ↗️ Share
+      </button>
+
+    </div>
+
+    <div class="comment-box">
+
+      <input
+        class="comment-input"
+        placeholder="Write a comment..."
+        maxlength="300"
+      >
+
+      <button
+        class="comment-submit"
+        data-id="${id}"
+      >
+        Send
+      </button>
+
+    </div>
+
+    <div class="comments" id="comments-${id}"></div>
+  `;
+
+  feed.appendChild(article);
+
+
+  article
+    .querySelector(".like-post")
+    ?.addEventListener(
+      "click",
+      ()=>toggleLike(id,data)
+    );
+
+
+  article
+    .querySelector(".delete-post")
+    ?.addEventListener(
+      "click",
+      ()=>deletePost(id)
+    );
+
+
+  article
+    .querySelector(".share-post")
+    ?.addEventListener(
+      "click",
+      ()=>{
+        shareText(data.text || "");
+      }
+    );
+
+
+  article
+    .querySelector(".comment-submit")
+    ?.addEventListener(
+      "click",
+      ()=>{
+        const input=
+          article.querySelector(".comment-input");
+
+        addComment(
+          id,
+          input
+        );
+      }
+    );
+
+
+  article
+    .querySelector(".focus-comments")
+    ?.addEventListener(
+      "click",
+      ()=>{
+        article
+          .querySelector(".comment-input")
+          .focus();
+      }
+    );
+
+
+  loadComments(
+    id,
+    article.querySelector(
+      "#comments-"+id
+    )
+  );
+
+}
+
+
+/* ================= LIKE ================= */
+
+async function toggleLike(id,data){
+
+  try{
+
+    const ref=
+      doc(db,"posts",id);
+
+    const likes=
+      Array.isArray(data.likes)
+        ? [...data.likes]
+        : [];
+
+    const index=
+      likes.indexOf(currentUser.uid);
+
+    if(index>=0){
+
+      likes.splice(index,1);
+
+    }else{
+
+      likes.push(currentUser.uid);
+
+    }
+
+    await updateDoc(
+      ref,
+      {
+        likes:likes,
+        likeCount:likes.length
+      }
+    );
+
+    await loadFeed();
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Like failed: "+friendlyError(error.code)
+    );
+
+  }
+
+}
+
+
+/* ================= DELETE POST ================= */
+
+async function deletePost(id){
+
+  if(!confirm(
+    "Delete this post permanently?"
+  )){
+    return;
+  }
+
+  try{
+
+    await deleteDoc(
+      doc(db,"posts",id)
+    );
+
+    showToast("Post deleted.");
+
+    await loadFeed();
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Delete failed: "+friendlyError(error.code)
+    );
+
+  }
+
+}
+
+
+/* ================= COMMENTS ================= */
+
+async function addComment(id,input){
+
+  const text=
+    input.value.trim();
+
+  if(!text)return;
+
+  try{
+
+    const profileSnap=
+      await getDoc(
+        doc(db,"users",currentUser.uid)
+      );
+
+    const data=
+      profileSnap.exists()
+        ? profileSnap.data()
+        : {};
+
+    await addDoc(
+      collection(
+        db,
+        "posts",
+        id,
+        "comments"
+      ),
+      {
+        uid:currentUser.uid,
+        displayName:
+          data.displayName ||
+          currentUser.displayName ||
+          "User",
+        username:
+          data.username || "",
+        text:text,
+        createdAt:
+          serverTimestamp()
+      }
+    );
+
+    await updateDoc(
+      doc(db,"posts",id),
+      {
+        commentCount:
+          increment(1)
+      }
+    );
+
+    input.value="";
+
+    await loadFeed();
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Comment failed: "+friendlyError(error.code)
+    );
+
+  }
+
+}
+
+
+async function loadComments(id,container){
+
+  try{
+
+    const commentsQuery=
+      query(
+        collection(
+          db,
+          "posts",
+          id,
+          "comments"
+        ),
+        orderBy("createdAt","asc"),
+        limit(20)
+      );
+
+    const snapshot=
+      await getDocs(commentsQuery);
+
+    container.innerHTML="";
+
+    snapshot.forEach(
+      commentDoc=>{
+
+        const data=
+          commentDoc.data();
+
+        const div=
+          document.createElement("div");
+
+        div.className="comment";
+
+        div.innerHTML=
+          `<strong>
+             ${escapeHtml(data.displayName || "User")}
+           </strong>
+           ${escapeHtml(data.text || "")}`;
+
+        container.appendChild(div);
+
+      }
+    );
+
+  }catch(error){
+
+    console.log(
+      "COMMENTS:",
+      error.code
+    );
+
+  }
+
+}
+
+
+/* ================= SEARCH ================= */
+
+let searchTimer=null;
+
+searchInput.addEventListener(
+  "input",
+  ()=>{
+
+    clearTimeout(searchTimer);
+
+    searchTimer=
+      setTimeout(
+        searchUsers,
+        400
+      );
+
+  }
+);
+
+
+async function searchUsers(){
+
+  const value=
+    searchInput.value
+      .trim()
+      .toLowerCase()
+      .replace(/^@+/,"");
+
+  if(!value){
+
+    searchResults.innerHTML="";
+    return;
+
+  }
+
+  try{
+
+    const q=
+      query(
+        collection(db,"users"),
+        where(
+          "username",
+          ">=",
+          value
+        ),
+        where(
+          "username",
+          "<=",
+          value+"\uf8ff"
+        ),
+        limit(10)
+      );
+
+    const snapshot=
+      await getDocs(q);
+
+    searchResults.innerHTML="";
+
+    if(snapshot.empty){
+
+      searchResults.innerHTML=
+        `<div class="small-text">
+           No users found.
+         </div>`;
 
       return;
 
     }
 
+    snapshot.forEach(
+      userDoc=>{
 
-    saveProfileButton.disabled =
-      true;
+        const data=
+          userDoc.data();
 
-    saveProfileButton.textContent =
-      "Checking username...";
+        const div=
+          document.createElement("div");
 
+        div.className="user-result";
 
-    try{
+        div.innerHTML=`
 
-      /* CHECK UNIQUE USERNAME */
+          <div class="mini-avatar">
+            ${getInitials(
+              data.displayName || "User"
+            )}
+          </div>
 
-      const usernameQuery =
-        query(
-          collection(
-            db,
-            "users"
-          ),
-          where(
-            "username",
-            "==",
-            username
-          ),
-          limit(1)
-        );
+          <div>
+            <div class="user-result-name">
+              ${escapeHtml(
+                data.displayName || "User"
+              )}
+            </div>
 
+            <div class="user-result-username">
+              @${escapeHtml(
+                data.username || ""
+              )}
+            </div>
+          </div>
+        `;
 
-      const results =
-        await getDocs(
-          usernameQuery
-        );
+        div.addEventListener(
+          "click",
+          ()=>{
+            showOnly(profileSection);
 
-
-      if(
-        !results.empty &&
-        results.docs[0].id !==
-          user.uid
-      ){
-
-        profileMessage.textContent =
-          "❌ This username is already taken.";
-
-        profileMessage.style.color =
-          "#d93025";
-
-        saveProfileButton.disabled =
-          false;
-
-        saveProfileButton.textContent =
-          "Save Profile";
-
-        return;
-
-      }
-
-
-      saveProfileButton.textContent =
-        "Saving...";
-
-
-      /* SAVE */
-
-      await setDoc(
-        doc(
-          db,
-          "users",
-          user.uid
-        ),
-        {
-
-          uid:
-            user.uid,
-
-          email:
-            user.email || "",
-
-          username:
-            username,
-
-          displayName:
-            displayName,
-
-          name:
-            displayName,
-
-          bio:
-            bio,
-
-          profilePhoto:
-            user.photoURL || "",
-
-          followers:
-            0,
-
-          following:
-            0,
-
-          updatedAt:
-            serverTimestamp()
-
-        },
-        {
-          merge:true
-        }
-      );
-
-
-      /* UPDATE AUTH DISPLAY NAME */
-
-      if(
-        user.displayName !==
-        displayName
-      ){
-
-        await updateProfile(
-          user,
-          {
-            displayName:
-              displayName
+            if(
+              userDoc.id===currentUser.uid
+            ){
+              profileSection.scrollIntoView({
+                behavior:"smooth"
+              });
+            }
           }
         );
 
+        searchResults.appendChild(div);
+
       }
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    searchResults.innerHTML=
+      `<div class="small-text">
+        Search unavailable.
+       </div>`;
+
+  }
+
+}
 
 
-      /* UPDATE SCREEN */
+/* ================= SHARE ================= */
 
-      profileName.textContent =
-        displayName;
+async function shareText(text){
 
-      profileUsername.textContent =
-        "@" + username;
+  try{
 
-      profileBio.textContent =
-        bio ||
-        "Add your bio from Edit Profile.";
+    if(navigator.share){
 
-      welcomeText.textContent =
-        "Welcome, " +
-        displayName +
-        " 👋";
+      await navigator.share({
+        title:"BSENFLOW",
+        text:text
+      });
 
+    }else{
 
-      const initials =
-        getInitials(
-          displayName
-        );
+      await navigator.clipboard.writeText(text);
 
-
-      topAvatar.textContent =
-        initials;
-
-      profileAvatar.textContent =
-        initials;
-
-
-      profileMessage.textContent =
-        "✅ Profile saved successfully!";
-
-      profileMessage.style.color =
-        "#188038";
-
-
-      saveProfileButton.textContent =
-        "Saved ✓";
-
-
-      setTimeout(
-        function(){
-
-          profileEditor.style.display =
-            "none";
-
-          saveProfileButton.disabled =
-            false;
-
-          saveProfileButton.textContent =
-            "Save Profile";
-
-        },
-        1200
+      showToast(
+        "Post copied to clipboard."
       );
-
-
-    }catch(error){
-
-      console.error(
-        "PROFILE SAVE ERROR:",
-        error
-      );
-
-
-      profileMessage.textContent =
-        "❌ Profile save failed. Check Firestore Rules.";
-
-      profileMessage.style.color =
-        "#d93025";
-
-
-      saveProfileButton.disabled =
-        false;
-
-      saveProfileButton.textContent =
-        "Save Profile";
 
     }
 
-  }
-);
+  }catch(error){}
+
+}
 
 
-/* =====================================================
-   LOGOUT
-===================================================== */
+/* ================= LOGOUT ================= */
 
 logoutButton.addEventListener(
   "click",
-  async function(){
+  async()=>{
 
     try{
 
-      await signOut(
-        auth
-      );
+      await signOut(auth);
 
     }catch(error){
 
-      console.error(
-        "LOGOUT ERROR:",
-        error
+      showToast(
+        "Logout failed."
       );
 
     }
@@ -1874,48 +2587,78 @@ logoutButton.addEventListener(
 );
 
 
-/* =====================================================
-   HELPERS
-===================================================== */
+/* ================= HELPERS ================= */
 
 function getInitials(name){
 
-  const words =
-    name
+  const words=
+    String(name)
       .trim()
       .split(/\s+/);
 
-
-  if(words.length >= 2){
+  if(words.length>=2){
 
     return (
-      words[0][0] +
+      words[0][0]+
       words[1][0]
     ).toUpperCase();
 
   }
 
-
-  return name
+  return String(name)
     .substring(0,2)
     .toUpperCase();
 
 }
 
 
-function showAuthMessage(
-  text,
-  type
-){
+function formatDate(timestamp){
 
-  authMessage.textContent =
-    text;
+  if(!timestamp){
+    return "Just now";
+  }
+
+  try{
+
+    const date=
+      timestamp.toDate();
+
+    return date.toLocaleString(
+      "en-IN",
+      {
+        day:"2-digit",
+        month:"short",
+        year:"numeric",
+        hour:"2-digit",
+        minute:"2-digit"
+      }
+    );
+
+  }catch(error){
+
+    return "Recently";
+
+  }
+
+}
 
 
-  authMessage.style.color =
-    type === "success"
-      ? "#188038"
-      : "#d93025";
+function escapeHtml(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeAttribute(value){
+
+  return escapeHtml(value)
+    .replace(/`/g,"&#096;");
 
 }
 
@@ -1928,7 +2671,7 @@ function friendlyError(code){
       return "Invalid email address.";
 
     case "auth/user-not-found":
-      return "No account found with this email.";
+      return "No account exists with this email.";
 
     case "auth/wrong-password":
       return "Incorrect password.";
@@ -1940,29 +2683,74 @@ function friendlyError(code){
       return "This email is already registered. Please login.";
 
     case "auth/weak-password":
-      return "Password should contain at least 6 characters.";
+      return "Password must contain at least 6 characters.";
 
     case "auth/popup-closed-by-user":
       return "Google login was cancelled.";
 
     case "auth/popup-blocked":
-      return "Your browser blocked the Google login popup.";
+      return "Google popup was blocked by the browser.";
 
     case "auth/unauthorized-domain":
-      return "This website domain is not authorized in Firebase.";
+      return "This website is not authorized in Firebase.";
 
     case "auth/operation-not-allowed":
       return "This login method is not enabled in Firebase.";
 
     case "permission-denied":
-      return "Firestore permission denied.";
+      return "Firestore permission denied. Check Firestore Rules.";
 
     default:
-      return "Something went wrong. Please try again.";
+      return code
+        ? "Error: "+code
+        : "Something went wrong.";
 
   }
 
 }
+
+
+function showAuthMessage(text,type){
+
+  authMessage.textContent=text;
+
+  authMessage.style.color=
+    type==="success"
+      ? "#188038"
+      : "#d93025";
+
+}
+
+
+function showProfileMessage(text,success){
+
+  profileMessage.textContent=text;
+
+  profileMessage.style.color=
+    success
+      ? "#188038"
+      : "#d93025";
+
+}
+
+
+window.showToast=function(text){
+
+  const toast=
+    document.getElementById("toast");
+
+  toast.textContent=text;
+
+  toast.classList.add("show");
+
+  setTimeout(
+    ()=>{
+      toast.classList.remove("show");
+    },
+    2500
+  );
+
+};
 
 </script>
 
