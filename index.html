@@ -1724,3 +1724,339 @@ window.addEventListener(
 
 </body>
 </html>
+<script type="module">
+
+/* =====================================================
+   BSENFLOW PROFESSIONAL EMAIL LOGIN
+   APPEND-ONLY VERSION
+===================================================== */
+
+import {
+  sendSignInLinkToEmail,
+  isSignInWithEmailLink,
+  signInWithEmailLink
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+const BF = window.BSENFLOW;
+
+if (!BF || !BF.auth) {
+
+  console.error("BSENFLOW Firebase system not found.");
+
+} else {
+
+  const auth = BF.auth;
+
+  const firebaseTools = BF.firebase;
+
+
+  /* =====================================================
+     EMAIL ACTION SETTINGS
+  ===================================================== */
+
+  const actionCodeSettings = {
+
+    url:
+      window.location.origin +
+      window.location.pathname,
+
+    handleCodeInApp:true
+
+  };
+
+
+  /* =====================================================
+     CREATE PROFESSIONAL LOGIN BOX
+  ===================================================== */
+
+  const authBox =
+    document.querySelector(".auth-box");
+
+
+  if (authBox) {
+
+    const oldPassword =
+      document.getElementById("passwordInput");
+
+
+    const oldMainButton =
+      document.getElementById("mainBtn");
+
+
+    const oldGoogle =
+      document.getElementById("googleBtn");
+
+
+    /* Password login temporarily hidden */
+
+    if (oldPassword) {
+      oldPassword.style.display = "none";
+    }
+
+
+    if (oldMainButton) {
+      oldMainButton.style.display = "none";
+    }
+
+
+    /* Create email login button */
+
+    if (
+      !document.getElementById(
+        "bflowEmailContinue"
+      )
+    ) {
+
+      const emailButton =
+        document.createElement("button");
+
+
+      emailButton.id =
+        "bflowEmailContinue";
+
+
+      emailButton.type =
+        "button";
+
+
+      emailButton.textContent =
+        "Continue with Email →";
+
+
+      emailButton.style.cssText = `
+
+        width:100%;
+        padding:15px;
+        border:0;
+        border-radius:15px;
+        color:#fff;
+        font-weight:800;
+        background:
+          linear-gradient(
+            135deg,
+            #635bff,
+            #8b5cf6
+          );
+        cursor:pointer;
+        margin-top:4px;
+
+      `;
+
+
+      if (oldGoogle) {
+
+        oldGoogle.parentNode.insertBefore(
+          emailButton,
+          oldGoogle
+        );
+
+      } else {
+
+        authBox.appendChild(
+          emailButton
+        );
+
+      }
+
+
+      /* =================================================
+         EMAIL LINK SEND
+      ================================================= */
+
+      emailButton.addEventListener(
+        "click",
+        async function(){
+
+          const emailInput =
+            document.getElementById(
+              "emailInput"
+            );
+
+
+          const email =
+            emailInput?.value.trim();
+
+
+          const message =
+            document.getElementById(
+              "authMessage"
+            );
+
+
+          if (!email) {
+
+            if (message) {
+
+              message.textContent =
+                "Please enter your email.";
+
+              message.className =
+                "message error";
+
+            }
+
+            return;
+
+          }
+
+
+          emailButton.disabled =
+            true;
+
+
+          emailButton.textContent =
+            "Sending secure email...";
+
+
+          try {
+
+            await sendSignInLinkToEmail(
+              auth,
+              email,
+              actionCodeSettings
+            );
+
+
+            /* Save email locally */
+
+            window.localStorage.setItem(
+              "bsenflowEmailForSignIn",
+              email
+            );
+
+
+            if (message) {
+
+              message.textContent =
+                "📩 Check your email. Your secure BSENFLOW login link has been sent.";
+
+              message.className =
+                "message success";
+
+            }
+
+
+            emailButton.textContent =
+              "Email Sent ✓";
+
+
+          } catch(error) {
+
+            console.error(
+              "BSENFLOW EMAIL LINK ERROR:",
+              error
+            );
+
+
+            if (message) {
+
+              message.textContent =
+                "Unable to send login email. " +
+                (
+                  error.code ||
+                  "Please try again."
+                );
+
+              message.className =
+                "message error";
+
+            }
+
+
+            emailButton.disabled =
+              false;
+
+
+            emailButton.textContent =
+              "Continue with Email →";
+
+          }
+
+        }
+      );
+
+    }
+
+  }
+
+
+  /* =====================================================
+     COMPLETE EMAIL LINK LOGIN
+  ===================================================== */
+
+  if (
+    isSignInWithEmailLink(
+      auth,
+      window.location.href
+    )
+  ) {
+
+    let email =
+      window.localStorage.getItem(
+        "bsenflowEmailForSignIn"
+      );
+
+
+    if (!email) {
+
+      email =
+        window.prompt(
+          "Please enter your email to complete BSENFLOW login:"
+        );
+
+    }
+
+
+    if (email) {
+
+      try {
+
+        const result =
+          await signInWithEmailLink(
+            auth,
+            email,
+            window.location.href
+          );
+
+
+        window.localStorage.removeItem(
+          "bsenflowEmailForSignIn"
+        );
+
+
+        console.log(
+          "BSENFLOW Email Login Success:",
+          result.user.uid
+        );
+
+
+        /* Clean URL */
+
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname
+        );
+
+
+      } catch(error) {
+
+        console.error(
+          "BSENFLOW EMAIL VERIFICATION ERROR:",
+          error
+        );
+
+
+        alert(
+          "Email verification failed. Please request a new login link."
+        );
+
+      }
+
+    }
+
+  }
+
+}
+
+</script>
