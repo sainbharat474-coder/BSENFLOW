@@ -2060,3 +2060,611 @@ if (!BF || !BF.auth) {
 }
 
 </script>
+<script type="module">
+
+/* =====================================================
+   BSENFLOW PROFESSIONAL PROFILE
+   USERNAME + DISPLAY NAME + BIO
+===================================================== */
+
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  limit
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const BF = window.BSENFLOW;
+
+if (!BF) {
+
+  console.error("BSENFLOW Firebase system not found.");
+
+} else {
+
+  const auth = BF.auth;
+  const db = BF.db;
+
+  const {
+    doc,
+    setDoc,
+    getDoc,
+    serverTimestamp
+  } = BF.firebase;
+
+
+  /* =====================================================
+     CREATE PROFESSIONAL PROFILE BUTTON
+  ===================================================== */
+
+  const profileCard =
+    document.querySelector(".profile-card");
+
+
+  if (profileCard) {
+
+    const professionalBtn =
+      document.createElement("button");
+
+
+    professionalBtn.id =
+      "bflowProfessionalProfile";
+
+
+    professionalBtn.textContent =
+      "⚙️ Edit Professional Profile";
+
+
+    professionalBtn.style.cssText = `
+      width:100%;
+      margin-top:10px;
+      padding:14px;
+      border:1px solid #635bff;
+      border-radius:14px;
+      background:#fff;
+      color:#635bff;
+      font-weight:800;
+      cursor:pointer;
+    `;
+
+
+    profileCard.appendChild(
+      professionalBtn
+    );
+
+
+    /* =================================================
+       PROFILE PANEL
+    ================================================= */
+
+    const panel =
+      document.createElement("div");
+
+
+    panel.id =
+      "bflowProfessionalPanel";
+
+
+    panel.style.cssText = `
+      display:none;
+      margin-top:18px;
+      padding:22px;
+      background:#f8f8fc;
+      border-radius:20px;
+      border:1px solid #e8e8ef;
+    `;
+
+
+    panel.innerHTML = `
+
+      <div style="
+        font-size:20px;
+        font-weight:900;
+        margin-bottom:6px;
+      ">
+        Edit your profile
+      </div>
+
+      <div style="
+        color:#777;
+        font-size:13px;
+        margin-bottom:18px;
+      ">
+        Your @username is your unique BSENFLOW identity.
+      </div>
+
+
+      <label style="
+        display:block;
+        font-weight:800;
+        font-size:13px;
+        margin-bottom:7px;
+      ">
+        Username
+      </label>
+
+      <input
+        id="bflowUsername"
+        type="text"
+        placeholder="username"
+        maxlength="30"
+        autocomplete="off"
+        style="
+          width:100%;
+          padding:14px;
+          border:1px solid #ddd;
+          border-radius:13px;
+          outline:none;
+          margin-bottom:5px;
+        "
+      >
+
+      <div style="
+        font-size:12px;
+        color:#777;
+        margin-bottom:15px;
+      ">
+        Example: @bharatsain
+      </div>
+
+
+      <label style="
+        display:block;
+        font-weight:800;
+        font-size:13px;
+        margin-bottom:7px;
+      ">
+        Display Name
+      </label>
+
+      <input
+        id="bflowDisplayName"
+        type="text"
+        placeholder="Your name"
+        maxlength="60"
+        style="
+          width:100%;
+          padding:14px;
+          border:1px solid #ddd;
+          border-radius:13px;
+          outline:none;
+          margin-bottom:15px;
+        "
+      >
+
+
+      <label style="
+        display:block;
+        font-weight:800;
+        font-size:13px;
+        margin-bottom:7px;
+      ">
+        Bio
+      </label>
+
+      <textarea
+        id="bflowBio"
+        placeholder="Tell people about yourself..."
+        maxlength="160"
+        style="
+          width:100%;
+          min-height:120px;
+          padding:14px;
+          border:1px solid #ddd;
+          border-radius:13px;
+          outline:none;
+          resize:vertical;
+          margin-bottom:6px;
+        "
+      ></textarea>
+
+      <div style="
+        text-align:right;
+        color:#777;
+        font-size:12px;
+        margin-bottom:15px;
+      ">
+        Maximum 160 characters
+      </div>
+
+
+      <button
+        id="bflowSaveProfessionalProfile"
+        type="button"
+        style="
+          width:100%;
+          padding:15px;
+          border:0;
+          border-radius:14px;
+          background:linear-gradient(
+            135deg,
+            #635bff,
+            #8b5cf6
+          );
+          color:#fff;
+          font-weight:900;
+        "
+      >
+        Save Profile
+      </button>
+
+
+      <div
+        id="bflowProfileStatus"
+        style="
+          text-align:center;
+          min-height:20px;
+          margin-top:12px;
+          font-size:13px;
+        "
+      ></div>
+
+    `;
+
+
+    profileCard.appendChild(panel);
+
+
+    /* =================================================
+       OPEN PROFILE EDITOR
+    ================================================= */
+
+    professionalBtn.addEventListener(
+      "click",
+      async function(){
+
+        if(
+          panel.style.display === "block"
+        ){
+
+          panel.style.display = "none";
+
+          return;
+
+        }
+
+
+        panel.style.display = "block";
+
+
+        const user =
+          auth.currentUser;
+
+
+        if(!user) return;
+
+
+        try {
+
+          const userRef =
+            doc(
+              db,
+              "users",
+              user.uid
+            );
+
+
+          const snap =
+            await getDoc(userRef);
+
+
+          if(snap.exists()) {
+
+            const data =
+              snap.data();
+
+
+            document.getElementById(
+              "bflowUsername"
+            ).value =
+              data.username || "";
+
+
+            document.getElementById(
+              "bflowDisplayName"
+            ).value =
+              data.displayName ||
+              data.name ||
+              user.displayName ||
+              "";
+
+
+            document.getElementById(
+              "bflowBio"
+            ).value =
+              data.bio || "";
+
+          }
+
+        } catch(error) {
+
+          console.error(
+            "PROFILE LOAD ERROR:",
+            error
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =================================================
+       SAVE PROFESSIONAL PROFILE
+    ================================================= */
+
+    document.getElementById(
+      "bflowSaveProfessionalProfile"
+    ).addEventListener(
+      "click",
+      async function(){
+
+        const user =
+          auth.currentUser;
+
+
+        const status =
+          document.getElementById(
+            "bflowProfileStatus"
+          );
+
+
+        if(!user){
+
+          status.textContent =
+            "Please login first.";
+
+          status.style.color =
+            "#d93025";
+
+          return;
+
+        }
+
+
+        let username =
+          document.getElementById(
+            "bflowUsername"
+          ).value.trim().toLowerCase();
+
+
+        const displayName =
+          document.getElementById(
+            "bflowDisplayName"
+          ).value.trim();
+
+
+        const bio =
+          document.getElementById(
+            "bflowBio"
+          ).value.trim();
+
+
+        /* Remove @ if user types it */
+
+        username =
+          username.replace(/^@+/, "");
+
+
+        /* Username validation */
+
+        if(!/^[a-z0-9._]{3,30}$/.test(username)){
+
+          status.textContent =
+            "Username: 3–30 characters. Use letters, numbers, . or _ only.";
+
+          status.style.color =
+            "#d93025";
+
+          return;
+
+        }
+
+
+        if(!displayName){
+
+          status.textContent =
+            "Please enter your display name.";
+
+          status.style.color =
+            "#d93025";
+
+          return;
+
+        }
+
+
+        const saveBtn =
+          document.getElementById(
+            "bflowSaveProfessionalProfile"
+          );
+
+
+        saveBtn.disabled =
+          true;
+
+        saveBtn.textContent =
+          "Checking username...";
+
+
+        try {
+
+          /* =============================================
+             CHECK USERNAME UNIQUENESS
+          ============================================= */
+
+          const usernameQuery =
+            query(
+              collection(
+                db,
+                "users"
+              ),
+              where(
+                "username",
+                "==",
+                username
+              ),
+              limit(1)
+            );
+
+
+          const usernameResult =
+            await getDocs(
+              usernameQuery
+            );
+
+
+          if(
+            !usernameResult.empty &&
+            usernameResult.docs[0].id !== user.uid
+          ){
+
+            status.textContent =
+              "❌ This username is already taken.";
+
+            status.style.color =
+              "#d93025";
+
+            saveBtn.disabled =
+              false;
+
+            saveBtn.textContent =
+              "Save Profile";
+
+            return;
+
+          }
+
+
+          saveBtn.textContent =
+            "Saving...";
+
+
+          /* =============================================
+             SAVE PROFILE
+          ============================================= */
+
+          await setDoc(
+            doc(
+              db,
+              "users",
+              user.uid
+            ),
+            {
+
+              uid:user.uid,
+
+              username:username,
+
+              displayName:displayName,
+
+              name:displayName,
+
+              bio:bio,
+
+              email:
+                user.email || "",
+
+              profilePhoto:
+                user.photoURL || "",
+
+              updatedAt:
+                serverTimestamp()
+
+            },
+            {
+              merge:true
+            }
+          );
+
+
+          /* =============================================
+             UPDATE SCREEN
+          ============================================= */
+
+          const usernameText =
+            "@" + username;
+
+
+          profileName.textContent =
+            displayName;
+
+
+          profileBio.textContent =
+            bio ||
+            "No bio added yet.";
+
+
+          welcomeText.textContent =
+            "Welcome, " +
+            displayName +
+            " 👋";
+
+
+          status.textContent =
+            "✅ Profile saved successfully!";
+
+
+          status.style.color =
+            "#188038";
+
+
+          saveBtn.textContent =
+            "Saved ✓";
+
+
+          setTimeout(
+            function(){
+
+              panel.style.display =
+                "none";
+
+              saveBtn.disabled =
+                false;
+
+              saveBtn.textContent =
+                "Save Profile";
+
+            },
+            1200
+          );
+
+
+          console.log(
+            "BSENFLOW USERNAME:",
+            usernameText
+          );
+
+
+        } catch(error) {
+
+          console.error(
+            "PROFILE SAVE ERROR:",
+            error
+          );
+
+
+          status.textContent =
+            "Could not save profile. Please try again.";
+
+          status.style.color =
+            "#d93025";
+
+
+          saveBtn.disabled =
+            false;
+
+          saveBtn.textContent =
+            "Save Profile";
+
+        }
+
+      }
+    );
+
+  }
+
+}
+
+</script>
