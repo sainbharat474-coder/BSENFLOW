@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#0b0b0f">
-<title>BSENFLOW — Social, Reimagined</title>
+<meta name="theme-color" content="#111111">
+<title>BSENFLOW — Social Network</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -12,28 +12,34 @@
 :root{
   --bg:#f5f6fa;
   --card:#fff;
-  --text:#111318;
-  --muted:#747985;
-  --line:#e8e9ef;
-  --primary:#635bff;
-  --primary2:#8b5cf6;
-  --dark:#0b0b0f;
-  --success:#16a34a;
-  --danger:#ef4444;
-  --shadow:0 15px 45px rgba(0,0,0,.08);
+  --text:#111;
+  --muted:#777;
+  --line:#e9e9ee;
+  --accent:#635bff;
+  --accent2:#8b5cf6;
+  --danger:#ff3b6b;
+  --shadow:0 10px 35px rgba(0,0,0,.07);
 }
 
 body{
-  font-family:Inter,Arial,Helvetica,sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
   background:var(--bg);
   color:var(--text);
 }
 
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
+button,input,textarea,select{
+  font:inherit;
+}
 
-/* ================= AUTH ================= */
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* AUTH */
 
 .auth-page{
   min-height:100vh;
@@ -42,131 +48,103 @@ button{cursor:pointer}
   justify-content:center;
   padding:20px;
   background:
-    radial-gradient(circle at 10% 10%,#635bff 0,transparent 28%),
-    radial-gradient(circle at 90% 90%,#8b5cf6 0,transparent 25%),
-    #09090d;
+    radial-gradient(circle at top left,#8b5cf6 0,transparent 35%),
+    radial-gradient(circle at bottom right,#635bff 0,transparent 35%),
+    #111;
 }
 
 .auth-box{
   width:100%;
-  max-width:450px;
-  background:rgba(255,255,255,.97);
-  border-radius:30px;
-  padding:34px;
-  box-shadow:0 30px 100px rgba(0,0,0,.35);
+  max-width:430px;
+  background:#fff;
+  border-radius:28px;
+  padding:32px;
+  box-shadow:0 30px 80px rgba(0,0,0,.35);
 }
 
 .logo{
   text-align:center;
   font-size:36px;
   font-weight:950;
-  letter-spacing:-1.5px;
+  letter-spacing:-2px;
 }
 
 .logo span,
 .brand span{
-  color:var(--primary);
+  color:var(--accent);
 }
 
-.auth-subtitle{
+.subtitle{
   text-align:center;
   color:var(--muted);
   margin:8px 0 28px;
 }
 
-.input{
+.auth-box input{
   width:100%;
-  padding:15px 16px;
-  border:1px solid #dedfe6;
+  padding:15px 17px;
+  margin-bottom:13px;
+  border:1px solid #ddd;
   border-radius:15px;
   outline:none;
-  margin-bottom:13px;
-  background:#fff;
 }
 
-.input:focus{
-  border-color:var(--primary);
-  box-shadow:0 0 0 4px rgba(99,91,255,.10);
+.auth-box input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(99,91,255,.1);
 }
 
-.primary-btn{
+.main-btn{
   width:100%;
-  border:0;
   padding:15px;
+  border:0;
   border-radius:15px;
-  color:#fff;
-  font-weight:850;
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
-  box-shadow:0 10px 25px rgba(99,91,255,.25);
+  color:white;
+  font-weight:800;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
 }
 
 .google-btn{
   width:100%;
-  border:1px solid var(--line);
-  background:#fff;
   padding:14px;
+  margin-top:12px;
+  border:1px solid #ddd;
   border-radius:15px;
-  margin-top:11px;
-  font-weight:800;
-}
-
-.divider{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin:18px 0;
-  color:#aaa;
-  font-size:12px;
-}
-
-.divider:before,
-.divider:after{
-  content:"";
-  height:1px;
-  background:var(--line);
-  flex:1;
+  background:#fff;
+  font-weight:700;
 }
 
 .switch{
   text-align:center;
   margin-top:20px;
-  font-size:14px;
   color:var(--muted);
+  font-size:14px;
 }
 
 .switch span{
-  color:var(--primary);
-  font-weight:850;
+  color:var(--accent);
+  font-weight:800;
   cursor:pointer;
 }
 
 .message{
-  min-height:20px;
   text-align:center;
-  margin-top:13px;
+  margin-top:14px;
+  min-height:20px;
   font-size:14px;
 }
 
-.verify-box{
-  background:#f4f2ff;
-  padding:14px;
-  border-radius:14px;
-  margin-top:14px;
-  font-size:13px;
-  line-height:1.5;
-}
-
-/* ================= APP ================= */
+/* APP */
 
 .app{
-  display:none;
   min-height:100vh;
+  padding-bottom:82px;
 }
 
 .topbar{
-  height:70px;
+  height:68px;
   background:rgba(255,255,255,.94);
-  backdrop-filter:blur(18px);
+  backdrop-filter:blur(15px);
   border-bottom:1px solid var(--line);
   display:flex;
   align-items:center;
@@ -174,11 +152,11 @@ button{cursor:pointer}
   padding:0 25px;
   position:sticky;
   top:0;
-  z-index:100;
+  z-index:50;
 }
 
 .brand{
-  font-size:26px;
+  font-size:25px;
   font-weight:950;
   letter-spacing:-1px;
 }
@@ -186,459 +164,315 @@ button{cursor:pointer}
 .top-actions{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:10px;
 }
 
 .icon-btn{
-  width:43px;
-  height:43px;
+  width:42px;
+  height:42px;
   border:0;
-  background:#f3f3f7;
-  border-radius:13px;
+  border-radius:50%;
+  background:#f1f1f5;
   display:grid;
   place-items:center;
-  transition:.2s;
+  font-size:20px;
 }
 
-.icon-btn:hover{
-  transform:translateY(-2px);
-  background:#e9e8ff;
-}
-
-.icon-btn svg{
-  width:21px;
-  height:21px;
-  stroke:currentColor;
-}
-
-.user-mini{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  margin-left:4px;
-  cursor:pointer;
-}
-
-.avatar{
-  width:43px;
-  height:43px;
+.top-avatar{
+  width:42px;
+  height:42px;
   border-radius:50%;
-  background:linear-gradient(135deg,#635bff,#111);
+  object-fit:cover;
+  background:linear-gradient(135deg,var(--accent),#111);
   color:white;
   display:grid;
   place-items:center;
   font-weight:900;
+}
+
+/* CONTENT */
+
+.content{
+  max-width:1050px;
+  margin:0 auto;
+  padding:25px 18px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.hero{
+  background:var(--card);
+  border-radius:28px;
+  padding:42px 25px;
+  text-align:center;
+  box-shadow:var(--shadow);
+}
+
+.hero h1{
+  font-size:42px;
+  margin-bottom:8px;
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:17px;
+}
+
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-top:22px;
+}
+
+.quick-card{
+  border:0;
+  background:#fff;
+  padding:20px 10px;
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  font-weight:800;
+}
+
+.quick-card div{
+  font-size:27px;
+  margin-bottom:7px;
+}
+
+.section-title{
+  font-size:22px;
+  margin:25px 0 14px;
+}
+
+/* PROFILE */
+
+.profile-card{
+  background:#fff;
+  border-radius:28px;
+  padding:28px;
+  box-shadow:var(--shadow);
+}
+
+.profile-head{
+  display:flex;
+  gap:22px;
+  align-items:center;
+}
+
+.profile-photo{
+  width:105px;
+  height:105px;
+  border-radius:50%;
+  object-fit:cover;
+  background:linear-gradient(135deg,var(--accent),#111);
+  display:grid;
+  place-items:center;
+  color:#fff;
+  font-size:30px;
+  font-weight:900;
   overflow:hidden;
 }
 
-.avatar img{
+.profile-photo img{
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
-.user-mini strong{
-  font-size:14px;
+.profile-main{
+  flex:1;
 }
 
-.user-mini small{
-  display:block;
-  color:var(--muted);
-  font-size:11px;
-}
-
-/* ================= LAYOUT ================= */
-
-.layout{
-  max-width:1250px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:230px minmax(0,650px) 260px;
-  gap:25px;
-  padding:25px 20px 100px;
-}
-
-.sidebar,
-.rightbar{
-  position:sticky;
-  top:95px;
-  height:max-content;
-}
-
-.nav-item{
-  width:100%;
-  border:0;
-  background:transparent;
-  display:flex;
-  align-items:center;
-  gap:14px;
-  padding:13px 15px;
-  border-radius:14px;
-  margin-bottom:5px;
-  font-weight:750;
-  text-align:left;
-}
-
-.nav-item:hover,
-.nav-item.active{
-  background:#eae9ff;
-  color:var(--primary);
-}
-
-.nav-item svg{
-  width:22px;
-  height:22px;
-}
-
-.premium-card{
-  margin-top:22px;
-  background:linear-gradient(145deg,#111,#28233f);
-  color:#fff;
-  border-radius:22px;
-  padding:20px;
-}
-
-.premium-card h3{
-  margin-bottom:7px;
-}
-
-.premium-card p{
-  font-size:12px;
-  color:#c6c6cf;
-  line-height:1.5;
-}
-
-.premium-card button{
-  margin-top:15px;
-  border:0;
-  background:#fff;
-  color:#111;
-  padding:10px 14px;
-  border-radius:12px;
-  font-weight:850;
-}
-
-/* ================= FEED ================= */
-
-.feed-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:18px;
-}
-
-.feed-head h1{
-  font-size:25px;
-}
-
-.card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:22px;
-  box-shadow:var(--shadow);
-}
-
-.profile-summary{
-  padding:22px;
-  margin-bottom:18px;
-}
-
-.profile-summary-row{
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
-
-.profile-summary .avatar{
-  width:62px;
-  height:62px;
-}
-
-.profile-summary h2{
-  font-size:20px;
+.profile-main h2{
+  font-size:24px;
 }
 
 .username{
-  color:var(--primary);
-  font-weight:750;
-  font-size:14px;
-  margin-top:3px;
+  color:var(--accent);
+  font-weight:800;
+  margin-top:4px;
 }
 
 .bio{
-  color:var(--muted);
-  margin-top:8px;
-  line-height:1.45;
+  color:#555;
+  margin-top:9px;
+  line-height:1.5;
 }
 
 .stats{
   display:flex;
-  gap:25px;
-  margin-top:17px;
+  gap:28px;
+  margin-top:16px;
 }
 
-.stats strong{
+.stat{
+  text-align:center;
+}
+
+.stat strong{
   display:block;
+  font-size:19px;
 }
 
-.stats span{
+.stat span{
   color:var(--muted);
-  font-size:12px;
+  font-size:13px;
 }
 
-.edit-profile-btn{
-  margin-top:17px;
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:12px;
-  padding:10px 15px;
+.profile-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:22px;
+}
+
+.primary{
+  background:#111;
+  color:#fff;
+  border:0;
+  border-radius:13px;
+  padding:12px 18px;
   font-weight:800;
 }
 
-/* ================= CREATE ================= */
-
-.create-card{
-  padding:18px;
-  margin-bottom:18px;
+.secondary{
+  background:#f0f0f4;
+  color:#111;
+  border:0;
+  border-radius:13px;
+  padding:12px 18px;
+  font-weight:800;
 }
 
-.create-row{
+/* SEARCH */
+
+.search-box{
   display:flex;
-  gap:12px;
-  align-items:center;
+  gap:10px;
+  margin-bottom:20px;
 }
 
-.create-input{
+.search-box input{
   flex:1;
-  border:0;
-  background:#f5f5f8;
-  border-radius:15px;
-  padding:13px 16px;
-  cursor:pointer;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:15px;
+  outline:none;
+  background:#fff;
 }
 
-.create-tools{
-  display:flex;
-  justify-content:space-between;
-  margin-top:13px;
+.search-results{
+  background:#fff;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
 }
 
-.tool-btn{
-  border:0;
-  background:transparent;
-  padding:8px 12px;
-  border-radius:10px;
-  font-weight:750;
-}
-
-.tool-btn:hover{
-  background:#f0efff;
-  color:var(--primary);
-}
-
-/* ================= POSTS ================= */
-
-.post{
-  padding:19px;
-  margin-bottom:18px;
-}
-
-.post-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.post-user{
-  display:flex;
-  gap:11px;
-  align-items:center;
-}
-
-.post-user .avatar{
-  width:43px;
-  height:43px;
-}
-
-.post-user strong{
-  display:block;
-}
-
-.post-user small{
-  color:var(--muted);
-}
-
-.post-text{
-  padding:16px 0;
-  line-height:1.55;
-  white-space:pre-wrap;
-}
-
-.post-actions{
-  display:flex;
-  gap:8px;
-  border-top:1px solid var(--line);
-  padding-top:12px;
-}
-
-.post-action{
-  border:0;
-  background:transparent;
-  padding:8px 12px;
-  border-radius:10px;
+.user-result{
+  padding:16px;
   display:flex;
   align-items:center;
-  gap:6px;
-  font-weight:700;
+  gap:12px;
+  border-bottom:1px solid var(--line);
 }
 
-.post-action:hover{
-  background:#f4f4f7;
-}
-
-.post-action svg{
-  width:20px;
-}
-
-/* ================= RIGHT ================= */
-
-.right-card{
-  padding:19px;
-  margin-bottom:18px;
-}
-
-.right-card h3{
-  margin-bottom:15px;
-}
-
-.suggestion{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:14px;
-}
-
-.suggestion-left{
-  display:flex;
-  align-items:center;
-  gap:9px;
-}
-
-.suggestion .avatar{
-  width:38px;
-  height:38px;
-}
-
-.follow-btn{
-  border:0;
-  background:#eae9ff;
-  color:var(--primary);
-  border-radius:9px;
-  padding:7px 10px;
+.mini-avatar{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#111;
+  color:#fff;
+  display:grid;
+  place-items:center;
   font-weight:800;
 }
 
-/* ================= MOBILE NAV ================= */
+/* REELS */
 
-.mobile-nav{
-  display:none;
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:65px;
-  background:rgba(255,255,255,.96);
-  backdrop-filter:blur(15px);
-  border-top:1px solid var(--line);
-  z-index:200;
-  justify-content:space-around;
-  align-items:center;
+.reels-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
 }
 
-.mobile-nav button{
-  border:0;
-  background:transparent;
-  padding:8px;
-}
-
-.mobile-nav svg{
-  width:23px;
-}
-
-/* ================= PLUS MENU ================= */
-
-.plus-menu{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  backdrop-filter:blur(5px);
-  display:none;
-  align-items:flex-end;
-  justify-content:center;
-  z-index:500;
-}
-
-.plus-box{
-  width:min(520px,100%);
-  background:#fff;
-  border-radius:28px 28px 0 0;
-  padding:25px;
-  animation:up .22s ease;
-}
-
-@keyframes up{
-  from{transform:translateY(100%)}
-  to{transform:translateY(0)}
-}
-
-.plus-title{
+.reel-card{
+  aspect-ratio:9/14;
+  border-radius:20px;
+  background:linear-gradient(145deg,#111,#635bff);
+  color:#fff;
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:18px;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:18px;
+  overflow:hidden;
+  position:relative;
 }
 
-.plus-option{
-  width:100%;
-  display:flex;
-  align-items:center;
+.reel-card .play{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:45px;
+}
+
+/* CREATE */
+
+.create-options{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
   gap:15px;
-  padding:15px;
+}
+
+.create-option{
+  background:#fff;
   border:0;
-  background:#f7f7f9;
-  border-radius:16px;
-  margin-bottom:10px;
+  border-radius:22px;
+  padding:25px;
   text-align:left;
+  box-shadow:var(--shadow);
 }
 
-.plus-option svg{
-  width:23px;
+.create-option .big{
+  font-size:35px;
+  margin-bottom:12px;
 }
 
-.plus-option strong{
+.create-option strong{
   display:block;
+  font-size:17px;
 }
 
-.plus-option small{
+.create-option small{
   color:var(--muted);
 }
 
-/* ================= MODAL ================= */
+/* MODAL */
 
 .modal{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.55);
-  backdrop-filter:blur(5px);
   display:none;
   align-items:center;
   justify-content:center;
   padding:20px;
-  z-index:600;
+  z-index:100;
+}
+
+.modal.show{
+  display:flex;
 }
 
 .modal-box{
-  width:min(500px,100%);
+  width:100%;
+  max-width:500px;
   background:#fff;
   border-radius:25px;
   padding:25px;
@@ -648,68 +482,189 @@ button{cursor:pointer}
 
 .modal-head{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   margin-bottom:20px;
 }
 
-.close-btn{
+.close{
   border:0;
-  background:#f0f0f3;
+  background:#f1f1f4;
   width:38px;
   height:38px;
-  border-radius:12px;
+  border-radius:50%;
 }
 
-.modal textarea{
+.form-input,
+.form-textarea{
   width:100%;
-  min-height:150px;
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:15px;
-  resize:vertical;
+  border:1px solid #ddd;
+  border-radius:14px;
+  padding:14px;
+  margin-bottom:12px;
   outline:none;
 }
 
-.modal textarea:focus{
-  border-color:var(--primary);
+.form-textarea{
+  min-height:110px;
+  resize:vertical;
 }
 
-.modal-actions{
-  display:flex;
-  gap:10px;
-  margin-top:15px;
-}
-
-.modal-actions button{
-  flex:1;
-}
-
-.secondary-btn{
-  border:1px solid var(--line);
-  background:#fff;
-  padding:13px;
-  border-radius:13px;
+.form-label{
+  display:block;
   font-weight:800;
+  margin:10px 0 7px;
 }
 
-/* ================= TOAST ================= */
+.avatar-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  margin:10px 0 20px;
+}
+
+.avatar-choice{
+  width:100%;
+  aspect-ratio:1;
+  border-radius:50%;
+  border:2px solid transparent;
+  background:#f0f0f4;
+  font-size:28px;
+}
+
+.avatar-choice.selected{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(99,91,255,.12);
+}
+
+.upload-box{
+  border:2px dashed #ccc;
+  border-radius:18px;
+  padding:25px;
+  text-align:center;
+  margin-bottom:15px;
+}
+
+.preview{
+  width:100%;
+  max-height:280px;
+  object-fit:contain;
+  border-radius:18px;
+  background:#111;
+  margin:10px 0;
+}
+
+/* POST */
+
+.post-card{
+  background:#fff;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  margin-top:18px;
+}
+
+.post-head{
+  padding:14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.post-media{
+  width:100%;
+  max-height:600px;
+  object-fit:cover;
+}
+
+.post-body{
+  padding:15px;
+}
+
+.post-actions{
+  display:flex;
+  gap:15px;
+  font-size:23px;
+  margin-bottom:10px;
+}
+
+.post-caption{
+  line-height:1.5;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  height:70px;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(20px);
+  border-top:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:80;
+}
+
+.nav-inner{
+  width:100%;
+  max-width:650px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+}
+
+.nav-btn{
+  border:0;
+  background:transparent;
+  height:65px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  color:#888;
+  font-size:11px;
+  font-weight:700;
+}
+
+.nav-icon{
+  font-size:23px;
+  line-height:1;
+}
+
+.nav-btn.active{
+  color:#111;
+}
+
+.nav-btn.create .nav-icon{
+  width:43px;
+  height:43px;
+  border-radius:14px;
+  color:#fff;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:grid;
+  place-items:center;
+  font-size:28px;
+}
+
+/* TOAST */
 
 .toast{
   position:fixed;
   left:50%;
-  bottom:30px;
-  transform:translateX(-50%) translateY(30px);
+  bottom:90px;
+  transform:translateX(-50%) translateY(20px);
   background:#111;
   color:#fff;
-  padding:13px 18px;
-  border-radius:13px;
+  padding:12px 18px;
+  border-radius:14px;
   opacity:0;
   pointer-events:none;
   transition:.25s;
-  z-index:999;
-  max-width:90%;
-  text-align:center;
+  z-index:200;
 }
 
 .toast.show{
@@ -717,56 +672,57 @@ button{cursor:pointer}
   transform:translateX(-50%) translateY(0);
 }
 
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:1000px){
-  .layout{
-    grid-template-columns:190px minmax(0,650px);
-  }
-  .rightbar{display:none}
-}
+/* MOBILE */
 
 @media(max-width:700px){
+
   .topbar{
     padding:0 14px;
   }
 
-  .brand{
-    font-size:23px;
+  .content{
+    padding:16px 12px;
   }
 
-  .user-mini div:not(.avatar){
-    display:none;
+  .hero{
+    padding:30px 18px;
   }
 
-  .layout{
-    display:block;
-    padding:17px 12px 90px;
+  .hero h1{
+    font-size:30px;
   }
 
-  .sidebar{
-    display:none;
+  .quick-grid{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .mobile-nav{
-    display:flex;
+  .profile-head{
+    align-items:flex-start;
   }
 
-  .feed-head h1{
-    font-size:22px;
+  .profile-photo{
+    width:82px;
+    height:82px;
   }
 
-  .profile-summary{
-    border-radius:18px;
+  .profile-main h2{
+    font-size:20px;
   }
 
-  .post,
-  .create-card{
-    border-radius:18px;
+  .stats{
+    gap:18px;
   }
 
-  .top-actions .hide-mobile{
-    display:none;
+  .create-options{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .reels-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .avatar-grid{
+    grid-template-columns:repeat(5,1fr);
   }
 }
 </style>
@@ -774,474 +730,383 @@ button{cursor:pointer}
 
 <body>
 
-<!-- ======================================================
-     AUTH
-====================================================== -->
+<!-- ================= AUTH ================= -->
 
-<section class="auth-page" id="authPage">
+<div class="auth-page" id="authPage">
 
   <div class="auth-box">
 
     <div class="logo">BSEN<span>FLOW</span></div>
 
-    <div class="auth-subtitle" id="authSubtitle">
+    <div class="subtitle" id="authSubtitle">
       Welcome back
     </div>
 
     <input
-      class="input hidden"
-      id="nameInput"
+      id="name"
       type="text"
-      placeholder="Full name"
-      autocomplete="name"
+      placeholder="Your name"
+      style="display:none"
     >
 
     <input
-      class="input hidden"
-      id="usernameInput"
-      type="text"
-      placeholder="@username"
-      autocomplete="username"
-    >
-
-    <input
-      class="input"
-      id="emailInput"
+      id="email"
       type="email"
-      placeholder="Email address"
+      placeholder="Email"
       autocomplete="email"
     >
 
     <input
-      class="input"
-      id="passwordInput"
+      id="password"
       type="password"
       placeholder="Password"
       autocomplete="current-password"
     >
 
-    <button class="primary-btn" id="authBtn">
+    <button class="main-btn" id="mainBtn">
       Login
     </button>
 
     <button class="google-btn" id="googleBtn">
-      Continue with Google
+      G&nbsp; Continue with Google
     </button>
 
-    <div class="divider">SECURE FIREBASE LOGIN</div>
-
-    <div class="message" id="authMessage"></div>
+    <div class="message" id="message"></div>
 
     <div class="switch">
-      <span id="switchBtn">Create new account</span>
+      <span id="switchText">Create new account</span>
     </div>
 
   </div>
-
-</section>
-
-
-<!-- ======================================================
-     APP
-====================================================== -->
-
-<section class="app" id="app">
-
-<header class="topbar">
-
-  <div class="brand">
-    BSEN<span>FLOW</span>
-  </div>
-
-  <div class="top-actions">
-
-    <button class="icon-btn hide-mobile" id="searchBtn" title="Search">
-      <svg fill="none" viewBox="0 0 24 24">
-        <circle cx="11" cy="11" r="7" stroke-width="2"/>
-        <path d="m20 20-4-4" stroke-width="2"/>
-      </svg>
-    </button>
-
-    <button class="icon-btn" id="notificationBtn" title="Notifications">
-      <svg fill="none" viewBox="0 0 24 24">
-        <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </button>
-
-    <div class="user-mini" id="profileTop">
-
-      <div class="avatar" id="topAvatar">
-        BS
-      </div>
-
-      <div>
-        <strong id="topName">User</strong>
-        <small id="topUsername">@user</small>
-      </div>
-
-    </div>
-
-  </div>
-
-</header>
-
-
-<div class="layout">
-
-<!-- SIDEBAR -->
-
-<aside class="sidebar">
-
-  <button class="nav-item active" data-page="home">
-    <svg fill="none" viewBox="0 0 24 24">
-      <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" stroke="currentColor" stroke-width="2"/>
-    </svg>
-    Home
-  </button>
-
-  <button class="nav-item" id="searchNav">
-    <svg fill="none" viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
-      <path d="m20 20-4-4" stroke="currentColor" stroke-width="2"/>
-    </svg>
-    Search
-  </button>
-
-  <button class="nav-item" id="messageNav">
-    <svg fill="none" viewBox="0 0 24 24">
-      <path d="M20 11.5a7.5 7.5 0 0 1-8 7.5 9 9 0 0 1-4-.9L4 20l1.4-3.2A7.4 7.4 0 0 1 4.5 12 7.5 7.5 0 0 1 12 4.5a7.5 7.5 0 0 1 8 7z" stroke="currentColor" stroke-width="2"/>
-    </svg>
-    Messages
-  </button>
-
-  <button class="nav-item" id="notificationsNav">
-    <svg fill="none" viewBox="0 0 24 24">
-      <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-    Notifications
-  </button>
-
-  <button class="nav-item" id="profileNav">
-    <svg fill="none" viewBox="0 0 24 24">
-      <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
-      <path d="M4 21a8 8 0 0 1 16 0" stroke="currentColor" stroke-width="2"/>
-    </svg>
-    Profile
-  </button>
-
-  <button class="nav-item" id="settingsNav">
-    <svg fill="none" viewBox="0 0 24 24">
-      <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" stroke="currentColor" stroke-width="2"/>
-      <path d="m19.4 15 .1.1-1.5 2.6-.2-.1a3 3 0 0 0-3.1 0l-.2.1-1.5-2.6.1-.1a3 3 0 0 0 0-6l-.1-.1L14 6.3l.2.1a3 3 0 0 0 3.1 0l.2-.1L19.5 9l-.1.1a3 3 0 0 0 0 5.9Z" stroke="currentColor" stroke-width="1.5"/>
-    </svg>
-    Settings
-  </button>
-
-  <div class="premium-card">
-
-    <h3>❖ Premium</h3>
-
-    <p>
-      Unlock the next level of BSENFLOW.
-      More profile features and creator tools are coming.
-    </p>
-
-    <button id="premiumBtn">
-      Explore Premium
-    </button>
-
-  </div>
-
-</aside>
-
-
-<!-- MAIN FEED -->
-
-<main>
-
-  <div class="feed-head">
-    <h1>Home</h1>
-
-    <button class="icon-btn" id="plusBtn" title="Create">
-      <svg fill="none" viewBox="0 0 24 24">
-        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/>
-      </svg>
-    </button>
-  </div>
-
-
-  <!-- PROFILE SUMMARY -->
-
-  <section class="card profile-summary">
-
-    <div class="profile-summary-row">
-
-      <div class="avatar" id="profileAvatar">
-        BS
-      </div>
-
-      <div>
-
-        <h2 id="profileName">
-          BSENFLOW User
-        </h2>
-
-        <div class="username" id="profileUsername">
-          @username
-        </div>
-
-        <div class="bio" id="profileBio">
-          Welcome to my BSENFLOW profile.
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="stats">
-
-      <div>
-        <strong id="postCount">0</strong>
-        <span>Posts</span>
-      </div>
-
-      <div>
-        <strong>0</strong>
-        <span>Followers</span>
-      </div>
-
-      <div>
-        <strong>0</strong>
-        <span>Following</span>
-      </div>
-
-    </div>
-
-    <button class="edit-profile-btn" id="editProfileBtn">
-      Edit Profile
-    </button>
-
-  </section>
-
-
-  <!-- CREATE -->
-
-  <section class="card create-card">
-
-    <div class="create-row">
-
-      <div class="avatar" id="createAvatar">
-        BS
-      </div>
-
-      <button class="create-input" id="createInput">
-        What's happening, <span id="createUsername">@you</span>?
-      </button>
-
-    </div>
-
-    <div class="create-tools">
-
-      <button class="tool-btn" id="photoTool">
-        ◉ Photo
-      </button>
-
-      <button class="tool-btn" id="reelTool">
-        ▶ Reel
-      </button>
-
-      <button class="tool-btn" id="storyTool">
-        ◎ Story
-      </button>
-
-      <button class="tool-btn" id="liveTool">
-        ● Live
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- POSTS -->
-
-  <div id="postsContainer"></div>
-
-</main>
-
-
-<!-- RIGHT BAR -->
-
-<aside class="rightbar">
-
-  <section class="card right-card">
-
-    <h3>Suggested for you</h3>
-
-    <div class="suggestion">
-
-      <div class="suggestion-left">
-        <div class="avatar">BS</div>
-
-        <div>
-          <strong>Bharat Sain</strong>
-          <small>@bharatsain</small>
-        </div>
-      </div>
-
-      <button class="follow-btn">
-        Follow
-      </button>
-
-    </div>
-
-    <div class="suggestion">
-
-      <div class="suggestion-left">
-        <div class="avatar">BF</div>
-
-        <div>
-          <strong>BSENFLOW</strong>
-          <small>@bsenflow</small>
-        </div>
-      </div>
-
-      <button class="follow-btn">
-        Follow
-      </button>
-
-    </div>
-
-  </section>
-
-</aside>
 
 </div>
 
 
-<!-- MOBILE NAV -->
+<!-- ================= APP ================= -->
 
-<nav class="mobile-nav">
+<div class="app hidden" id="app">
 
-  <button id="mobileHome">
-    <svg fill="none" viewBox="0 0 24 24">
-      <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" stroke="currentColor" stroke-width="2"/>
-    </svg>
-  </button>
+  <header class="topbar">
 
-  <button id="mobileSearch">
-    <svg fill="none" viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
-      <path d="m20 20-4-4" stroke="currentColor" stroke-width="2"/>
-    </svg>
-  </button>
+    <div class="brand">
+      BSEN<span>FLOW</span>
+    </div>
 
-  <button id="mobilePlus">
-    <svg fill="none" viewBox="0 0 24 24">
-      <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-    </svg>
-  </button>
+    <div class="top-actions">
 
-  <button id="mobileNotifications">
-    <svg fill="none" viewBox="0 0 24 24">
-      <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-  </button>
+      <button class="icon-btn" id="topSearchBtn" title="Search">
+        ⌕
+      </button>
 
-  <button id="mobileProfile">
-    <svg fill="none" viewBox="0 0 24 24">
-      <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
-      <path d="M4 21a8 8 0 0 1 16 0" stroke="currentColor" stroke-width="2"/>
-    </svg>
-  </button>
+      <img
+        class="top-avatar"
+        id="topAvatar"
+        alt="Profile"
+      >
 
-</nav>
+    </div>
 
-</section>
+  </header>
 
 
-<!-- ======================================================
-     PLUS CREATE MENU
-====================================================== -->
+  <main class="content">
 
-<div class="plus-menu" id="plusMenu">
+    <!-- HOME -->
 
-  <div class="plus-box">
+    <section class="page active" id="homePage">
 
-    <div class="plus-title">
+      <section class="hero">
+
+        <h1>Welcome to BSENFLOW 🚀</h1>
+
+        <p id="welcomeText">
+          Your world. Your people. Your flow.
+        </p>
+
+        <div style="margin-top:22px">
+          <button class="primary" onclick="openCreate()">
+            ＋ Create something
+          </button>
+        </div>
+
+      </section>
+
+      <div class="quick-grid">
+
+        <button class="quick-card" onclick="showPage('search')">
+          <div>⌕</div>
+          Search
+        </button>
+
+        <button class="quick-card" onclick="showPage('reels')">
+          <div>▶</div>
+          Reels
+        </button>
+
+        <button class="quick-card" onclick="openCreate()">
+          <div>＋</div>
+          Create
+        </button>
+
+        <button class="quick-card" onclick="showPage('profile')">
+          <div>◉</div>
+          Profile
+        </button>
+
+      </div>
+
+      <h2 class="section-title">Your Feed</h2>
+
+      <div id="feed"></div>
+
+    </section>
+
+
+    <!-- SEARCH -->
+
+    <section class="page" id="searchPage">
+
+      <h2 class="section-title">Search BSENFLOW</h2>
+
+      <div class="search-box">
+
+        <input
+          id="searchInput"
+          placeholder="Search by @username or name..."
+        >
+
+        <button class="primary" id="searchBtn">
+          Search
+        </button>
+
+      </div>
+
+      <div class="search-results" id="searchResults">
+
+        <div style="padding:25px;text-align:center;color:#777">
+          Search for people using their username or name.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- REELS -->
+
+    <section class="page" id="reelsPage">
+
+      <h2 class="section-title">Reels</h2>
+
+      <div class="reels-grid">
+
+        <div class="reel-card">
+          <div class="play">▶</div>
+          <strong>Discover something new</strong>
+          <small>BSENFLOW Reels</small>
+        </div>
+
+        <div class="reel-card">
+          <div class="play">▶</div>
+          <strong>Your next story starts here</strong>
+          <small>BSENFLOW Reels</small>
+        </div>
+
+        <div class="reel-card">
+          <div class="play">▶</div>
+          <strong>Create. Share. Connect.</strong>
+          <small>BSENFLOW Reels</small>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROFILE -->
+
+    <section class="page" id="profilePage">
+
+      <div class="profile-card">
+
+        <div class="profile-head">
+
+          <div class="profile-photo" id="profilePhoto">
+            BS
+          </div>
+
+          <div class="profile-main">
+
+            <h2 id="profileName">
+              BSENFLOW User
+            </h2>
+
+            <div class="username" id="profileUsername">
+              @username
+            </div>
+
+            <div class="bio" id="profileBio">
+              Welcome to my BSENFLOW profile.
+            </div>
+
+            <div class="stats">
+
+              <div class="stat">
+                <strong id="followersCount">0</strong>
+                <span>Followers</span>
+              </div>
+
+              <div class="stat">
+                <strong id="followingCount">0</strong>
+                <span>Following</span>
+              </div>
+
+              <div class="stat">
+                <strong id="viewsCount">0</strong>
+                <span>Profile Views</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="profile-buttons">
+
+          <button class="primary" id="editProfileBtn">
+            Edit Profile
+          </button>
+
+          <button class="secondary" id="logoutBtn">
+            Logout
+          </button>
+
+        </div>
+
+
+        <div style="margin-top:20px;color:#777;font-size:14px">
+          <strong>Founder:</strong> Bharat Sain
+        </div>
+
+      </div>
+
+
+      <h2 class="section-title">Your Posts</h2>
+
+      <div id="profilePosts"></div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================= BOTTOM NAV ================= -->
+
+  <nav class="bottom-nav">
+
+    <div class="nav-inner">
+
+      <button class="nav-btn active" data-page="home">
+        <span class="nav-icon">⌂</span>
+        <span>Home</span>
+      </button>
+
+      <button class="nav-btn" data-page="search">
+        <span class="nav-icon">⌕</span>
+        <span>Search</span>
+      </button>
+
+      <button class="nav-btn" data-page="reels">
+        <span class="nav-icon">▶</span>
+        <span>Reels</span>
+      </button>
+
+      <button
+        class="nav-btn create"
+        id="createNavBtn"
+      >
+        <span class="nav-icon">+</span>
+        <span>Create</span>
+      </button>
+
+      <button class="nav-btn" data-page="profile">
+        <span class="nav-icon" id="navProfileIcon">
+          ◉
+        </span>
+        <span>Profile</span>
+      </button>
+
+    </div>
+
+  </nav>
+
+</div>
+
+
+<!-- ================= CREATE MODAL ================= -->
+
+<div class="modal" id="createModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
 
       <h2>Create</h2>
 
-      <button class="close-btn" id="closePlus">
+      <button class="close" onclick="closeCreate()">
         ✕
       </button>
 
     </div>
 
-    <button class="plus-option" id="createPostOption">
+    <div class="create-options">
 
-      <svg fill="none" viewBox="0 0 24 24">
-        <rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="2"/>
-        <path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="2"/>
-      </svg>
-
-      <div>
+      <button
+        class="create-option"
+        onclick="openPostComposer('Post')"
+      >
+        <div class="big">▣</div>
         <strong>Post</strong>
-        <small>Share something with your followers</small>
-      </div>
+        <small>Photo or video</small>
+      </button>
 
-    </button>
-
-    <button class="plus-option" id="createReelOption">
-
-      <svg fill="none" viewBox="0 0 24 24">
-        <rect x="4" y="5" width="16" height="14" rx="3" stroke="currentColor" stroke-width="2"/>
-        <path d="m10 9 5 3-5 3z" fill="currentColor"/>
-      </svg>
-
-      <div>
+      <button
+        class="create-option"
+        onclick="openPostComposer('Reel')"
+      >
+        <div class="big">▶</div>
         <strong>Reel</strong>
-        <small>Create a short video</small>
-      </div>
+        <small>Short video</small>
+      </button>
 
-    </button>
-
-    <button class="plus-option" id="createStoryOption">
-
-      <svg fill="none" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/>
-        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
-      </svg>
-
-      <div>
+      <button
+        class="create-option"
+        onclick="openPostComposer('Story')"
+      >
+        <div class="big">◉</div>
         <strong>Story</strong>
-        <small>Share something for 24 hours</small>
-      </div>
+        <small>Share a moment</small>
+      </button>
 
-    </button>
-
-    <button class="plus-option" id="createLiveOption">
-
-      <svg fill="none" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/>
-        <circle cx="12" cy="12" r="3" fill="currentColor"/>
-      </svg>
-
-      <div>
+      <button
+        class="create-option"
+        onclick="openPostComposer('Live')"
+      >
+        <div class="big">●</div>
         <strong>Live</strong>
-        <small>Go live with your audience</small>
-      </div>
+        <small>Go live</small>
+      </button>
 
-    </button>
+    </div>
 
   </div>
 
 </div>
 
 
-<!-- ======================================================
-     POST MODAL
-====================================================== -->
+<!-- ================= POST MODAL ================= -->
 
 <div class="modal" id="postModal">
 
@@ -1249,41 +1114,61 @@ button{cursor:pointer}
 
     <div class="modal-head">
 
-      <h2>Create Post</h2>
+      <h2 id="composerTitle">
+        Create Post
+      </h2>
 
-      <button class="close-btn" id="closePost">
+      <button class="close" onclick="closePostComposer()">
         ✕
       </button>
 
     </div>
 
-    <textarea
-      id="postText"
-      placeholder="What's on your mind?"
-    ></textarea>
+    <label class="form-label">
+      Choose photo or video
+    </label>
 
-    <div class="modal-actions">
+    <div class="upload-box">
 
-      <button class="secondary-btn" id="cancelPost">
-        Cancel
-      </button>
+      <input
+        type="file"
+        id="mediaInput"
+        accept="image/*,video/*"
+      >
 
-      <button class="primary-btn" id="publishPost">
-        Publish Post
-      </button>
+      <div style="margin-top:10px;color:#777">
+        Gallery / Files
+      </div>
 
     </div>
+
+    <img
+      id="mediaPreview"
+      class="preview hidden"
+      alt="Preview"
+    >
+
+    <textarea
+      id="captionInput"
+      class="form-textarea"
+      placeholder="Write a caption..."
+    ></textarea>
+
+    <button
+      class="main-btn"
+      id="publishBtn"
+    >
+      Publish
+    </button>
 
   </div>
 
 </div>
 
 
-<!-- ======================================================
-     PROFILE MODAL
-====================================================== -->
+<!-- ================= EDIT PROFILE MODAL ================= -->
 
-<div class="modal" id="profileModal">
+<div class="modal" id="editModal">
 
   <div class="modal-box">
 
@@ -1291,127 +1176,101 @@ button{cursor:pointer}
 
       <h2>Edit Profile</h2>
 
-      <button class="close-btn" id="closeProfile">
+      <button class="close" onclick="closeEditProfile()">
         ✕
       </button>
 
     </div>
 
-    <input
-      class="input"
-      id="editName"
-      placeholder="Your name"
-    >
+
+    <label class="form-label">
+      Profile Photo
+    </label>
+
+    <div class="upload-box">
+
+      <input
+        type="file"
+        id="profilePhotoInput"
+        accept="image/*"
+      >
+
+      <div style="margin-top:10px;color:#777">
+        Choose a photo
+      </div>
+
+    </div>
+
+
+    <label class="form-label">
+      Name
+    </label>
 
     <input
-      class="input"
+      class="form-input"
+      id="editName"
+      placeholder="Your real/display name"
+    >
+
+
+    <label class="form-label">
+      Username
+    </label>
+
+    <input
+      class="form-input"
       id="editUsername"
       placeholder="@username"
     >
 
+    <small style="display:block;color:#777;margin-bottom:12px">
+      Username is your main BSENFLOW identity.
+    </small>
+
+
+    <label class="form-label">
+      Bio
+    </label>
+
     <textarea
+      class="form-textarea"
       id="editBio"
-      placeholder="Write your bio..."
+      maxlength="160"
+      placeholder="Tell people about yourself..."
     ></textarea>
 
-    <div class="modal-actions">
 
-      <button class="secondary-btn" id="cancelProfile">
-        Cancel
-      </button>
+    <label class="form-label">
+      Profile Avatar
+    </label>
 
-      <button class="primary-btn" id="saveProfile">
-        Save Profile
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
+    <div class="avatar-grid" id="avatarGrid"></div>
 
 
-<!-- ======================================================
-     SEARCH MODAL
-====================================================== -->
+    <label class="form-label">
+      Profile Visibility
+    </label>
 
-<div class="modal" id="searchModal">
-
-  <div class="modal-box">
-
-    <div class="modal-head">
-
-      <h2>Search BSENFLOW</h2>
-
-      <button class="close-btn" id="closeSearch">
-        ✕
-      </button>
-
-    </div>
-
-    <input
-      class="input"
-      id="searchInput"
-      placeholder="Search by username..."
+    <select
+      class="form-input"
+      id="profileVisibility"
     >
+      <option value="public">
+        Public — Everyone can see your profile
+      </option>
 
-    <div class="message" id="searchMessage">
-      Username search is ready for the next user-discovery module.
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ======================================================
-     NOTIFICATION MODAL
-====================================================== -->
-
-<div class="modal" id="notificationModal">
-
-  <div class="modal-box">
-
-    <div class="modal-head">
-
-      <h2>Notifications</h2>
-
-      <button class="close-btn" id="closeNotifications">
-        ✕
-      </button>
-
-    </div>
-
-    <div class="right-card">
-      🔔 You're all caught up.
-      <br><br>
-      New likes, follows, comments and messages will appear here.
-    </div>
-
-  </div>
-
-</div>
+      <option value="private">
+        Private — Only approved people can see it
+      </option>
+    </select>
 
 
-<!-- ======================================================
-     SIMPLE INFORMATION MODAL
-====================================================== -->
-
-<div class="modal" id="infoModal">
-
-  <div class="modal-box">
-
-    <div class="modal-head">
-
-      <h2 id="infoTitle">BSENFLOW</h2>
-
-      <button class="close-btn" id="closeInfo">
-        ✕
-      </button>
-
-    </div>
-
-    <p id="infoText" style="line-height:1.6;color:#666"></p>
+    <button
+      class="main-btn"
+      id="saveProfileBtn"
+    >
+      Save Profile
+    </button>
 
   </div>
 
@@ -1421,11 +1280,9 @@ button{cursor:pointer}
 <div class="toast" id="toast"></div>
 
 
-<!-- ======================================================
-     FIREBASE
-====================================================== -->
-
 <script type="module">
+
+/* ================= FIREBASE ================= */
 
 import {
   initializeApp
@@ -1436,13 +1293,10 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   GoogleAuthProvider,
-  signInWithRedirect,
-  getRedirectResult,
+  signInWithPopup,
   onAuthStateChanged,
   signOut,
-  updateProfile,
-  sendEmailVerification,
-  sendPasswordResetEmail
+  updateProfile
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
@@ -1452,226 +1306,234 @@ import {
   getDoc,
   collection,
   addDoc,
-  onSnapshot,
+  getDocs,
   query,
-  orderBy,
-  serverTimestamp
+  orderBy
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-/* ================= FIREBASE CONFIG ================= */
-
 const firebaseConfig = {
-  apiKey: "AIzaSyCfBlYDE7hz8yUXTxtUpATBmCqR4qZ1fsI",
-  authDomain: "bsenflow.firebaseapp.com",
-  projectId: "bsenflow",
-  storageBucket: "bsenflow.firebasestorage.app",
-  messagingSenderId: "757334229298",
-  appId: "1:757334229298:web:8d1d9ba615c09d1edad72b",
-  measurementId: "G-4KYD657J4K"
+
+  apiKey:"AIzaSyCfBlYDE7hz8yUXTxtUpATBmCqR4qZ1fsI",
+
+  authDomain:"bsenflow.firebaseapp.com",
+
+  projectId:"bsenflow",
+
+  storageBucket:"bsenflow.firebasestorage.app",
+
+  messagingSenderId:"757334229298",
+
+  appId:"1:757334229298:web:8d1d9ba615c09d1edad72b",
+
+  measurementId:"G-4KYD657J4K"
+
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
 
-const auth = getAuth(firebaseApp);
+const firebaseApp =
+  initializeApp(firebaseConfig);
 
-const db = getFirestore(firebaseApp);
+const auth =
+  getAuth(firebaseApp);
 
-const googleProvider = new GoogleAuthProvider();
+const db =
+  getFirestore(firebaseApp);
 
-googleProvider.setCustomParameters({
-  prompt:"select_account"
-});
+const googleProvider =
+  new GoogleAuthProvider();
 
 
 /* ================= ELEMENTS ================= */
 
-const authPage = document.getElementById("authPage");
-const appPage = document.getElementById("app");
+const authPage =
+  document.getElementById("authPage");
 
-const nameInput = document.getElementById("nameInput");
-const usernameInput = document.getElementById("usernameInput");
-const emailInput = document.getElementById("emailInput");
-const passwordInput = document.getElementById("passwordInput");
+const appPage =
+  document.getElementById("app");
 
-const authBtn = document.getElementById("authBtn");
-const googleBtn = document.getElementById("googleBtn");
+const nameInput =
+  document.getElementById("name");
 
-const switchBtn = document.getElementById("switchBtn");
-const authSubtitle = document.getElementById("authSubtitle");
-const authMessage = document.getElementById("authMessage");
+const emailInput =
+  document.getElementById("email");
 
-const topAvatar = document.getElementById("topAvatar");
-const topName = document.getElementById("topName");
-const topUsername = document.getElementById("topUsername");
+const passwordInput =
+  document.getElementById("password");
 
-const profileAvatar = document.getElementById("profileAvatar");
-const profileName = document.getElementById("profileName");
-const profileUsername = document.getElementById("profileUsername");
-const profileBio = document.getElementById("profileBio");
-const createAvatar = document.getElementById("createAvatar");
-const createUsername = document.getElementById("createUsername");
+const mainBtn =
+  document.getElementById("mainBtn");
 
-const postsContainer = document.getElementById("postsContainer");
-const postCount = document.getElementById("postCount");
+const googleBtn =
+  document.getElementById("googleBtn");
+
+const switchText =
+  document.getElementById("switchText");
+
+const authSubtitle =
+  document.getElementById("authSubtitle");
+
+const message =
+  document.getElementById("message");
+
+const logoutBtn =
+  document.getElementById("logoutBtn");
+
+const topAvatar =
+  document.getElementById("topAvatar");
+
+const navProfileIcon =
+  document.getElementById("navProfileIcon");
+
+const profilePhoto =
+  document.getElementById("profilePhoto");
+
+const profileName =
+  document.getElementById("profileName");
+
+const profileUsername =
+  document.getElementById("profileUsername");
+
+const profileBio =
+  document.getElementById("profileBio");
+
+const followersCount =
+  document.getElementById("followersCount");
+
+const followingCount =
+  document.getElementById("followingCount");
+
+const viewsCount =
+  document.getElementById("viewsCount");
+
+const profilePosts =
+  document.getElementById("profilePosts");
+
+const feed =
+  document.getElementById("feed");
+
 
 let signupMode = false;
 let currentUser = null;
 let currentProfile = null;
+let selectedAvatar = "🙂";
+let composerType = "Post";
 
 
-/* ================= HELPERS ================= */
+/* ================= AVATARS ================= */
 
-function toast(text){
-
-  const t = document.getElementById("toast");
-
-  t.textContent = text;
-
-  t.classList.add("show");
-
-  setTimeout(()=>{
-    t.classList.remove("show");
-  },2600);
-}
+const avatars = [
+  "🙂","😎","🤩","🥳","😇",
+  "🦁","🐯","🐼","🐨","🦊",
+  "🐸","🐵","🐰","🐻","🐱",
+  "🧑‍💻","👨‍🚀","👩‍🎨","🧑‍🎤","🧑‍🚀"
+];
 
 
-function showAuthMessage(text){
+function createAvatarGrid(){
 
-  authMessage.textContent = text;
+  const grid =
+    document.getElementById("avatarGrid");
 
-}
+  grid.innerHTML = "";
 
+  avatars.forEach(item => {
 
-function initials(name){
+    const btn =
+      document.createElement("button");
 
-  if(!name) return "BS";
+    btn.className =
+      "avatar-choice" +
+      (item === selectedAvatar
+        ? " selected"
+        : "");
 
-  return name
-    .split(" ")
-    .filter(Boolean)
-    .slice(0,2)
-    .map(x=>x[0])
-    .join("")
-    .toUpperCase();
+    btn.textContent = item;
 
-}
+    btn.onclick = () => {
 
+      selectedAvatar = item;
 
-function setAvatar(element,profile){
+      document
+        .querySelectorAll(".avatar-choice")
+        .forEach(x =>
+          x.classList.remove("selected")
+        );
 
-  const name =
-    profile?.name ||
-    currentUser?.displayName ||
-    "BSENFLOW";
+      btn.classList.add("selected");
 
-  element.innerHTML = "";
+    };
 
-  if(profile?.photoURL){
+    grid.appendChild(btn);
 
-    const img = document.createElement("img");
-
-    img.src = profile.photoURL;
-
-    img.alt = name;
-
-    element.appendChild(img);
-
-  }else{
-
-    element.textContent = initials(name);
-
-  }
+  });
 
 }
 
 
-/* ================= AUTH MODE ================= */
+/* ================= AUTH SWITCH ================= */
 
-switchBtn.addEventListener("click",()=>{
+switchText.addEventListener("click",()=>{
 
   signupMode = !signupMode;
 
-  nameInput.classList.toggle("hidden",!signupMode);
+  nameInput.style.display =
+    signupMode ? "block" : "none";
 
-  usernameInput.classList.toggle("hidden",!signupMode);
-
-  authBtn.textContent =
+  mainBtn.textContent =
     signupMode
       ? "Create Account"
       : "Login";
 
-  switchBtn.textContent =
+  switchText.textContent =
     signupMode
       ? "Already have an account? Login"
       : "Create new account";
 
   authSubtitle.textContent =
     signupMode
-      ? "Create your BSENFLOW identity"
+      ? "Create your BSENFLOW account"
       : "Welcome back";
 
-  showAuthMessage("");
+  message.textContent = "";
 
 });
 
 
 /* ================= EMAIL AUTH ================= */
 
-authBtn.addEventListener("click",async()=>{
+mainBtn.addEventListener("click",async()=>{
 
-  const email = emailInput.value.trim();
+  const email =
+    emailInput.value.trim();
 
-  const password = passwordInput.value;
+  const password =
+    passwordInput.value;
+
+  const name =
+    nameInput.value.trim();
+
 
   if(!email || !password){
 
-    showAuthMessage(
-      "Please enter your email and password."
-    );
+    message.textContent =
+      "Please enter email and password.";
 
     return;
 
   }
 
 
-  authBtn.disabled = true;
-
-  authBtn.textContent =
-    signupMode
-      ? "Creating..."
-      : "Logging in...";
-
-
   try{
 
     if(signupMode){
 
-      const name =
-        nameInput.value.trim();
+      if(!name){
 
-      let username =
-        usernameInput.value.trim()
-          .toLowerCase();
+        message.textContent =
+          "Please enter your name.";
 
-      username =
-        username.replace(/^@/,"")
-          .replace(/[^a-z0-9_.]/g,"");
-
-
-      if(name.length < 2){
-
-        throw {
-          code:"custom/name"
-        };
-
-      }
-
-      if(username.length < 3){
-
-        throw {
-          code:"custom/username"
-        };
+        return;
 
       }
 
@@ -1692,38 +1554,44 @@ authBtn.addEventListener("click",async()=>{
       );
 
 
+      const username =
+        createUsername(name);
+
+
       await setDoc(
         doc(db,"users",result.user.uid),
         {
+
           uid:result.user.uid,
+
           name:name,
+
           username:username,
-          usernameLower:username,
+
           email:email,
-          bio:"",
+
+          bio:"Welcome to BSENFLOW.",
+
+          avatar:"🙂",
+
           photoURL:"",
+
           followers:0,
+
           following:0,
-          posts:0,
-          createdAt:serverTimestamp()
-        },
-        {
-          merge:true
+
+          profileViews:0,
+
+          visibility:"public",
+
+          createdAt:Date.now()
+
         }
       );
 
 
-      try{
-        await sendEmailVerification(result.user);
-      }catch(e){
-        console.warn(e);
-      }
-
-
-      showAuthMessage(
-        "Account created. Verification email sent if available."
-      );
-
+      message.textContent =
+        "Account created successfully!";
 
     }else{
 
@@ -1739,18 +1607,8 @@ authBtn.addEventListener("click",async()=>{
 
     console.error(error);
 
-    showAuthMessage(
-      friendlyError(error.code)
-    );
-
-  }finally{
-
-    authBtn.disabled = false;
-
-    authBtn.textContent =
-      signupMode
-        ? "Create Account"
-        : "Login";
+    message.textContent =
+      friendlyError(error.code);
 
   }
 
@@ -1761,158 +1619,123 @@ authBtn.addEventListener("click",async()=>{
 
 googleBtn.addEventListener("click",async()=>{
 
-  googleBtn.disabled = true;
-
-  googleBtn.textContent =
-    "Opening Google...";
-
   try{
 
-    /*
-      REDIRECT is used instead of popup.
-      This prevents many browser popup problems.
-    */
+    const result =
+      await signInWithPopup(
+        auth,
+        googleProvider
+      );
 
-    await signInWithRedirect(
-      auth,
-      googleProvider
-    );
+    const user =
+      result.user;
+
+    const userRef =
+      doc(db,"users",user.uid);
+
+    const existing =
+      await getDoc(userRef);
+
+
+    if(!existing.exists()){
+
+      const username =
+        createUsername(
+          user.displayName ||
+          user.email?.split("@")[0] ||
+          "user"
+        );
+
+
+      await setDoc(
+        userRef,
+        {
+
+          uid:user.uid,
+
+          name:
+            user.displayName ||
+            "BSENFLOW User",
+
+          username:username,
+
+          email:user.email || "",
+
+          bio:"Welcome to BSENFLOW.",
+
+          avatar:"🙂",
+
+          photoURL:user.photoURL || "",
+
+          followers:0,
+
+          following:0,
+
+          profileViews:0,
+
+          visibility:"public",
+
+          createdAt:Date.now()
+
+        }
+      );
+
+    }
 
   }catch(error){
 
     console.error(error);
 
-    showAuthMessage(
-      friendlyError(error.code)
-    );
-
-    googleBtn.disabled = false;
-
-    googleBtn.textContent =
-      "Continue with Google";
+    message.textContent =
+      friendlyError(error.code);
 
   }
 
 });
 
 
-/* Handle Google redirect */
+/* ================= LOGOUT ================= */
 
-getRedirectResult(auth)
-  .then(async result=>{
+logoutBtn.addEventListener("click",async()=>{
 
-    if(!result || !result.user)
-      return;
+  try{
 
-    await createOrUpdateGoogleProfile(
-      result.user
-    );
+    await signOut(auth);
 
-  })
-  .catch(error=>{
+  }catch(error){
 
-    console.error(
-      "Google redirect:",
-      error
-    );
-
-    showAuthMessage(
-      friendlyError(error.code)
-    );
-
-  });
-
-
-async function createOrUpdateGoogleProfile(user){
-
-  const ref =
-    doc(db,"users",user.uid);
-
-  const snap =
-    await getDoc(ref);
-
-  if(!snap.exists()){
-
-    const base =
-      (user.email || "user")
-        .split("@")[0]
-        .toLowerCase()
-        .replace(/[^a-z0-9_.]/g,"");
-
-    const username =
-      base.length >= 3
-        ? base
-        : "user"+user.uid.slice(0,6);
-
-
-    await setDoc(
-      ref,
-      {
-        uid:user.uid,
-        name:
-          user.displayName ||
-          "BSENFLOW User",
-        username:username,
-        usernameLower:username,
-        email:user.email || "",
-        bio:"",
-        photoURL:user.photoURL || "",
-        followers:0,
-        following:0,
-        posts:0,
-        createdAt:serverTimestamp()
-      }
-    );
-
-  }else{
-
-    await setDoc(
-      ref,
-      {
-        name:
-          user.displayName ||
-          snap.data().name ||
-          "BSENFLOW User",
-        email:user.email || "",
-        photoURL:user.photoURL || ""
-      },
-      {
-        merge:true
-      }
-    );
+    showToast("Logout failed.");
 
   }
 
-}
+});
 
 
 /* ================= AUTH STATE ================= */
 
 onAuthStateChanged(
   auth,
-  async user=>{
+  async user => {
+
+    currentUser = user;
 
     if(user){
 
-      currentUser = user;
+      authPage.classList.add("hidden");
 
-      authPage.style.display = "none";
+      appPage.classList.remove("hidden");
 
-      appPage.style.display = "block";
+      await loadProfile();
 
-      await loadProfile(user);
+      await loadPosts();
 
-      loadPosts();
+      updateUserUI();
 
     }else{
 
-      currentUser = null;
+      authPage.classList.remove("hidden");
 
-      currentProfile = null;
-
-      authPage.style.display = "flex";
-
-      appPage.style.display = "none";
+      appPage.classList.add("hidden");
 
     }
 
@@ -1922,13 +1745,17 @@ onAuthStateChanged(
 
 /* ================= PROFILE ================= */
 
-async function loadProfile(user){
+async function loadProfile(){
+
+  if(!currentUser) return;
+
 
   const ref =
-    doc(db,"users",user.uid);
+    doc(db,"users",currentUser.uid);
 
   const snap =
     await getDoc(ref);
+
 
   if(snap.exists()){
 
@@ -1937,811 +1764,1021 @@ async function loadProfile(user){
 
   }else{
 
-    const fallbackName =
-      user.displayName ||
-      user.email?.split("@")[0] ||
-      "BSENFLOW User";
-
-    const fallbackUsername =
-      fallbackName
-        .toLowerCase()
-        .replace(/[^a-z0-9]/g,"")
-        .slice(0,20) ||
-      "user"+user.uid.slice(0,6);
-
     currentProfile = {
-      uid:user.uid,
-      name:fallbackName,
-      username:fallbackUsername,
-      usernameLower:fallbackUsername,
-      email:user.email || "",
-      bio:"",
-      photoURL:user.photoURL || "",
+
+      uid:currentUser.uid,
+
+      name:
+        currentUser.displayName ||
+        "BSENFLOW User",
+
+      username:
+        createUsername(
+          currentUser.displayName ||
+          "user"
+        ),
+
+      email:
+        currentUser.email || "",
+
+      bio:
+        "Welcome to BSENFLOW.",
+
+      avatar:"🙂",
+
+      photoURL:"",
+
       followers:0,
+
       following:0,
-      posts:0
+
+      profileViews:0,
+
+      visibility:"public"
+
     };
 
     await setDoc(
       ref,
-      currentProfile,
-      {merge:true}
+      currentProfile
     );
 
   }
 
-
-  renderProfile();
-
 }
 
 
-function renderProfile(){
-
-  const p =
-    currentProfile || {};
-
-  const name =
-    p.name ||
-    currentUser?.displayName ||
-    "BSENFLOW User";
-
-  const username =
-    p.username ||
-    "user";
-
-  const bio =
-    p.bio ||
-    "Welcome to BSENFLOW.";
-
-  topName.textContent = name;
-
-  topUsername.textContent =
-    "@"+username;
-
-  profileName.textContent =
-    name;
-
-  profileUsername.textContent =
-    "@"+username;
-
-  profileBio.textContent =
-    bio;
-
-  createUsername.textContent =
-    "@"+username;
-
-  postCount.textContent =
-    p.posts || 0;
-
-  setAvatar(topAvatar,p);
-
-  setAvatar(profileAvatar,p);
-
-  setAvatar(createAvatar,p);
-
-}
-
-
-/* ================= PROFILE EDIT ================= */
-
-const profileModal =
-  document.getElementById("profileModal");
-
-document.getElementById("editProfileBtn")
-  .addEventListener("click",openProfileEditor);
-
-document.getElementById("profileNav")
-  .addEventListener("click",openProfileEditor);
-
-document.getElementById("profileTop")
-  .addEventListener("click",openProfileEditor);
-
-document.getElementById("mobileProfile")
-  .addEventListener("click",openProfileEditor);
-
-
-function openProfileEditor(){
+function updateUserUI(){
 
   if(!currentProfile) return;
 
-  document.getElementById("editName").value =
-    currentProfile.name || "";
 
-  document.getElementById("editUsername").value =
-    "@"+(currentProfile.username || "");
-
-  document.getElementById("editBio").value =
-    currentProfile.bio || "";
-
-  profileModal.style.display = "flex";
-
-}
-
-
-document.getElementById("closeProfile")
-  .addEventListener("click",closeProfile);
-
-document.getElementById("cancelProfile")
-  .addEventListener("click",closeProfile);
-
-function closeProfile(){
-
-  profileModal.style.display = "none";
-
-}
-
-
-document.getElementById("saveProfile")
-  .addEventListener("click",async()=>{
-
-    const name =
-      document.getElementById("editName")
-        .value.trim();
-
-    let username =
-      document.getElementById("editUsername")
-        .value.trim()
-        .toLowerCase()
-        .replace(/^@/,"")
-        .replace(/[^a-z0-9_.]/g,"");
-
-    const bio =
-      document.getElementById("editBio")
-        .value.trim();
-
-
-    if(name.length < 2){
-
-      toast("Name is too short.");
-
-      return;
-
-    }
-
-    if(username.length < 3){
-
-      toast("Username must be at least 3 characters.");
-
-      return;
-
-    }
-
-
-    try{
-
-      await setDoc(
-        doc(db,"users",currentUser.uid),
-        {
-          name:name,
-          username:username,
-          usernameLower:username,
-          bio:bio,
-          updatedAt:serverTimestamp()
-        },
-        {
-          merge:true
-        }
-      );
-
-
-      await updateProfile(
-        currentUser,
-        {
-          displayName:name
-        }
-      );
-
-
-      currentProfile.name =
-        name;
-
-      currentProfile.username =
-        username;
-
-      currentProfile.bio =
-        bio;
-
-
-      renderProfile();
-
-      closeProfile();
-
-      toast("Profile updated successfully.");
-
-    }catch(error){
-
-      console.error(error);
-
-      toast(
-        friendlyError(error.code)
-      );
-
-    }
-
-  });
-
-
-/* ================= CREATE MENU ================= */
-
-const plusMenu =
-  document.getElementById("plusMenu");
-
-function openPlus(){
-
-  plusMenu.style.display =
-    "flex";
-
-}
-
-function closePlus(){
-
-  plusMenu.style.display =
-    "none";
-
-}
-
-document.getElementById("plusBtn")
-  .addEventListener("click",openPlus);
-
-document.getElementById("mobilePlus")
-  .addEventListener("click",openPlus);
-
-document.getElementById("closePlus")
-  .addEventListener("click",closePlus);
-
-
-/* ================= POST MODAL ================= */
-
-const postModal =
-  document.getElementById("postModal");
-
-function openPost(){
-
-  closePlus();
-
-  postModal.style.display =
-    "flex";
-
-  setTimeout(()=>{
-    document.getElementById("postText")
-      .focus();
-  },100);
-
-}
-
-function closePost(){
-
-  postModal.style.display =
-    "none";
-
-}
-
-
-document.getElementById("createInput")
-  .addEventListener("click",openPost);
-
-document.getElementById("createPostOption")
-  .addEventListener("click",openPost);
-
-document.getElementById("photoTool")
-  .addEventListener("click",()=>{
-    toast("Photo posts will be connected to Firebase Storage next.");
-  });
-
-document.getElementById("reelTool")
-  .addEventListener("click",()=>{
-    openInfo(
-      "Reels",
-      "The Reels area is reserved for video publishing. We will connect Firebase Storage and video processing in the next module."
-    );
-  });
-
-document.getElementById("storyTool")
-  .addEventListener("click",()=>{
-    openInfo(
-      "Stories",
-      "The Story system is prepared in the interface. Story publishing will be connected to Storage and expiry logic in the next module."
-    );
-  });
-
-document.getElementById("liveTool")
-  .addEventListener("click",()=>{
-    openInfo(
-      "Live",
-      "Live streaming requires a dedicated streaming service/backend. The BSENFLOW Live entry point is ready."
-    );
-  });
-
-document.getElementById("createReelOption")
-  .addEventListener("click",()=>{
-    closePlus();
-    openInfo(
-      "Create Reel",
-      "Reel publishing will be connected to Firebase Storage in the next development module."
-    );
-  });
-
-document.getElementById("createStoryOption")
-  .addEventListener("click",()=>{
-    closePlus();
-    openInfo(
-      "Create Story",
-      "Story publishing will be connected to Firebase Storage and expiry logic."
-    );
-  });
-
-document.getElementById("createLiveOption")
-  .addEventListener("click",()=>{
-    closePlus();
-    openInfo(
-      "Go Live",
-      "Live streaming needs a secure streaming backend. The UI entry point is ready."
-    );
-  });
-
-
-document.getElementById("closePost")
-  .addEventListener("click",closePost);
-
-document.getElementById("cancelPost")
-  .addEventListener("click",closePost);
-
-
-/* ================= PUBLISH POST ================= */
-
-document.getElementById("publishPost")
-  .addEventListener("click",async()=>{
-
-    const text =
-      document.getElementById("postText")
-        .value.trim();
-
-    if(!text){
-
-      toast("Write something first.");
-
-      return;
-
-    }
-
-
-    const button =
-      document.getElementById("publishPost");
-
-    button.disabled = true;
-
-    button.textContent =
-      "Publishing...";
-
-
-    try{
-
-      await addDoc(
-        collection(db,"posts"),
-        {
-          uid:currentUser.uid,
-          name:currentProfile.name,
-          username:currentProfile.username,
-          text:text,
-          likes:0,
-          comments:0,
-          createdAt:serverTimestamp()
-        }
-      );
-
-
-      await setDoc(
-        doc(db,"users",currentUser.uid),
-        {
-          posts:(currentProfile.posts || 0)+1
-        },
-        {
-          merge:true
-        }
-      );
-
-
-      currentProfile.posts =
-        (currentProfile.posts || 0)+1;
-
-      renderProfile();
-
-      document.getElementById("postText").value =
-        "";
-
-      closePost();
-
-      toast("Post published.");
-
-    }catch(error){
-
-      console.error(error);
-
-      toast(
-        "Post failed: "+
-        friendlyError(error.code)
-      );
-
-    }finally{
-
-      button.disabled = false;
-
-      button.textContent =
-        "Publish Post";
-
-    }
-
-  });
-
-
-/* ================= LOAD POSTS ================= */
-
-let postsUnsubscribe = null;
-
-function loadPosts(){
-
-  if(postsUnsubscribe)
-    postsUnsubscribe();
-
-  const postsQuery =
-    query(
-      collection(db,"posts"),
-      orderBy("createdAt","desc")
-    );
-
-
-  postsUnsubscribe =
-    onSnapshot(
-      postsQuery,
-      snapshot=>{
-
-        postsContainer.innerHTML = "";
-
-        let count = 0;
-
-        snapshot.forEach(docSnap=>{
-
-          count++;
-
-          const post =
-            docSnap.data();
-
-          renderPost(
-            docSnap.id,
-            post
-          );
-
-        });
-
-
-        if(count === 0){
-
-          postsContainer.innerHTML = `
-            <div class="card post">
-              <h3>Welcome to BSENFLOW 🚀</h3>
-              <p style="color:#777;margin-top:8px">
-                Your feed is ready. Create your first post using the <b>+</b> button.
-              </p>
-            </div>
-          `;
-
-        }
-
-      },
-      error=>{
-
-        console.error(error);
-
-        postsContainer.innerHTML = `
-          <div class="card post">
-            <b>Feed is waiting for Firestore permissions.</b>
-            <p style="color:#777;margin-top:8px">
-              Authentication is separate from the Firestore feed.
-            </p>
-          </div>
-        `;
-
-      }
-    );
-
-}
-
-
-function renderPost(id,post){
-
-  const article =
-    document.createElement("article");
-
-  article.className =
-    "card post";
-
-  const name =
-    post.name ||
+  profileName.textContent =
+    currentProfile.name ||
     "BSENFLOW User";
 
-  const username =
-    post.username ||
-    "user";
 
-  const text =
-    post.text ||
-    "";
-
-  article.innerHTML = `
-
-    <div class="post-head">
-
-      <div class="post-user">
-
-        <div class="avatar">
-          ${escapeHTML(initials(name))}
-        </div>
-
-        <div>
-          <strong>
-            ${escapeHTML(name)}
-          </strong>
-
-          <small>
-            @${escapeHTML(username)}
-          </small>
-        </div>
-
-      </div>
-
-      <button class="icon-btn post-more">
-        ⋯
-      </button>
-
-    </div>
-
-    <div class="post-text">
-      ${escapeHTML(text)}
-    </div>
-
-    <div class="post-actions">
-
-      <button class="post-action like-btn">
-        <svg fill="none" viewBox="0 0 24 24">
-          <path d="M20.8 8.7c0 5-8.8 10.3-8.8 10.3S3.2 13.7 3.2 8.7A4.7 4.7 0 0 1 12 6.2a4.7 4.7 0 0 1 8.8 2.5Z" stroke="currentColor" stroke-width="1.8"/>
-        </svg>
-        <span>Like</span>
-      </button>
-
-      <button class="post-action comment-btn">
-        <svg fill="none" viewBox="0 0 24 24">
-          <path d="M20 11.5a7.5 7.5 0 0 1-8 7.5 9 9 0 0 1-4-.9L4 20l1.4-3.2A7.4 7.4 0 0 1 4.5 12 7.5 7.5 0 0 1 12 4.5a7.5 7.5 0 0 1 8 7Z" stroke="currentColor" stroke-width="1.8"/>
-        </svg>
-        <span>Comment</span>
-      </button>
-
-      <button class="post-action share-btn">
-        <svg fill="none" viewBox="0 0 24 24">
-          <path d="m20 4-7 16-3-7-7-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-          <path d="m20 4-10 9" stroke="currentColor" stroke-width="1.8"/>
-        </svg>
-        <span>Share</span>
-      </button>
-
-    </div>
-  `;
+  profileUsername.textContent =
+    "@" +
+    (currentProfile.username || "username");
 
 
-  article
-    .querySelector(".like-btn")
-    .addEventListener("click",()=>{
-      toast("Like system ready for the engagement module.");
-    });
+  profileBio.textContent =
+    currentProfile.bio ||
+    "Welcome to BSENFLOW.";
 
 
-  article
-    .querySelector(".comment-btn")
-    .addEventListener("click",()=>{
-      toast("Comments module is next.");
-    });
+  followersCount.textContent =
+    currentProfile.followers || 0;
 
 
-  article
-    .querySelector(".share-btn")
-    .addEventListener("click",async()=>{
-
-      try{
-
-        await navigator.clipboard.writeText(
-          location.href
-        );
-
-        toast("BSENFLOW link copied.");
-
-      }catch(e){
-
-        toast("Share option selected.");
-
-      }
-
-    });
+  followingCount.textContent =
+    currentProfile.following || 0;
 
 
-  article
-    .querySelector(".post-more")
-    .addEventListener("click",()=>{
-      toast("Post options opened.");
-    });
+  viewsCount.textContent =
+    currentProfile.profileViews || 0;
 
 
-  postsContainer.appendChild(article);
+  const photo =
+    currentProfile.photoURL;
+
+
+  if(photo){
+
+    profilePhoto.innerHTML =
+      `<img src="${photo}" alt="Profile">`;
+
+    topAvatar.src = photo;
+
+    navProfileIcon.textContent = "◉";
+
+  }else{
+
+    profilePhoto.innerHTML =
+      currentProfile.avatar || "🙂";
+
+    topAvatar.removeAttribute("src");
+
+    topAvatar.alt =
+      currentProfile.avatar || "🙂";
+
+    navProfileIcon.textContent =
+      currentProfile.avatar || "🙂";
+
+  }
+
+
+  document.getElementById(
+    "welcomeText"
+  ).textContent =
+    "Welcome, " +
+    (currentProfile.name || "User") +
+    " 👋";
 
 }
 
 
-function escapeHTML(value){
+/* ================= EDIT PROFILE ================= */
 
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+document.getElementById(
+  "editProfileBtn"
+).addEventListener("click",()=>{
 
-}
+  if(!currentProfile) return;
 
-
-/* ================= SEARCH ================= */
-
-const searchModal =
-  document.getElementById("searchModal");
-
-function openSearch(){
-
-  searchModal.style.display =
-    "flex";
-
-  setTimeout(()=>{
-    document.getElementById("searchInput")
-      .focus();
-  },100);
-
-}
-
-document.getElementById("searchBtn")
-  .addEventListener("click",openSearch);
-
-document.getElementById("searchNav")
-  .addEventListener("click",openSearch);
-
-document.getElementById("mobileSearch")
-  .addEventListener("click",openSearch);
-
-document.getElementById("closeSearch")
-  .addEventListener("click",()=>{
-    searchModal.style.display = "none";
-  });
+  document.getElementById(
+    "editName"
+  ).value =
+    currentProfile.name || "";
 
 
-/* ================= NOTIFICATIONS ================= */
-
-function openNotifications(){
-
-  document.getElementById("notificationModal")
-    .style.display = "flex";
-
-}
-
-document.getElementById("notificationBtn")
-  .addEventListener("click",openNotifications);
-
-document.getElementById("notificationsNav")
-  .addEventListener("click",openNotifications);
-
-document.getElementById("mobileNotifications")
-  .addEventListener("click",openNotifications);
-
-document.getElementById("closeNotifications")
-  .addEventListener("click",()=>{
-    document.getElementById("notificationModal")
-      .style.display = "none";
-  });
+  document.getElementById(
+    "editUsername"
+  ).value =
+    currentProfile.username || "";
 
 
-/* ================= INFO ================= */
-
-function openInfo(title,text){
-
-  document.getElementById("infoTitle")
-    .textContent = title;
-
-  document.getElementById("infoText")
-    .textContent = text;
-
-  document.getElementById("infoModal")
-    .style.display = "flex";
-
-}
-
-document.getElementById("closeInfo")
-  .addEventListener("click",()=>{
-    document.getElementById("infoModal")
-      .style.display = "none";
-  });
+  document.getElementById(
+    "editBio"
+  ).value =
+    currentProfile.bio || "";
 
 
-/* ================= MESSAGES ================= */
-
-document.getElementById("messageNav")
-  .addEventListener("click",()=>{
-    openInfo(
-      "Messages",
-      "BSENFLOW Direct Messages are planned as the next major module. The navigation and interface are already prepared."
-    );
-  });
+  document.getElementById(
+    "profileVisibility"
+  ).value =
+    currentProfile.visibility || "public";
 
 
-/* ================= SETTINGS ================= */
-
-document.getElementById("settingsNav")
-  .addEventListener("click",()=>{
-    openInfo(
-      "Settings",
-      "Account settings, privacy, security, notification preferences and theme controls will be connected here."
-    );
-  });
+  selectedAvatar =
+    currentProfile.avatar || "🙂";
 
 
-/* ================= PREMIUM ================= */
+  createAvatarGrid();
 
-document.getElementById("premiumBtn")
-  .addEventListener("click",()=>{
-    openInfo(
-      "BSENFLOW Premium",
-      "Premium will become the creator-focused subscription area with advanced profile and social features."
-    );
-  });
+  document
+    .getElementById("editModal")
+    .classList.add("show");
+
+});
 
 
-/* ================= MOBILE HOME ================= */
+document.getElementById(
+  "saveProfileBtn"
+).addEventListener("click",async()=>{
 
-document.getElementById("mobileHome")
-  .addEventListener("click",()=>{
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
-    });
-  });
+  if(!currentUser) return;
 
 
-/* ================= LOGOUT ================= */
+  const name =
+    document.getElementById(
+      "editName"
+    ).value.trim();
 
-document.getElementById("topAvatar")
-  .addEventListener("click",openProfileEditor);
+
+  let username =
+    document.getElementById(
+      "editUsername"
+    ).value
+    .trim()
+    .replace(/^@/,"")
+    .toLowerCase()
+    .replace(/[^a-z0-9_.]/g,"");
 
 
-/* logout through keyboard-independent profile menu:
-   double click avatar = logout confirmation */
+  const bio =
+    document.getElementById(
+      "editBio"
+    ).value.trim();
 
-topAvatar.addEventListener("dblclick",async()=>{
 
-  const yes =
-    confirm("Logout from BSENFLOW?");
+  const visibility =
+    document.getElementById(
+      "profileVisibility"
+    ).value;
 
-  if(!yes) return;
+
+  if(!name){
+
+    showToast("Please enter your name.");
+
+    return;
+
+  }
+
+
+  if(!username){
+
+    showToast("Please enter a username.");
+
+    return;
+
+  }
+
 
   try{
 
-    await signOut(auth);
+    const updateData = {
 
-    toast("Logged out.");
+      name:name,
+
+      username:username,
+
+      bio:bio,
+
+      avatar:selectedAvatar,
+
+      visibility:visibility
+
+    };
+
+
+    const photoInput =
+      document.getElementById(
+        "profilePhotoInput"
+      );
+
+
+    if(photoInput.files.length){
+
+      const file =
+        photoInput.files[0];
+
+      if(file.size > 2 * 1024 * 1024){
+
+        showToast(
+          "Photo should be under 2MB."
+        );
+
+        return;
+
+      }
+
+
+      updateData.photoURL =
+        await fileToDataURL(file);
+
+    }
+
+
+    await setDoc(
+      doc(db,"users",currentUser.uid),
+      updateData,
+      {merge:true}
+    );
+
+
+    await updateProfile(
+      currentUser,
+      {
+        displayName:name,
+        photoURL:
+          updateData.photoURL ||
+          currentUser.photoURL
+      }
+    );
+
+
+    currentProfile = {
+
+      ...currentProfile,
+
+      ...updateData
+
+    };
+
+
+    updateUserUI();
+
+    closeEditProfile();
+
+    showToast(
+      "Profile updated successfully."
+    );
 
   }catch(error){
 
-    toast("Logout failed.");
+    console.error(error);
+
+    showToast(
+      "Profile update failed."
+    );
 
   }
 
 });
 
 
-/* ================= ERROR SYSTEM ================= */
+/* ================= CREATE ================= */
+
+window.openCreate = function(){
+
+  document
+    .getElementById("createModal")
+    .classList.add("show");
+
+};
+
+
+window.closeCreate = function(){
+
+  document
+    .getElementById("createModal")
+    .classList.remove("show");
+
+};
+
+
+window.openPostComposer = function(type){
+
+  composerType = type;
+
+  closeCreate();
+
+  document.getElementById(
+    "composerTitle"
+  ).textContent =
+    "Create " + type;
+
+  document.getElementById(
+    "mediaInput"
+  ).value = "";
+
+  document.getElementById(
+    "captionInput"
+  ).value = "";
+
+  document.getElementById(
+    "mediaPreview"
+  ).classList.add("hidden");
+
+  document
+    .getElementById("postModal")
+    .classList.add("show");
+
+};
+
+
+window.closePostComposer = function(){
+
+  document
+    .getElementById("postModal")
+    .classList.remove("show");
+
+};
+
+
+/* ================= MEDIA PREVIEW ================= */
+
+document.getElementById(
+  "mediaInput"
+).addEventListener("change",event=>{
+
+  const file =
+    event.target.files[0];
+
+  if(!file) return;
+
+
+  const preview =
+    document.getElementById(
+      "mediaPreview"
+    );
+
+
+  preview.src =
+    URL.createObjectURL(file);
+
+
+  preview.classList.remove("hidden");
+
+});
+
+
+/* ================= PUBLISH ================= */
+
+document.getElementById(
+  "publishBtn"
+).addEventListener("click",async()=>{
+
+  if(!currentUser){
+
+    showToast("Please login first.");
+
+    return;
+
+  }
+
+
+  const file =
+    document.getElementById(
+      "mediaInput"
+    ).files[0];
+
+
+  const caption =
+    document.getElementById(
+      "captionInput"
+    ).value.trim();
+
+
+  if(!file && !caption){
+
+    showToast(
+      "Add a photo, video or caption."
+    );
+
+    return;
+
+  }
+
+
+  try{
+
+    let mediaURL = "";
+
+    let mediaType = "";
+
+
+    if(file){
+
+      if(file.size > 3 * 1024 * 1024){
+
+        showToast(
+          "For now choose a file under 3MB."
+        );
+
+        return;
+
+      }
+
+
+      mediaURL =
+        await fileToDataURL(file);
+
+      mediaType =
+        file.type.startsWith("video/")
+          ? "video"
+          : "image";
+
+    }
+
+
+    await addDoc(
+      collection(db,"posts"),
+      {
+
+        uid:currentUser.uid,
+
+        name:
+          currentProfile?.name ||
+          currentUser.displayName ||
+          "User",
+
+        username:
+          currentProfile?.username ||
+          "user",
+
+        avatar:
+          currentProfile?.avatar ||
+          "🙂",
+
+        photoURL:
+          currentProfile?.photoURL ||
+          "",
+
+        type:composerType,
+
+        caption:caption,
+
+        mediaURL:mediaURL,
+
+        mediaType:mediaType,
+
+        likes:0,
+
+        comments:0,
+
+        createdAt:Date.now()
+
+      }
+    );
+
+
+    closePostComposer();
+
+    await loadPosts();
+
+    showToast(
+      composerType +
+      " published successfully."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "Could not publish. Check Firebase."
+    );
+
+  }
+
+});
+
+
+/* ================= LOAD POSTS ================= */
+
+async function loadPosts(){
+
+  if(!currentUser) return;
+
+
+  try{
+
+    const postsRef =
+      collection(db,"posts");
+
+
+    const snapshot =
+      await getDocs(postsRef);
+
+
+    const posts = [];
+
+
+    snapshot.forEach(item=>{
+
+      posts.push({
+        id:item.id,
+        ...item.data()
+      });
+
+    });
+
+
+    posts.sort(
+      (a,b)=>
+        (b.createdAt || 0) -
+        (a.createdAt || 0)
+    );
+
+
+    renderPosts(
+      posts,
+      feed
+    );
+
+
+    renderPosts(
+      posts.filter(
+        p => p.uid === currentUser.uid
+      ),
+      profilePosts
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    feed.innerHTML = `
+      <div class="profile-card">
+        <p style="color:#777">
+          Your feed is ready. Create your first post.
+        </p>
+      </div>
+    `;
+
+  }
+
+}
+
+
+function renderPosts(posts,container){
+
+  if(!posts.length){
+
+    container.innerHTML = `
+      <div class="profile-card">
+        <p style="color:#777">
+          No posts yet. Create your first post 🚀
+        </p>
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML = "";
+
+
+  posts.forEach(post=>{
+
+    const card =
+      document.createElement("article");
+
+    card.className =
+      "post-card";
+
+
+    const initials =
+      (post.name || "U")
+      .substring(0,2)
+      .toUpperCase();
+
+
+    let media = "";
+
+
+    if(post.mediaURL){
+
+      if(post.mediaType === "video"){
+
+        media =
+          `<video
+             class="post-media"
+             src="${post.mediaURL}"
+             controls>
+           </video>`;
+
+      }else{
+
+        media =
+          `<img
+             class="post-media"
+             src="${post.mediaURL}"
+             alt="Post">`;
+
+      }
+
+    }
+
+
+    card.innerHTML = `
+
+      <div class="post-head">
+
+        <div class="mini-avatar">
+          ${post.avatar || initials}
+        </div>
+
+        <div>
+          <strong>
+            ${escapeHTML(post.name || "User")}
+          </strong>
+
+          <div style="color:#777;font-size:13px">
+            @${escapeHTML(post.username || "user")}
+          </div>
+        </div>
+
+      </div>
+
+      ${media}
+
+      <div class="post-body">
+
+        <div class="post-actions">
+          <span>♡</span>
+          <span>◌</span>
+          <span>⌁</span>
+        </div>
+
+        ${
+          post.caption
+          ? `<div class="post-caption">
+               ${escapeHTML(post.caption)}
+             </div>`
+          : ""
+        }
+
+      </div>
+    `;
+
+
+    container.appendChild(card);
+
+  });
+
+}
+
+
+/* ================= SEARCH ================= */
+
+document.getElementById(
+  "searchBtn"
+).addEventListener("click",performSearch);
+
+
+document.getElementById(
+  "searchInput"
+).addEventListener("keydown",event=>{
+
+  if(event.key === "Enter"){
+
+    performSearch();
+
+  }
+
+});
+
+
+async function performSearch(){
+
+  const term =
+    document.getElementById(
+      "searchInput"
+    ).value
+    .trim()
+    .toLowerCase()
+    .replace(/^@/,"");
+
+
+  const results =
+    document.getElementById(
+      "searchResults"
+    );
+
+
+  if(!term){
+
+    results.innerHTML = `
+      <div style="padding:25px;text-align:center;color:#777">
+        Enter a name or @username.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  try{
+
+    const snapshot =
+      await getDocs(
+        collection(db,"users")
+      );
+
+
+    const matches = [];
+
+
+    snapshot.forEach(item=>{
+
+      const u =
+        item.data();
+
+
+      const name =
+        (u.name || "").toLowerCase();
+
+      const username =
+        (u.username || "").toLowerCase();
+
+
+      if(
+        name.includes(term) ||
+        username.includes(term)
+      ){
+
+        matches.push(u);
+
+      }
+
+    });
+
+
+    if(!matches.length){
+
+      results.innerHTML = `
+        <div style="padding:25px;text-align:center;color:#777">
+          No users found.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    results.innerHTML = "";
+
+
+    matches.forEach(u=>{
+
+      const row =
+        document.createElement("div");
+
+      row.className =
+        "user-result";
+
+
+      row.innerHTML = `
+
+        <div class="mini-avatar">
+          ${u.avatar || "🙂"}
+        </div>
+
+        <div style="flex:1">
+
+          <strong>
+            ${escapeHTML(u.name || "User")}
+          </strong>
+
+          <div style="color:#635bff;font-size:13px">
+            @${escapeHTML(u.username || "username")}
+          </div>
+
+        </div>
+
+        <button class="secondary">
+          View
+        </button>
+      `;
+
+
+      results.appendChild(row);
+
+    });
+
+  }catch(error){
+
+    console.error(error);
+
+    results.innerHTML = `
+      <div style="padding:25px;color:#777">
+        Search is temporarily unavailable.
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* ================= NAVIGATION ================= */
+
+document.querySelectorAll(
+  ".nav-btn[data-page]"
+).forEach(btn=>{
+
+  btn.addEventListener(
+    "click",
+    ()=>{
+
+      showPage(
+        btn.dataset.page
+      );
+
+    }
+  );
+
+});
+
+
+document.getElementById(
+  "createNavBtn"
+).addEventListener(
+  "click",
+  openCreate
+);
+
+
+document.getElementById(
+  "topSearchBtn"
+).addEventListener(
+  "click",
+  ()=>showPage("search")
+);
+
+
+function showPage(page){
+
+  document
+    .querySelectorAll(".page")
+    .forEach(x =>
+      x.classList.remove("active")
+    );
+
+
+  const target =
+    document.getElementById(
+      page + "Page"
+    );
+
+
+  if(target){
+
+    target.classList.add("active");
+
+  }
+
+
+  document
+    .querySelectorAll(
+      ".nav-btn[data-page]"
+    )
+    .forEach(btn=>{
+
+      btn.classList.toggle(
+        "active",
+        btn.dataset.page === page
+      );
+
+    });
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+window.showPage = showPage;
+
+
+/* ================= EDIT MODAL ================= */
+
+window.closeEditProfile = function(){
+
+  document
+    .getElementById("editModal")
+    .classList.remove("show");
+
+  document.getElementById(
+    "profilePhotoInput"
+  ).value = "";
+
+};
+
+
+/* ================= HELPERS ================= */
+
+function createUsername(name){
+
+  let value =
+    name
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g,"")
+      .substring(0,18);
+
+
+  if(!value){
+
+    value = "user";
+
+  }
+
+
+  return value +
+    Math.floor(
+      1000 + Math.random()*9000
+    );
+
+}
+
+
+function fileToDataURL(file){
+
+  return new Promise(
+    (resolve,reject)=>{
+
+      const reader =
+        new FileReader();
+
+      reader.onload =
+        () => resolve(
+          reader.result
+        );
+
+      reader.onerror =
+        reject;
+
+      reader.readAsDataURL(file);
+
+    }
+  );
+
+}
+
+
+function escapeHTML(value){
+
+  return String(value || "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
 
 function friendlyError(code){
 
@@ -2751,69 +2788,56 @@ function friendlyError(code){
       return "Invalid email address.";
 
     case "auth/user-not-found":
-      return "No account exists with this email.";
+      return "No account found with this email.";
 
     case "auth/wrong-password":
-      return "Incorrect password.";
-
     case "auth/invalid-credential":
       return "Email or password is incorrect.";
 
     case "auth/email-already-in-use":
-      return "This email is already registered. Login instead.";
+      return "This email is already registered.";
 
     case "auth/weak-password":
-      return "Password must be at least 6 characters.";
-
-    case "auth/operation-not-allowed":
-      return "This login method is disabled in Firebase Authentication.";
-
-    case "auth/unauthorized-domain":
-      return "GitHub Pages domain is not authorized in Firebase.";
-
-    case "auth/popup-blocked":
-      return "Google popup was blocked. This version uses redirect login.";
+      return "Password should be at least 6 characters.";
 
     case "auth/popup-closed-by-user":
       return "Google login was cancelled.";
 
-    case "auth/network-request-failed":
-      return "Network connection failed.";
+    case "auth/popup-blocked":
+      return "Browser blocked the Google login window.";
 
-    case "custom/name":
-      return "Please enter your full name.";
-
-    case "custom/username":
-      return "Username must be at least 3 characters.";
-
-    case "permission-denied":
-      return "Firestore permission denied.";
+    case "auth/unauthorized-domain":
+      return "Add this website domain to Firebase Authorized Domains.";
 
     default:
-      return "Something went wrong. Check Firebase settings.";
+      return "Something went wrong. Please try again.";
 
   }
 
 }
 
 
-/* ================= CLOSE MODALS ON BACKDROP ================= */
+function showToast(text){
 
-document.querySelectorAll(".modal")
-  .forEach(modal=>{
+  const toast =
+    document.getElementById("toast");
 
-    modal.addEventListener("click",e=>{
+  toast.textContent = text;
 
-      if(e.target === modal){
+  toast.classList.add("show");
 
-        modal.style.display = "none";
+  setTimeout(
+    () =>
+      toast.classList.remove("show"),
+    2500
+  );
 
-      }
+}
 
-    });
 
-  });
+/* INITIAL AVATARS */
 
+createAvatarGrid();
 
 </script>
 
