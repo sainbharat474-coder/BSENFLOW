@@ -2668,3 +2668,739 @@ if (!BF) {
 }
 
 </script>
+<script type="module">
+
+/* =========================================================
+   BSENFLOW PROFILE FIX
+   APPEND ONLY - DO NOT DELETE OLD CODE
+========================================================= */
+
+import {
+  getApp,
+  getApps,
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+  limit
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =========================================================
+   FIREBASE
+========================================================= */
+
+const BSENFLOW_CONFIG = {
+  apiKey: "AIzaSyCfBlYDE7hz8yUXTxtUpATBmCqR4qZ1fsI",
+  authDomain: "bsenflow.firebaseapp.com",
+  projectId: "bsenflow",
+  storageBucket: "bsenflow.firebasestorage.app",
+  messagingSenderId: "757334229298",
+  appId: "1:757334229298:web:8d1d9ba615c09d1edad72b",
+  measurementId: "G-4KYD657J4K"
+};
+
+const bsenflowApp =
+  getApps().length
+    ? getApp()
+    : initializeApp(BSENFLOW_CONFIG);
+
+const bsenflowAuth =
+  getAuth(bsenflowApp);
+
+const bsenflowDB =
+  getFirestore(bsenflowApp);
+
+
+/* =========================================================
+   WAIT FOR LOGIN
+========================================================= */
+
+onAuthStateChanged(
+  bsenflowAuth,
+  function(user) {
+
+    if (!user) return;
+
+    createBSENFLOWProfileSystem(user);
+
+  }
+);
+
+
+/* =========================================================
+   PROFILE SYSTEM
+========================================================= */
+
+function createBSENFLOWProfileSystem(user) {
+
+  /* Prevent duplicate creation */
+
+  if (
+    document.getElementById(
+      "bsenflowProfileEditor"
+    )
+  ) return;
+
+
+  /* =======================================================
+     FIND EXISTING PROFILE CARD
+  ======================================================= */
+
+  const profileCard =
+    document.querySelector(
+      ".profile-card"
+    );
+
+
+  if (!profileCard) {
+
+    console.log(
+      "BSENFLOW: profile card not found yet."
+    );
+
+    setTimeout(
+      function() {
+        createBSENFLOWProfileSystem(user);
+      },
+      1000
+    );
+
+    return;
+  }
+
+
+  /* =======================================================
+     CREATE EDIT PROFILE BUTTON
+  ======================================================= */
+
+  const editButton =
+    document.createElement("button");
+
+  editButton.id =
+    "bsenflowEditProfileButton";
+
+  editButton.type =
+    "button";
+
+  editButton.innerHTML =
+    "✏️ Edit Profile";
+
+
+  editButton.style.cssText = `
+    width:100%;
+    margin-top:18px;
+    padding:15px;
+    border:none;
+    border-radius:15px;
+    background:linear-gradient(135deg,#635bff,#8b5cf6);
+    color:white;
+    font-size:15px;
+    font-weight:800;
+    cursor:pointer;
+  `;
+
+  profileCard.appendChild(
+    editButton
+  );
+
+
+  /* =======================================================
+     CREATE PROFILE EDITOR
+  ======================================================= */
+
+  const editor =
+    document.createElement("div");
+
+  editor.id =
+    "bsenflowProfileEditor";
+
+  editor.style.cssText = `
+    display:none;
+    margin-top:18px;
+    padding:22px;
+    background:#f7f7fb;
+    border:1px solid #e7e7ee;
+    border-radius:20px;
+  `;
+
+
+  editor.innerHTML = `
+
+    <div style="
+      font-size:22px;
+      font-weight:900;
+      margin-bottom:5px;
+    ">
+      Edit Your Profile
+    </div>
+
+    <div style="
+      color:#777;
+      font-size:13px;
+      margin-bottom:20px;
+    ">
+      Your username is your main BSENFLOW identity.
+    </div>
+
+
+    <label style="
+      display:block;
+      font-size:13px;
+      font-weight:800;
+      margin-bottom:7px;
+    ">
+      Username
+    </label>
+
+    <input
+      id="bsenflowUsername"
+      type="text"
+      maxlength="30"
+      placeholder="bharatsain"
+      autocomplete="off"
+      style="
+        width:100%;
+        padding:14px;
+        border:1px solid #ddd;
+        border-radius:13px;
+        outline:none;
+        margin-bottom:6px;
+      "
+    >
+
+    <div style="
+      color:#777;
+      font-size:12px;
+      margin-bottom:18px;
+    ">
+      Your public identity: @username
+    </div>
+
+
+    <label style="
+      display:block;
+      font-size:13px;
+      font-weight:800;
+      margin-bottom:7px;
+    ">
+      Display Name
+    </label>
+
+    <input
+      id="bsenflowDisplayName"
+      type="text"
+      maxlength="60"
+      placeholder="Your name"
+      style="
+        width:100%;
+        padding:14px;
+        border:1px solid #ddd;
+        border-radius:13px;
+        outline:none;
+        margin-bottom:18px;
+      "
+    >
+
+
+    <label style="
+      display:block;
+      font-size:13px;
+      font-weight:800;
+      margin-bottom:7px;
+    ">
+      Bio
+    </label>
+
+    <textarea
+      id="bsenflowBio"
+      maxlength="160"
+      placeholder="Tell people about yourself..."
+      style="
+        width:100%;
+        min-height:120px;
+        padding:14px;
+        border:1px solid #ddd;
+        border-radius:13px;
+        outline:none;
+        resize:vertical;
+        margin-bottom:5px;
+      "
+    ></textarea>
+
+    <div style="
+      text-align:right;
+      color:#777;
+      font-size:12px;
+      margin-bottom:18px;
+    ">
+      160 characters maximum
+    </div>
+
+
+    <button
+      id="bsenflowSaveProfile"
+      type="button"
+      style="
+        width:100%;
+        padding:15px;
+        border:none;
+        border-radius:14px;
+        background:#111;
+        color:white;
+        font-weight:900;
+        cursor:pointer;
+      "
+    >
+      Save Profile
+    </button>
+
+
+    <div
+      id="bsenflowProfileMessage"
+      style="
+        text-align:center;
+        min-height:22px;
+        margin-top:12px;
+        font-size:13px;
+      "
+    ></div>
+
+  `;
+
+
+  profileCard.appendChild(
+    editor
+  );
+
+
+  /* =======================================================
+     LOAD PROFILE
+  ======================================================= */
+
+  async function loadProfile() {
+
+    try {
+
+      const userRef =
+        doc(
+          bsenflowDB,
+          "users",
+          user.uid
+        );
+
+      const snapshot =
+        await getDoc(userRef);
+
+
+      if (!snapshot.exists()) {
+
+        document.getElementById(
+          "bsenflowDisplayName"
+        ).value =
+          user.displayName || "";
+
+        return;
+      }
+
+
+      const data =
+        snapshot.data();
+
+
+      document.getElementById(
+        "bsenflowUsername"
+      ).value =
+        data.username || "";
+
+
+      document.getElementById(
+        "bsenflowDisplayName"
+      ).value =
+        data.displayName ||
+        data.name ||
+        user.displayName ||
+        "";
+
+
+      document.getElementById(
+        "bsenflowBio"
+      ).value =
+        data.bio || "";
+
+
+    } catch(error) {
+
+      console.error(
+        "BSENFLOW PROFILE LOAD:",
+        error
+      );
+
+    }
+
+  }
+
+
+  /* =======================================================
+     OPEN EDIT PROFILE
+  ======================================================= */
+
+  editButton.addEventListener(
+    "click",
+    async function() {
+
+      if (
+        editor.style.display ===
+        "block"
+      ) {
+
+        editor.style.display =
+          "none";
+
+        return;
+
+      }
+
+
+      editor.style.display =
+        "block";
+
+
+      await loadProfile();
+
+    }
+  );
+
+
+  /* =======================================================
+     SAVE PROFILE
+  ======================================================= */
+
+  document
+    .getElementById(
+      "bsenflowSaveProfile"
+    )
+    .addEventListener(
+      "click",
+      async function() {
+
+        const usernameInput =
+          document.getElementById(
+            "bsenflowUsername"
+          );
+
+        const displayInput =
+          document.getElementById(
+            "bsenflowDisplayName"
+          );
+
+        const bioInput =
+          document.getElementById(
+            "bsenflowBio"
+          );
+
+        const saveButton =
+          document.getElementById(
+            "bsenflowSaveProfile"
+          );
+
+        const message =
+          document.getElementById(
+            "bsenflowProfileMessage"
+          );
+
+
+        let username =
+          usernameInput.value
+            .trim()
+            .toLowerCase()
+            .replace(/^@/, "");
+
+
+        const displayName =
+          displayInput.value.trim();
+
+
+        const bio =
+          bioInput.value.trim();
+
+
+        /* USERNAME VALIDATION */
+
+        if (
+          !/^[a-z0-9._]{3,30}$/.test(
+            username
+          )
+        ) {
+
+          message.textContent =
+            "Username 3-30 characters ka hona chahiye.";
+
+          message.style.color =
+            "#d93025";
+
+          return;
+
+        }
+
+
+        if (!displayName) {
+
+          message.textContent =
+            "Please enter your display name.";
+
+          message.style.color =
+            "#d93025";
+
+          return;
+
+        }
+
+
+        saveButton.disabled =
+          true;
+
+        saveButton.textContent =
+          "Checking...";
+
+
+        try {
+
+          /* =================================================
+             CHECK USERNAME
+          ================================================= */
+
+          const usernameQuery =
+            query(
+              collection(
+                bsenflowDB,
+                "users"
+              ),
+              where(
+                "username",
+                "==",
+                username
+              ),
+              limit(1)
+            );
+
+
+          const usernameResults =
+            await getDocs(
+              usernameQuery
+            );
+
+
+          if (
+            !usernameResults.empty &&
+            usernameResults.docs[0].id !==
+              user.uid
+          ) {
+
+            message.textContent =
+              "❌ This username is already taken.";
+
+            message.style.color =
+              "#d93025";
+
+            saveButton.disabled =
+              false;
+
+            saveButton.textContent =
+              "Save Profile";
+
+            return;
+
+          }
+
+
+          /* =================================================
+             SAVE TO FIRESTORE
+          ================================================= */
+
+          saveButton.textContent =
+            "Saving...";
+
+
+          await setDoc(
+            doc(
+              bsenflowDB,
+              "users",
+              user.uid
+            ),
+            {
+
+              uid:user.uid,
+
+              username:username,
+
+              displayName:displayName,
+
+              name:displayName,
+
+              bio:bio,
+
+              email:
+                user.email || "",
+
+              profilePhoto:
+                user.photoURL || "",
+
+              updatedAt:
+                new Date()
+
+            },
+            {
+              merge:true
+            }
+          );
+
+
+          /* =================================================
+             UPDATE CURRENT PAGE
+          ================================================= */
+
+          const profileNameElement =
+            document.getElementById(
+              "profileName"
+            );
+
+
+          if (
+            profileNameElement
+          ) {
+
+            profileNameElement.textContent =
+              displayName;
+
+          }
+
+
+          const welcomeElement =
+            document.getElementById(
+              "welcomeText"
+            );
+
+
+          if (
+            welcomeElement
+          ) {
+
+            welcomeElement.textContent =
+              "Welcome, " +
+              displayName +
+              " 👋";
+
+          }
+
+
+          message.textContent =
+            "✅ Profile saved successfully!";
+
+          message.style.color =
+            "#188038";
+
+
+          saveButton.textContent =
+            "Saved ✓";
+
+
+          setTimeout(
+            function() {
+
+              editor.style.display =
+                "none";
+
+              saveButton.disabled =
+                false;
+
+              saveButton.textContent =
+                "Save Profile";
+
+            },
+            1200
+          );
+
+
+        } catch(error) {
+
+          console.error(
+            "BSENFLOW PROFILE SAVE ERROR:",
+            error
+          );
+
+
+          message.textContent =
+            "❌ Profile save nahi hua. Firebase Rules check karenge.";
+
+          message.style.color =
+            "#d93025";
+
+
+          saveButton.disabled =
+            false;
+
+          saveButton.textContent =
+            "Save Profile";
+
+        }
+
+      }
+    );
+
+
+  /* =======================================================
+     MAKE TOP AVATAR CLICKABLE
+  ======================================================= */
+
+  const topAvatar =
+    document.getElementById(
+      "avatar"
+    );
+
+
+  if (topAvatar) {
+
+    topAvatar.style.cursor =
+      "pointer";
+
+
+    topAvatar.title =
+      "Open Profile";
+
+
+    topAvatar.addEventListener(
+      "click",
+      function() {
+
+        editor.style.display =
+          "block";
+
+        loadProfile();
+
+        editor.scrollIntoView({
+          behavior:"smooth",
+          block:"center"
+        });
+
+      }
+    );
+
+  }
+
+}
+
+</script>
